@@ -3,4 +3,5 @@ project(projeto_apa)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(projeto_apa main.cpp)
+add_executable(projeto_apa main.cpp
+        instancia_problema.cpp)
