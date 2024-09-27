@@ -18,13 +18,12 @@ public:
     vector<suco_t> solucao;
     vector<suco_t> sucos;
     vector<vector<int>> trocaSuco;
-    long long solucaoValor;
 
     guloso(const int& size , const vector<suco_t>& sucos, const vector<vector<int>>& trocaSuco);
 
     void calcula_solucao();
 
-    solucao::solucao *algoritmo_guloso();
+    class solucao *algoritmo_guloso();
 
 };
 #endif //GULOSO_HPP

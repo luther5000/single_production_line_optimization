@@ -7,12 +7,9 @@
 
 guloso::guloso(const int &size, const vector<suco_t> &sucos,
     const vector<vector<int> > &trocaSuco) {
-
-    this->solucao.resize(size);
     this->trocaSuco = trocaSuco;
     this->sucos = sucos;
     this->size = size;
-    this->solucaoValor = 0;
 }
 
 solucao *guloso::algoritmo_guloso() {
@@ -25,5 +22,5 @@ solucao *guloso::algoritmo_guloso() {
         return a.prazo < b.prazo;
     });
 
-    return new solucao::solucao(this->solucao, this->trocaSuco);
+    return new class solucao(this->solucao, this->trocaSuco);
 }
