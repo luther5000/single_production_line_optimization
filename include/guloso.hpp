@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <instancia_problema.hpp>
+#include "solucao.hpp"
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,7 @@ public:
 
     void calcula_solucao();
 
-    void algoritmo_guloso();
+    solucao::solucao *algoritmo_guloso();
 
 };
 #endif //GULOSO_HPP
