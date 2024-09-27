@@ -1,12 +1,15 @@
-#include <iostream>
 #include "instancia_problema.hpp"
+#include <iostream>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    instancia_problema test("instancias/n60A.txt");
+int main(int argc, char **argv) {
+    if(argc != 2) {
+        std::cout << "Insira um arquivo como entrada!" << std::endl;
+        return 1;
+    }
+    instancia_problema test(argv[1]);
     test.algoritmo_guloso();
     test.calcula_solucao();
-    std::cout << test.getsolucao_valor() << std::endl;
+    test.exibe();
 
     return 0;
 }

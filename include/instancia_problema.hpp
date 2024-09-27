@@ -29,6 +29,8 @@ public:
     void calcula_solucao();
 
     long long getsolucao_valor() const;
+
+    void exibe() const;
 };
 
 #endif //INSTANCIA_PROBLEMA_H
