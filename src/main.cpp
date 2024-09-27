@@ -1,4 +1,5 @@
 #include "instancia_problema.hpp"
+#include "guloso.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -7,9 +8,13 @@ int main(int argc, char **argv) {
         return 1;
     }
     instancia_problema test(argv[1]);
-    test.algoritmo_guloso();
-    test.calcula_solucao();
     test.exibe();
+
+    guloso guloso(test.size, test.sucos, test.trocaSuco);
+    guloso.algoritmo_guloso();
+    guloso.calcula_solucao();
+
+    cout << guloso.solucaoValor << endl;
 
     return 0;
 }

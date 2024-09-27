@@ -14,19 +14,14 @@ typedef struct {
 } suco_t;
 
 class instancia_problema {
-private:
+public:
     int size;
     vector<suco_t> sucos;
     vector<suco_t> solucao;
-    long long solucao_valor;
-    vector<vector<int>> troca_suco;
+    long long solucaoValor;
+    vector<vector<int>> trocaSuco;
 
-public:
     instancia_problema(const string& endereco);
-
-    void algoritmo_guloso();
-
-    void calcula_solucao();
 
     long long getsolucao_valor() const;
 
