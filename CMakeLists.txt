@@ -10,4 +10,6 @@ include_directories(include)
 add_executable(projeto_apa.exe src/main.cpp
         src/instancia_problema.cpp
         src/vizinhancaSwap.cpp
-        src/guloso.cpp)
+        src/guloso.cpp
+        src/solucao.cpp)
+

@@ -11,13 +11,13 @@ using namespace std;
 instancia_problema::instancia_problema(const string& endereco) {
     ifstream file;
     file.open(endereco, ios::in);
+
     if(!file.is_open()) {
         perror("Erro");
     }
 
     size = 0;
     file >> size;
-    solucaoValor = -1;
 
     sucos.resize(size);
 
@@ -44,14 +44,11 @@ instancia_problema::instancia_problema(const string& endereco) {
     file.close();
 }
 
-long long instancia_problema::getsolucao_valor() const {
-    return solucaoValor;
-}
-
 void instancia_problema::exibe() const {
     printf("Valores de entrada:\n");
     printf(" Indice: Tempo   Prazo   Multa\n");
     for(suco_t cs: sucos) {
         printf("%7lld: %7lld %7lld %7lld\n", cs.indice, cs.tempo, cs.prazo, cs.multa);
     }
+    printf("\n");
 }
