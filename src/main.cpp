@@ -12,12 +12,9 @@ int main(int argc, char **argv) {
     test.exibe();
 
     guloso guloso(test.size, test.sucos, test.trocaSuco);
-    guloso.algoritmo_guloso();
-    guloso.calcula_solucao();
+    solucao *solucao = guloso.algoritmo_guloso();
 
-    cout << guloso.solucaoValor << endl;
-    solucao valor(test.sucos, test.trocaSuco);
-    valor.exibe();
+    solucao->exibe();
 
     return 0;
 }
