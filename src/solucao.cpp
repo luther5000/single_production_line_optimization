@@ -1,5 +1,4 @@
 #include "solucao.hpp"
-#include <vector>
 #include <iostream>
 
 solucao::solucao(const vector<suco_t>& solucao, const vector<vector<int>>& troca_suco) {

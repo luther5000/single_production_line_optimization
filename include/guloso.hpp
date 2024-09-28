@@ -21,8 +21,6 @@ public:
 
     guloso(const int& size , const vector<suco_t>& sucos, const vector<vector<int>>& trocaSuco);
 
-    void calcula_solucao();
-
     class solucao *algoritmo_guloso();
 
 };

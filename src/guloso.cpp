@@ -12,7 +12,7 @@ guloso::guloso(const int &size, const vector<suco_t> &sucos,
     this->size = size;
 }
 
-solucao *guloso::algoritmo_guloso() {
+solucao* guloso::algoritmo_guloso() {
     solucao.resize(size);
     for (int i = 0; i < size; ++i) {
         solucao[i] = sucos[i];

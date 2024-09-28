@@ -1,6 +1,7 @@
 #include "instancia_problema.hpp"
 #include "guloso.hpp"
 #include "solucao.hpp"
+#include "vizinhancaSwap.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -15,6 +16,8 @@ int main(int argc, char **argv) {
     solucao *solucao = guloso.algoritmo_guloso();
 
     solucao->exibe();
+
+    vizinhaca2Swap(*solucao, test.trocaSuco).exibe();
 
     return 0;
 }
