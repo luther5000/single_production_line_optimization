@@ -1,7 +1,7 @@
 #include "instancia_problema.hpp"
 #include "guloso.hpp"
 #include "solucao.hpp"
-#include "vizinhancaSwap.hpp"
+#include "variableNeighborhoodSearch.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
     solucao->exibe();
 
-    vizinhaca2Swap(*solucao, test.trocaSuco).exibe();
+    variableNeighborhoodSearch(*solucao, test.trocaSuco).exibe();
 
     return 0;
 }

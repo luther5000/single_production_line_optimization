@@ -8,6 +8,8 @@
 #include "solucao.hpp"
 #include <vector>
 
+using namespace std;
+
 solucao vizinhaca2Swap(const solucao& solucao, const vector<vector<int>>& troca_suco);
 
 #endif //__VIZINHANCASWAP_HPP

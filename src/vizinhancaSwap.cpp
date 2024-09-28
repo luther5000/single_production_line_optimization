@@ -10,7 +10,11 @@
  *  - const vector<vectir<int>>& troca_suco: a matriz que contem as trocas de
  *  contexto da linha de producao
  * Saida:
- *  - Um novo objeto solucao com a melhor solucao encontrada.
+ *  - Uma tupla com:
+ *      - primeiro elemento true se uma melhor solucao foi encontrada
+ *      e um novo objeto solucao com a melhor solucao encontrada como segundo elemento.
+ *      - primeiro elemento false se nenhuma melhor solucao foi encontrada,
+ *      e consequentemente a mesma solucao que foi passada como argumento.
  * Complexidade:
  *  - Cubico em relacao ao tamanho do vector linhaProducao interno a solucao;
  * */
@@ -36,7 +40,6 @@ solucao vizinhaca2Swap(const solucao& entrada,
             // Isso faria essa chamada ser O(1), derrubando a
             // complexidade para O(n^2).
             copiaEntrada.calcula_solucao(troca_suco);
-
             // O resto do corpo da funcao eh O(1)
             if(copiaEntrada.multaTotal < melhorSolucao) {
                 iMelhorSolucao = i;
