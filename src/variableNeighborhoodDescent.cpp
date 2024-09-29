@@ -28,8 +28,8 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 2: { //pivoSwap
-                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
+            case 2: { //reverseSwap
+                solucao melhorVizinho = reverseSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;

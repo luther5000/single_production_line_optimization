@@ -1,4 +1,6 @@
 #include "vizinhancas.hpp"
+#include "solucao.hpp"
+#include <utility>
 #include <vector>
 /*
  * Troca todos os pares de elementos de lugar, e verifica quais desses gera uma
@@ -58,6 +60,7 @@ solucao twoSwap(const solucao& entrada,
     return copiaEntrada;
 }
 
+// Essa vizinhanca esta contida na reverseSwap, entao seu uso eh redundante.
 /* Define um pivo como centro, e vai trocando os elementos ao redor dele, e
  * verifica quais desses geram uma melhor solucao. Por exemplo:
  * 0 1 2 3 4 5
@@ -116,6 +119,67 @@ solucao pivoSwap(const solucao& entrada,
     // Regerar a melhor solucao encontrada tem custo proporcional a O(n)
     for(unsigned long i = 1; i <= raioMelhorSolucao; ++i) {
         std::swap(copiaEntrada.linhaProducao[centroMelhorSolucao + i], copiaEntrada.linhaProducao[centroMelhorSolucao - i]);
+    }
+    copiaEntrada.multaTotal = melhorSolucao;
+
+    return copiaEntrada;
+}
+
+solucao reverseSwap(const solucao& entrada,
+        const vector<vector<int>>& troca_suco) {
+    solucao copiaEntrada = entrada; // O(n);
+    unsigned long inicioMelhorSolucao = 0;
+    unsigned long fimMelhorSolucao = 0;
+    long long melhorSolucao = entrada.multaTotal;
+    unsigned long i;
+    unsigned long j;
+
+
+    // Escolhemos todos os pares de inicio e fim validos e sem repeticao
+    // e damos um reverse nos elementos entre esses dois, com eles inclusos.
+    // O numero de pares eh proporcional a n^2, e portanto o custo de testar
+    // todos os pares eh O(n^2)
+    for(unsigned long inicio = 0; inicio + 1 < entrada.linhaProducao.size(); ++inicio) {
+        for(unsigned long fim = inicio + 1; fim < entrada.linhaProducao.size(); ++fim) {
+            i = inicio;
+            j = fim;
+            // Invertemos os elementos entre inicio e fim
+            // Isso custa O(n), dando um total de O(n^3)
+            while(i < j) {
+                std::swap(copiaEntrada.linhaProducao[i], copiaEntrada.linhaProducao[j]);
+                ++i;
+                --j;
+            }
+
+            // Calcula o valor dessa solucao
+            // Isso custa O(n), dando um total de O(n^3)
+            copiaEntrada.calcula_solucao(troca_suco);
+
+            // Essa parte eh O(1)
+            if(copiaEntrada.multaTotal < melhorSolucao) {
+                inicioMelhorSolucao = inicio;
+                fimMelhorSolucao = fim;
+                melhorSolucao = copiaEntrada.multaTotal;
+            }
+
+            // Invertemos os elementos entre o inicio e o fim novamente
+            // para voltarmos ao vector original
+            // Isso custa O(n), dando um custo total de O(n^3)
+            i = inicio;
+            j = fim;
+            while(i < j) {
+                std::swap(copiaEntrada.linhaProducao[i], copiaEntrada.linhaProducao[j]);
+                ++i;
+                --j;
+            }
+        }
+    }
+
+    // Regerar a melhor solucao encontrada tem custo proporcional a O(n)
+    while(inicioMelhorSolucao < fimMelhorSolucao) {
+        std::swap(copiaEntrada.linhaProducao[inicioMelhorSolucao], copiaEntrada.linhaProducao[fimMelhorSolucao]);
+        ++inicioMelhorSolucao;
+        --fimMelhorSolucao;
     }
     copiaEntrada.multaTotal = melhorSolucao;
 
