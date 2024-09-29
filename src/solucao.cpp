@@ -30,5 +30,5 @@ void solucao::exibe() {
         printf("%7lld: %7lld %7lld %7lld\n", cs.indice, cs.tempo, cs.prazo, cs.multa);
     }
     printf("\n");
-    printf("Valor da solucao: %lld\n", this->multaTotal);
+    printf("Valor da solucao: %lld\n\n", this->multaTotal);
 }

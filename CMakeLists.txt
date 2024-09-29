@@ -9,8 +9,8 @@ include_directories(include)
 
 add_executable(projeto_apa.exe src/main.cpp
         src/instancia_problema.cpp
-        src/vizinhancaSwap.cpp
+        src/vizinhancas.cpp
         src/guloso.cpp
         src/solucao.cpp
-        src/variableNeighborhoodSearch.cpp)
+        src/variableNeighborhoodDescent.cpp)
 
