@@ -2,6 +2,7 @@
 #include "solucao.hpp"
 #include <utility>
 #include <vector>
+#include <list>
 /*
  * Troca todos os pares de elementos de lugar, e verifica quais desses gera uma
  * melhor solucao. Eh valido ressaltar que os unicos pares trocados sao da
@@ -184,4 +185,87 @@ solucao reverseSwap(const solucao& entrada,
     copiaEntrada.multaTotal = melhorSolucao;
 
     return copiaEntrada;
+}
+
+/**
+ * Vizinhança que irá girar a solução constantemente. Se temos
+ * 1 2 3,
+ * essa vizinhança irá exlorar os vizinhos
+ * 3 1 2,
+ * 2 3 1.
+ *
+ * Essa vizinhança é calculada em O(n^2)
+ *
+ * @param entrada A solução inicial para ser explorada.
+ * @param trocaSuco Usado para calcular o custo das soluções geradas.
+ * @return {@code solucao} contendo a melhor solução entre os vizinhos explorados.
+ */
+solucao rotateSolucao(const solucao& entrada, const vector<vector<int>>& trocaSuco) {
+    //Para essa vizinhança é necessário o uso de uma lista encadeada
+    list<suco_t> linhaProducaoAtual;
+    for (unsigned long i = 0; i < entrada.linhaProducao.size(); ++i) { //O(n)
+        linhaProducaoAtual.push_back(entrada.linhaProducao[i]);
+    }
+
+    //Variáveis que irão guardar as melhores soluções encontradas na vizinhança
+    list<suco_t> melhorLinhaProducao = linhaProducaoAtual; //O(n)
+    long long valorMelhorSolucao = entrada.multaTotal;
+
+    /*
+     * Aqui serão feitas as rotações. A cada interação, o último elemento
+     * será jogado para a primeira posição e isso eventualmente gerará
+     * todos os resultados possíveis para essa vizinhança.
+     * Todo esse bloco é O(n^2)
+     */
+    for (unsigned long i = 0; i < entrada.linhaProducao.size() - 1; ++i) { //O(n)
+        linhaProducaoAtual.push_front(linhaProducaoAtual.back());
+        linhaProducaoAtual.pop_back();
+
+        long long valorSolucaoAtual = calculaSolucao(linhaProducaoAtual, trocaSuco); //O(n)
+
+        if (valorSolucaoAtual < valorMelhorSolucao) {
+            valorMelhorSolucao = valorSolucaoAtual;
+            melhorLinhaProducao = linhaProducaoAtual; //0(n)
+        }
+    }
+    solucao saida;
+    saida.multaTotal = valorMelhorSolucao;
+    saida.linhaProducao.resize(melhorLinhaProducao.size());
+
+    int i = 0;
+    for (suco_t suco : melhorLinhaProducao) { //O(n)
+        saida.linhaProducao[i] = suco;
+        ++i;
+    }
+    return saida;
+}
+
+/**
+ * Função que calcula o valor de uma solução a partir de uma list ao invés
+ * de um vector.
+ * @param linhaProducao Contém a ordem dos sucos a serem produzidos.
+ * @param trocaSuco O tempo necessário para trocar os sucos de lugar.
+ * @return {@code long long} contendo a multa paga para se executar essa linha de produção.
+ */
+long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<int>>& trocaSuco) {
+    long long valor = 0;
+    long long tempo = 0;
+    long long tempoPassado;
+    long long ultimaLinha = 0;
+
+    for (suco_t suco : linhaProducao) { //O(n)
+        if (suco.indice == linhaProducao.back().indice)
+            break;
+
+        tempo += trocaSuco[ultimaLinha][suco.indice] +  suco.tempo;
+        tempoPassado = tempo - suco.prazo;
+
+        if (tempoPassado > 0) {
+            valor += tempoPassado*suco.multa;
+        }
+
+        ultimaLinha = suco.indice;
+    }
+
+    return valor;
 }

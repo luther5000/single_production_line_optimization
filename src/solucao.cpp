@@ -6,6 +6,11 @@ solucao::solucao(const vector<suco_t>& solucao, const vector<vector<int>>& troca
     this->calcula_solucao(troca_suco);
 }
 
+solucao::solucao() {
+    this->linhaProducao.resize(0);
+    this->multaTotal = 0;
+}
+
 void solucao::calcula_solucao(const vector<vector<int>>& troca_suco) {
     long long tempo = 0;
     this->multaTotal = 0;
