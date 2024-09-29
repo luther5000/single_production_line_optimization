@@ -17,8 +17,8 @@ solucao pivoSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
 solucao reverseSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
-solucao rotateSolucao(const solucao& entrada, const vector<vector<int>>& trocaSuco);
-
 long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<int>>& trocaSuco);
+
+solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
 #endif //__VIZINHANCAS_HPP

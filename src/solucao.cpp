@@ -17,14 +17,14 @@ void solucao::calcula_solucao(const vector<vector<int>>& troca_suco) {
     long long ultimoLinha = 0;
     long long tempoPassado;
 
-    for (unsigned long i = 0; i < linhaProducao.size(); ++i) {
-        tempo += troca_suco[ultimoLinha][linhaProducao[i].indice] + linhaProducao[i].tempo;
-        tempoPassado = tempo - linhaProducao[i].prazo;
+    for (suco_t i: linhaProducao) {
+        tempo += troca_suco[ultimoLinha][i.indice] + i.tempo;
+        tempoPassado = tempo - i.prazo;
 
         if (tempoPassado > 0)
-            multaTotal += tempoPassado*linhaProducao[i].multa;
+            multaTotal += tempoPassado*i.multa;
 
-        ultimoLinha = linhaProducao[i].indice + 1;
+        ultimoLinha = i.indice + 1;
     }
 }
 

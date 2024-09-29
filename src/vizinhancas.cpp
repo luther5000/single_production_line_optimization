@@ -1,23 +1,17 @@
 #include "vizinhancas.hpp"
 #include "solucao.hpp"
-#include <utility>
-#include <vector>
-#include <list>
 /*
- * Troca todos os pares de elementos de lugar, e verifica quais desses gera uma
- * melhor solucao. Eh valido ressaltar que os unicos pares trocados sao da
- * solucao passada como entrada: ele para assim que todos os pares forem testa-
- * dos, e nao quando um minimo local for encontrado.
- * Entradas:
- *  - const solucao& entrada: uma solucao qualquer. É copiada no corpo da funcao
- *  portanto nao eh alterada.
- *  - const vector<vector<int>>& troca_suco: a matriz que contem as trocas de
- *  contexto da linha de producao
- * Saida:
- *  Retorna um objeto solucao, contendo a melhor solucao encontrada na
- *  vizinhanca.
- * Complexidade:
- *  - Cubico em relacao ao tamanho do vector linhaProducao interno a solucao;
+ * Esta vizinhanca eh gerada da seguinte forma:
+ *
+ *  Para cada par de indices i e j, i < j, trocamos o valor na posicao i com
+ *  o valor na posicao j.
+ * 
+ * Essa vizinhaca eh varrida em O(n^3).
+ *
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao.
+ * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
  * */
 solucao twoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
@@ -27,25 +21,28 @@ solucao twoSwap(const solucao& entrada,
     long long melhorSolucao = entrada.multaTotal;
 
     // O(n^2)
-    for(unsigned long i = 0; i < entrada.linhaProducao.size() - 1; ++i) {
-        for(unsigned long j = i + 1; j < entrada.linhaProducao.size() - 1; ++j) {
+    for(unsigned long i = 0; i + 1 < entrada.linhaProducao.size(); ++i) {
+        for(unsigned long j = i + 1; j < entrada.linhaProducao.size(); ++j) {
             std::swap(copiaEntrada.linhaProducao[i],
                     copiaEntrada.linhaProducao[j]);
 
             // Calcula solucao custa O(n)
             // Como eh realizad O(n^2) vezes, o custo total
             // eh O(n^3)
-            // Uma otimizacao possivel eh calcular os valores
-            // apenas onde a alteracao ocorreu
-            // Isso faria essa chamada ser O(1), derrubando a
-            // complexidade para O(n^2).
+            // Uma otimizacao possivel eh calcular os valores e salvar em um
+            // vetor. Depois, eh necessario apenas calcular a partir da ultima
+            // alteracao do vetor. Isso nao melhora a complexidade, mas torna
+            // o codigo mais eficiente.
             copiaEntrada.calcula_solucao(troca_suco);
+
             // O resto do corpo da funcao eh O(1)
             if(copiaEntrada.multaTotal < melhorSolucao) {
                 iMelhorSolucao = i;
                 jMelhorSolucao = j;
                 melhorSolucao = copiaEntrada.multaTotal;
             }
+
+            // Desfaz o swap
             std::swap(copiaEntrada.linhaProducao[i],
                     copiaEntrada.linhaProducao[j]);
         }
@@ -62,26 +59,30 @@ solucao twoSwap(const solucao& entrada,
 }
 
 // Essa vizinhanca esta contida na reverseSwap, entao seu uso eh redundante.
-/* Define um pivo como centro, e vai trocando os elementos ao redor dele, e
- * verifica quais desses geram uma melhor solucao. Por exemplo:
+// 
+/* 
+ * Essa vizinhanca eh gerada da seguinte forma:
+ *
+ * Para cada indice centro e cada inteiro raio, que nao cause OutOfBounds
+ * "Giramos" os elementos ao redor do centro, ou seja, fazemos swap de elemen-
+ * tos diametralmente opostos. Por exemplo
+ *
  * 0 1 2 3 4 5
- * Escolhendo o pivo 3, para raio 1, teriamos
+ *
+ * Escolhendo o centro 3, para raio 1, teriamos
+ *
  * 0 1 4 3 2 5
+ *
  * E para raio 2
+ *
  * 0 5 4 3 2 1
- * Ele testa todas a vizinhaca, com todos os centros e raios possiveis, retor-
- * nando a melhor solucao dentre todos estes.
- * Entradas:
- *  - const solucao& entrada: uma solucao qualquer. Eh copiada no corpo da
- *  funcao, portanto nao eh alterada.
- *  - const vector<vector<int>>& troca_suco: a matriz que contem as trocas de
- *  contexto da linha de producao
- * Saida:
- *  Retorna um objeto solucao, contendo a melhor solucao encontrada na
- *  vizinhanca.
- * Complexidade:
- *  - Cubico em relacao ao tamanho do vector linhaProducao interno a solucao.
- *  */
+ *
+ * Essa vizinhanca eh varrida em O(n^3).
+ *
+ * @param entrada A solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * */
 solucao pivoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
     solucao copiaEntrada = entrada; // O(n)
@@ -126,6 +127,19 @@ solucao pivoSwap(const solucao& entrada,
     return copiaEntrada;
 }
 
+/*
+ * Esta vizinhanca eh gerada da seguinte forma:
+ *
+ * Para cada par de indices, inicio e fim, invertemos a ordem dos elementos
+ * entre esses dois indices, com eles inclusos.
+ *
+ * Essa vizinhanca eh varrida em O(n^3).
+ *
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao
+ * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * */
 solucao reverseSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
     solucao copiaEntrada = entrada; // O(n);
@@ -136,7 +150,7 @@ solucao reverseSwap(const solucao& entrada,
     unsigned long j;
 
 
-    // Escolhemos todos os pares de inicio e fim validos e sem repeticao
+    // Escolhemos todos os pares de inicio e fim, inicio < fim
     // e damos um reverse nos elementos entre esses dois, com eles inclusos.
     // O numero de pares eh proporcional a n^2, e portanto o custo de testar
     // todos os pares eh O(n^2)
@@ -144,6 +158,7 @@ solucao reverseSwap(const solucao& entrada,
         for(unsigned long fim = inicio + 1; fim < entrada.linhaProducao.size(); ++fim) {
             i = inicio;
             j = fim;
+
             // Invertemos os elementos entre inicio e fim
             // Isso custa O(n), dando um total de O(n^3)
             while(i < j) {
@@ -188,59 +203,6 @@ solucao reverseSwap(const solucao& entrada,
 }
 
 /**
- * Vizinhança que irá girar a solução constantemente. Se temos
- * 1 2 3,
- * essa vizinhança irá exlorar os vizinhos
- * 3 1 2,
- * 2 3 1.
- *
- * Essa vizinhança é calculada em O(n^2)
- *
- * @param entrada A solução inicial para ser explorada.
- * @param trocaSuco Usado para calcular o custo das soluções geradas.
- * @return {@code solucao} contendo a melhor solução entre os vizinhos explorados.
- */
-solucao rotateSolucao(const solucao& entrada, const vector<vector<int>>& trocaSuco) {
-    //Para essa vizinhança é necessário o uso de uma lista encadeada
-    list<suco_t> linhaProducaoAtual;
-    for (unsigned long i = 0; i < entrada.linhaProducao.size(); ++i) { //O(n)
-        linhaProducaoAtual.push_back(entrada.linhaProducao[i]);
-    }
-
-    //Variáveis que irão guardar as melhores soluções encontradas na vizinhança
-    list<suco_t> melhorLinhaProducao = linhaProducaoAtual; //O(n)
-    long long valorMelhorSolucao = entrada.multaTotal;
-
-    /*
-     * Aqui serão feitas as rotações. A cada interação, o último elemento
-     * será jogado para a primeira posição e isso eventualmente gerará
-     * todos os resultados possíveis para essa vizinhança.
-     * Todo esse bloco é O(n^2)
-     */
-    for (unsigned long i = 0; i < entrada.linhaProducao.size() - 1; ++i) { //O(n)
-        linhaProducaoAtual.push_front(linhaProducaoAtual.back());
-        linhaProducaoAtual.pop_back();
-
-        long long valorSolucaoAtual = calculaSolucao(linhaProducaoAtual, trocaSuco); //O(n)
-
-        if (valorSolucaoAtual < valorMelhorSolucao) {
-            valorMelhorSolucao = valorSolucaoAtual;
-            melhorLinhaProducao = linhaProducaoAtual; //0(n)
-        }
-    }
-    solucao saida;
-    saida.multaTotal = valorMelhorSolucao;
-    saida.linhaProducao.resize(melhorLinhaProducao.size());
-
-    int i = 0;
-    for (suco_t suco : melhorLinhaProducao) { //O(n)
-        saida.linhaProducao[i] = suco;
-        ++i;
-    }
-    return saida;
-}
-
-/**
  * Função que calcula o valor de uma solução a partir de uma list ao invés
  * de um vector.
  * @param linhaProducao Contém a ordem dos sucos a serem produzidos.
@@ -268,4 +230,72 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<
     }
 
     return valor;
+}
+
+/*
+ * Esta vizinhanca eh gerada da seguinte forma:
+ *
+ * Para cada inteiro shift, 0 < shift < n, onde n eh o tamanho da linha de
+ * produco, faz a linha de producao ir de
+ *
+ * 0, 1, 2, ..., n
+ *
+ * para
+ *
+ * 0 + shift, 1 + shift, 2 + shift, ..., n + shift
+ *
+ * Com todos esses valores tomados modulo n.
+ *
+ * Essa vizinhanca eh varrida em O(n^2)
+ *
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao.
+ * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * */
+solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
+    unsigned long shiftMelhorSolucao = 0;
+    long long melhorSolucao = entrada.multaTotal;
+    long long n = entrada.linhaProducao.size();
+
+    // Esse laco vai rodar n - 1 vezes
+    for(unsigned long shift = 1; shift < entrada.linhaProducao.size(); ++shift) {
+
+        long long multa = 0;
+        long long tempo = 0;
+        long long ultimaLinha = 0;
+
+        // calculamos o valor da solucao que comeca em shift ao inves de 0
+        // Isso custa O(n), gerando um custo total de O(n^2)
+        for (unsigned long i = 0; i < entrada.linhaProducao.size(); ++i) {
+            tempo += 
+                troca_suco[ultimaLinha][entrada.linhaProducao[(i + shift) % n].indice] +
+                entrada.linhaProducao[(i + shift) % n].tempo;
+
+            long long tempoPassado = tempo - entrada.linhaProducao[(i + shift) % n].prazo;
+
+            if (tempoPassado > 0)
+                multa += tempoPassado*entrada.linhaProducao[(i + shift) % n].multa;
+
+            ultimaLinha = entrada.linhaProducao[(i + shift) % n].indice + 1;
+        }
+
+        // Se essa solucao eh melhor que a obtida ate o momento, a atualizamos
+        if(multa < melhorSolucao) {
+            shiftMelhorSolucao = shift;
+            melhorSolucao = multa;
+        }
+    }
+
+    solucao copiaEntrada;
+
+    copiaEntrada.linhaProducao.resize(n);
+
+    // usamos o melhor valor de shift encontrado para gerar a solucao otima
+    for(int i = 0; i < n; ++i) {
+        copiaEntrada.linhaProducao[i] = entrada.linhaProducao[(i + shiftMelhorSolucao) % n];
+    }
+    copiaEntrada.multaTotal = melhorSolucao;
+
+    return copiaEntrada;
 }
