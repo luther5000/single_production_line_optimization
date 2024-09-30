@@ -13,7 +13,7 @@ using namespace std;
  * nenhuma vizinhanca obter um resultado melhor que o atual.
  * */
 solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco) {
-    const int num_vizinhancas = 3;
+    const int num_vizinhancas = 4;
     solucao melhorSolucao = entrada;
     int k = 1;
     while(k <= num_vizinhancas) {
@@ -39,7 +39,18 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 3: { //rotateSwap
+            case 3: { //pivoSwap
+                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
+                if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
+                    melhorSolucao = std::move(melhorVizinho);
+                    k = 1;
+                }
+                else {
+                    k += 1;
+                }
+                break;
+            }
+            case 4: { //rotateSwap
                 solucao melhorVizinho = rotateSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);

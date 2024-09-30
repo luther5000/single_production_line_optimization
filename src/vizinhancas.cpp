@@ -58,20 +58,18 @@ solucao twoSwap(const solucao& entrada,
     return copiaEntrada;
 }
 
-// Essa vizinhanca esta contida na reverseSwap, entao seu uso eh redundante.
-// 
 /* 
  * Essa vizinhanca eh gerada da seguinte forma:
  *
- * Para cada indice centro e cada inteiro raio, que nao cause OutOfBounds
- * "Giramos" os elementos ao redor do centro, ou seja, fazemos swap de elemen-
- * tos diametralmente opostos. Por exemplo
+ * Para cada indice centro e cada inteiro r, fazemos swap dos r elementos na
+ * borda do vetor mais proximos do centro com seus respectivos elementos
+ * diametralmente opostos em relacao ao centro. Por exemplo
  *
  * 0 1 2 3 4 5
  *
  * Escolhendo o centro 3, para raio 1, teriamos
  *
- * 0 1 4 3 2 5
+ * 0 5 2 3 4 1
  *
  * E para raio 2
  *
@@ -87,40 +85,77 @@ solucao pivoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
     solucao copiaEntrada = entrada; // O(n)
     unsigned long centroMelhorSolucao = 0;
-    unsigned long raioMelhorSolucao = 0;
+    unsigned long rMelhorSolucao = 0;
     long long melhorSolucao = entrada.multaTotal;
+    const unsigned long n = entrada.linhaProducao.size();
 
     // testamos todos os centros validos
     // lembrando que o size() eh um unsigned, entao eh melhor so subtrair dele
     // quando houver certeza que o resultado nao dara overflow.
-    for(unsigned long centro = 1; centro + 1 < entrada.linhaProducao.size(); ++centro) {
-        unsigned long raio;
-        // No geral, a quantidade de vezes que esse loop interno vai rodar eh
-        // proporcional a O(n^2)
-        for(raio = 1; centro >= raio && centro + raio < entrada.linhaProducao.size(); ++raio) {
-            std::swap(copiaEntrada.linhaProducao[centro + raio], copiaEntrada.linhaProducao[centro - raio]);
+    for(unsigned long centro = 1; centro + 1 < n; ++centro) {
+        unsigned long r = 0;
 
-            // Calcular a solucao eh proporcional a O(n)
-            // E portanto essa linha tera peso O(n^3) no total
-            copiaEntrada.calcula_solucao(troca_suco);
-            // Essa parte eh O(1)
-            if(copiaEntrada.multaTotal < melhorSolucao) {
-                centroMelhorSolucao = centro;
-                raioMelhorSolucao = raio;
-                melhorSolucao = copiaEntrada.multaTotal;
+        // Nesse caso, estamos mais proximos do comeco do vetor do que do final.
+        // No total, os loops dentro de ambas branchs serao executados um numero
+        // de vezes proporcional a O(n^2)
+        if(centro < n - centro) {
+            for(r = 0; r < centro; ++r) {
+                // fazemos swap dos elementos de fora para dentro para fora, em
+                // direcao ao centro
+                std::swap(copiaEntrada.linhaProducao[r],
+                        copiaEntrada.linhaProducao[2*centro - r]);
+
+                // O calculo do valor da solucao eh proporcional a O(n)
+                // O que no total adiciona O(n^3) de custo a solucao
+                copiaEntrada.calcula_solucao(troca_suco);
+                // Essa parte eh O(1)
+                if(copiaEntrada.multaTotal < melhorSolucao) {
+                    centroMelhorSolucao = centro;
+                    rMelhorSolucao = r;
+                    melhorSolucao = copiaEntrada.multaTotal;
+                }
             }
-        }
-        // Voltar a solucao pro estado inicial tem custo proporcional a O(n)
-        // E portanto essa linha tem custo proporcional a O(n^2)
-        while(raio > 0) {
-            --raio;
-            std::swap(copiaEntrada.linhaProducao[centro + raio], copiaEntrada.linhaProducao[centro - raio]);
+            // Voltar a solucao pro estado inicial tem custo proporcional a O(n)
+            // E portanto essa linha tem custo proporcional a O(n^2)
+            for(r = 0; r < centro; ++r) {
+                std::swap(copiaEntrada.linhaProducao[r],
+                        copiaEntrada.linhaProducao[2*centro - r]);
+            }
+        // Caso contrario, estamos mais proximos do fim do array
+        } else {
+            for(r = 0; r < n - centro - 1; ++r) {
+                std::swap(copiaEntrada.linhaProducao[2*centro - n + 1 + r],
+                        copiaEntrada.linhaProducao[n - r - 1]);
+
+                copiaEntrada.calcula_solucao(troca_suco);
+                copiaEntrada.exibe();
+                // Essa parte eh O(1)
+                if(copiaEntrada.multaTotal < melhorSolucao) {
+                    centroMelhorSolucao = centro;
+                    rMelhorSolucao = r;
+                    melhorSolucao = copiaEntrada.multaTotal;
+                }
+            }
+            for(r = 0; r < n - centro - 1; ++r) {
+                std::swap(copiaEntrada.linhaProducao[2*centro - n + 1 + r],
+                        copiaEntrada.linhaProducao[n - r - 1]);
+            }
         }
     }
 
-    // Regerar a melhor solucao encontrada tem custo proporcional a O(n)
-    for(unsigned long i = 1; i <= raioMelhorSolucao; ++i) {
-        std::swap(copiaEntrada.linhaProducao[centroMelhorSolucao + i], copiaEntrada.linhaProducao[centroMelhorSolucao - i]);
+
+    // geramos novamente a melhor solucao
+    // essa linha tem custo proporcional a O(n)
+    if(centroMelhorSolucao < n - centroMelhorSolucao) {
+        for(unsigned long r = 0; r <= rMelhorSolucao; ++r) {
+            std::swap(copiaEntrada.linhaProducao[r],
+                    copiaEntrada.linhaProducao[2*centroMelhorSolucao - r]);
+        }
+    } else {
+        for(unsigned long r = 0; r <= rMelhorSolucao; ++r) {
+            std::swap(copiaEntrada.linhaProducao[2*centroMelhorSolucao - n + 1 + r],
+                    copiaEntrada.linhaProducao[n - r - 1]);
+        }
     }
     copiaEntrada.multaTotal = melhorSolucao;
 
