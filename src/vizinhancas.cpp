@@ -1,5 +1,6 @@
 #include "vizinhancas.hpp"
 #include "solucao.hpp"
+#include <iostream>
 /*
  * Esta vizinhanca eh gerada da seguinte forma:
  *
@@ -354,26 +355,35 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
         }
 
         list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
-        for (unsigned int i = 0; i < linhaProducaoAtual.size(); ++i){
+        for (unsigned int i = 0; i < linhaProducaoAtual.size() + 1; ++i){
             linhaProducaoAtual.insert(iterator, suco);
-            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);
+            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);  
 
             if (valorLinhaAtual < valorMelhorProducao){
                 valorLinhaAtual = valorMelhorProducao;
                 indiceLocalInsercao = i;
                 sucoInserido = suco;
+
+                for (suco_t sucoPrint : linhaProducaoAtual){
+                    cout << sucoPrint.indice << " ";
+                }
+                cout << endl;
             }
             
             --iterator;
-            linhaProducaoAtual.erase(iterator);
+            iterator = linhaProducaoAtual.erase(iterator);
             ++iterator;
         }
     }
+    cout << "saiu2" << endl;
 
     if (indiceLocalInsercao == -1)
         return entrada;
     else {
         vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
+        cout << endl;
+        cout << sucoInserido.indice << endl;
+        cout << indiceLocalInsercao << endl;
 
         for (int i = 0; i < entrada.linhaProducao.size(); ++i){
             if (entrada.linhaProducao[i].indice == sucoInserido.indice){
@@ -381,13 +391,16 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
             } 
 
             if (i == indiceLocalInsercao){
-                melhorLinhaProducao.push_back(entrada.linhaProducao[i]);
-                --i;
+                melhorLinhaProducao.push_back(sucoInserido);
                 continue;
             }
             
             melhorLinhaProducao.push_back(entrada.linhaProducao[i]);
         }
+        for (suco_t sucoPrint : melhorLinhaProducao){
+                    cout << sucoPrint.indice << " ";
+                }
+                cout << endl;
 
         return solucao(melhorLinhaProducao, valorMelhorProducao);
     }

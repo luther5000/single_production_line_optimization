@@ -2,6 +2,7 @@
 #include "guloso.hpp"
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
+#include "vizinhancas.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -16,8 +17,9 @@ int main(int argc, char **argv) {
     solucao *solucao = guloso.algoritmo_guloso();
 
     solucao->exibe();
+    insertSwap(*solucao, test.trocaSuco);
 
-    variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
+    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
     return 0;
 }
