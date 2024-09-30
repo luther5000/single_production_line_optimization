@@ -19,6 +19,7 @@ public:
 
     explicit solucao(const vector<suco_t>& solucao, const vector<vector<int>>& troca_suco);
     explicit solucao();
+    explicit solucao(const vector<suco_t>& solucao, const long long& valorMulta);
     void calcula_solucao(const vector<vector<int>>& troca_suco);
     void exibe();
 };

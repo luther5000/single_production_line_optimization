@@ -267,7 +267,7 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<
     return valor;
 }
 
-/*
+/** 
  * Esta vizinhanca eh gerada da seguinte forma:
  *
  * Para cada inteiro shift, 0 < shift < n, onde n eh o tamanho da linha de
@@ -333,4 +333,62 @@ solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
     copiaEntrada.multaTotal = melhorSolucao;
 
     return copiaEntrada;
+}
+
+solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco){     
+    long long valorMelhorProducao = entrada.multaTotal;
+    long long valorLinhaAtual;
+
+    long long indiceLocalInsercao = -1;
+    suco_t sucoInserido;
+
+    for (suco_t suco : entrada.linhaProducao){
+        /* 
+        * Fazemos uma cópia da linha de produção inicial sem o suco que estaremos
+        * inserindo em várias posições diferentes
+        */
+        list<suco_t> linhaProducaoAtual;
+        for (suco_t sucoCopia : entrada.linhaProducao){
+            if (sucoCopia.indice != suco.indice)
+                linhaProducaoAtual.push_back(sucoCopia);
+        }
+
+        list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
+        for (unsigned int i = 0; i < linhaProducaoAtual.size(); ++i){
+            linhaProducaoAtual.insert(iterator, suco);
+            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);
+
+            if (valorLinhaAtual < valorMelhorProducao){
+                valorLinhaAtual = valorMelhorProducao;
+                indiceLocalInsercao = i;
+                sucoInserido = suco;
+            }
+            
+            --iterator;
+            linhaProducaoAtual.erase(iterator);
+            ++iterator;
+        }
+    }
+
+    if (indiceLocalInsercao == -1)
+        return entrada;
+    else {
+        vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
+
+        for (int i = 0; i < entrada.linhaProducao.size(); ++i){
+            if (entrada.linhaProducao[i].indice == sucoInserido.indice){
+                continue;
+            } 
+
+            if (i == indiceLocalInsercao){
+                melhorLinhaProducao.push_back(entrada.linhaProducao[i]);
+                --i;
+                continue;
+            }
+            
+            melhorLinhaProducao.push_back(entrada.linhaProducao[i]);
+        }
+
+        return solucao(melhorLinhaProducao, valorMelhorProducao);
+    }
 }

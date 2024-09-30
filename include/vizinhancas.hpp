@@ -21,4 +21,6 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<
 
 solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
+solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
+
 #endif //__VIZINHANCAS_HPP

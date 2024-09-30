@@ -11,6 +11,11 @@ solucao::solucao() {
     this->multaTotal = 0;
 }
 
+solucao::solucao(const vector<suco_t>& solucao, const long long& valorMulta){
+    this->linhaProducao = solucao;
+    this->multaTotal = valorMulta;
+}
+
 void solucao::calcula_solucao(const vector<vector<int>>& troca_suco) {
     long long tempo = 0;
     this->multaTotal = 0;
