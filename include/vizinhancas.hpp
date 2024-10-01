@@ -23,4 +23,8 @@ solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
 
 solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
+solucao fiveFactorialSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
+
+solucao threeSwap(const solucao& entrada, const vector<vector<int>>& troca_suco);
+
 #endif //__VIZINHANCAS_HPP

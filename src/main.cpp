@@ -14,14 +14,12 @@ int main(int argc, char **argv) {
     instancia_problema test(argv[1]);
     test.exibe();
 
-    guloso guloso(test.size, test.sucos, test.trocaSuco);
-    solucao *solucao = guloso.algoritmo_guloso();
+    guloso gul = guloso(test.size, test.sucos, test.trocaSuco);
 
-    solucao->exibe();
-    //insertSwap(*solucao, test.trocaSuco);
+    solucao *sul = gul.algoritmo_guloso();
+    sul->exibe();
 
-    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
+    variableNeighborhoodDescent(*sul, test.trocaSuco).exibe();
 
-    metaHeuristica(*solucao, test.trocaSuco, 10).exibe();
     return 0;
 }
