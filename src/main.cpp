@@ -22,6 +22,6 @@ int main(int argc, char **argv) {
 
     //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
-    metaHeuristica(*solucao, test.trocaSuco, 50).exibe();
+    metaHeuristica(*solucao, test.trocaSuco, 15).exibe();
     return 0;
 }
