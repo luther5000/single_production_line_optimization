@@ -333,7 +333,27 @@ solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
     return copiaEntrada;
 }
 
-solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco){     
+/**
+ * Função que verifica para cada suco todos os possíveis locais que o suco pode ser inserido
+ * e guarda o melhor vizinho obtido para retornar ele.
+ *
+ * Ex: Caso selecionemos 2 no vetor abaixo
+ *
+ * 1 2 3 4 5
+ *
+ * Os possíveis locais de inserção seria:
+ *
+ * 2 1 3 4 5
+ * 1 3 2 4 5
+ * 1 3 4 2 5
+ * 1 3 4 5 2
+ *
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao.
+ * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ */
+solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco){
     long long valorMelhorProducao = entrada.multaTotal;
     long long valorLinhaAtual;
 
@@ -351,11 +371,16 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
                 linhaProducaoAtual.push_back(sucoCopia);
         }
 
+        /*
+         * Agora iremos analisar para cada um dos sucos todas as posições
+         * em que ele pode ser inserido na linha de produção.
+         */
         list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
         for (unsigned int i = 0; i < linhaProducaoAtual.size() + 1; ++i){
             linhaProducaoAtual.insert(iterator, suco);
             valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);  
 
+            // Caso o valor da solução seja melhor, salvamos ele para reconstruir a solução depois
             if (valorLinhaAtual < valorMelhorProducao){
                 valorMelhorProducao = valorLinhaAtual;
                 indiceLocalInsercao = i;
@@ -367,9 +392,12 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
             ++iterator;
         }
     }
+
+    //Caso a entrada seja a melhor solução, retornamos ela
     if (indiceLocalInsercao == -1)
         return entrada;
 
+    //Reconstruímos a solução ótima obtida pelo algoritmo
     vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
     melhorLinhaProducao[indiceLocalInsercao] = sucoInserido;
 
