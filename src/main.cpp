@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
         return 1;
     }
     instancia_problema test(argv[1]);
-    test.exibe();
+    //test.exibe();
 
     guloso guloso(test.size, test.sucos, test.trocaSuco);
     solucao *solucao = guloso.algoritmo_guloso();
@@ -22,6 +22,6 @@ int main(int argc, char **argv) {
 
     //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
-    metaHeuristica(*solucao, test.trocaSuco, 10).exibe();
+    metaHeuristica(*solucao, test.trocaSuco, 50).exibe();
     return 0;
 }

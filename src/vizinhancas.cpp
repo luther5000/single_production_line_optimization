@@ -129,7 +129,6 @@ solucao pivoSwap(const solucao& entrada,
                         copiaEntrada.linhaProducao[n - r - 1]);
 
                 copiaEntrada.calcula_solucao(troca_suco);
-                copiaEntrada.exibe();
                 // Essa parte eh O(1)
                 if(copiaEntrada.multaTotal < melhorSolucao) {
                     centroMelhorSolucao = centro;

@@ -7,13 +7,15 @@
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include <vector>
-#include <random>
-#include <iostream>
 
 using namespace std;
 
 solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_suco, const int& numIteracoes);
 
-void divisaoPerturbacao(vector<suco_t>& vector);
+void twoDividePerturbation(vector<suco_t>& linhaProducao);
+
+void fourDividePerturbation(vector<suco_t>& linhaProducao);
+
+void changeOdsEven(vector<suco_t>& linhaProducao);
 
 #endif //ILS_HPP
