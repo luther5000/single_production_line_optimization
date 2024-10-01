@@ -3,6 +3,7 @@
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include "vizinhancas.hpp"
+#include "ils.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -19,7 +20,8 @@ int main(int argc, char **argv) {
     solucao->exibe();
     //insertSwap(*solucao, test.trocaSuco);
 
-    variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
+    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
+    metaHeuristica(*solucao, test.trocaSuco, 10).exibe();
     return 0;
 }
