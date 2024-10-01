@@ -252,9 +252,6 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<
     long long ultimaLinha = 0;
 
     for (suco_t suco : linhaProducao) { //O(n)
-        if (suco.indice == linhaProducao.back().indice)
-            break;
-
         tempo += trocaSuco[ultimaLinha][suco.indice] +  suco.tempo;
         tempoPassado = tempo - suco.prazo;
 
@@ -360,14 +357,9 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
             valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);  
 
             if (valorLinhaAtual < valorMelhorProducao){
-                valorLinhaAtual = valorMelhorProducao;
+                valorMelhorProducao = valorLinhaAtual;
                 indiceLocalInsercao = i;
                 sucoInserido = suco;
-
-                for (suco_t sucoPrint : linhaProducaoAtual){
-                    cout << sucoPrint.indice << " ";
-                }
-                cout << endl;
             }
             
             --iterator;
@@ -375,33 +367,26 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
             ++iterator;
         }
     }
-    cout << "saiu2" << endl;
-
     if (indiceLocalInsercao == -1)
         return entrada;
-    else {
-        vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
-        cout << endl;
-        cout << sucoInserido.indice << endl;
-        cout << indiceLocalInsercao << endl;
 
-        for (int i = 0; i < entrada.linhaProducao.size(); ++i){
-            if (entrada.linhaProducao[i].indice == sucoInserido.indice){
-                continue;
-            } 
+    vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
+    melhorLinhaProducao[indiceLocalInsercao] = sucoInserido;
 
-            if (i == indiceLocalInsercao){
-                melhorLinhaProducao.push_back(sucoInserido);
-                continue;
-            }
-            
-            melhorLinhaProducao.push_back(entrada.linhaProducao[i]);
+    unsigned int j = 0;
+    for (unsigned long i = 0; i < entrada.linhaProducao.size(); ++i){
+        if (entrada.linhaProducao[i].indice == sucoInserido.indice) {
+            continue;
         }
-        for (suco_t sucoPrint : melhorLinhaProducao){
-                    cout << sucoPrint.indice << " ";
-                }
-                cout << endl;
+        if (j == indiceLocalInsercao) {
+            ++j;
+            --i;
+            continue;
+        }
 
-        return solucao(melhorLinhaProducao, valorMelhorProducao);
+        melhorLinhaProducao[j] = entrada.linhaProducao[i];
+        ++j;
     }
+
+    return solucao(melhorLinhaProducao, valorMelhorProducao);
 }

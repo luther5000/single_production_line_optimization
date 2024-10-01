@@ -17,9 +17,9 @@ int main(int argc, char **argv) {
     solucao *solucao = guloso.algoritmo_guloso();
 
     solucao->exibe();
-    insertSwap(*solucao, test.trocaSuco);
+    //insertSwap(*solucao, test.trocaSuco);
 
-    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
+    variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
     return 0;
 }

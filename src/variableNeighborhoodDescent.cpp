@@ -13,13 +13,13 @@ using namespace std;
  * nenhuma vizinhanca obter um resultado melhor que o atual.
  * */
 solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco) {
-    const int num_vizinhancas = 4;
+    const int num_vizinhancas = 5;
     solucao melhorSolucao = entrada;
     int k = 1;
     while(k <= num_vizinhancas) {
         switch(k) {
-            case 1: { //twoSwap
-                solucao melhorVizinho = twoSwap(melhorSolucao, troca_suco);
+            case 1: { //insertSwap
+                solucao melhorVizinho = insertSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
@@ -28,8 +28,8 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 2: { //reverseSwap
-                solucao melhorVizinho = reverseSwap(melhorSolucao, troca_suco);
+            case 2: { //twoSwap
+                solucao melhorVizinho = twoSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
@@ -39,8 +39,8 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 3: { //pivoSwap
-                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
+            case 3: { //reverseSwap
+                solucao melhorVizinho = reverseSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
@@ -52,6 +52,18 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
             }
             case 4: { //rotateSwap
                 solucao melhorVizinho = rotateSwap(melhorSolucao, troca_suco);
+                if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
+                    melhorSolucao = std::move(melhorVizinho);
+                    k = 1;
+                }
+                else {
+                    k += 1;
+                }
+                break;
+            }
+            case 5: {
+                //pivoSwap
+                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
