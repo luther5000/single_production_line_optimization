@@ -24,9 +24,27 @@ void executeAll(){
         instancia_problema instancia(endereco);
 
         guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
-        solucao *solucao = guloso.algoritmo_guloso();
+        solucao *solucao = guloso.algoritmo_guloso_2();
 
-
+        //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
         metaHeuristica(*solucao, instancia.trocaSuco, 15).exibe(endereco);
     }
+}
+
+void executeOneSeveralTimes(const string& endereco){
+    long long total = 0;
+    for (int i = 0; i < 10; ++i){
+        instancia_problema instancia(endereco);
+
+        guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
+        solucao *solucao = guloso.algoritmo_guloso_2();
+
+        //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
+        *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 15);
+        solucao->exibe(endereco);
+
+        total += solucao->multaTotal;
+    }
+
+    cout << "Média: " << total / 10 << endl;
 }

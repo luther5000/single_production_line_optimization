@@ -51,14 +51,14 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 break;
             }
             case 4: { //rotateSwap
-                /*solucao melhorVizinho = rotateSwap(melhorSolucao, troca_suco);
+                solucao melhorVizinho = rotateSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
                 }
-                else {*/
+                else {
                     k += 1;
-                //}
+                }
                 break;
             }
             case 5: { //pivoSwap

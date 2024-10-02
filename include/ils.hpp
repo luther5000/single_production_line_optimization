@@ -8,6 +8,7 @@
 #include "variableNeighborhoodDescent.hpp"
 #include <vector>
 #include <list>
+#include <random>
 
 using namespace std;
 
@@ -20,5 +21,7 @@ void fourDividePerturbation(vector<suco_t>& linhaProducao);
 void changeOdsEven(vector<suco_t>& linhaProducao);
 
 void rotate(vector<suco_t>& linhaProducao);
+
+void multipleSwaps(vector<suco_t>& linhaProducao);
 
 #endif //ILS_HPP

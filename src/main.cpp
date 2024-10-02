@@ -8,12 +8,13 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-    if(argc != 2) {
+    /*if(argc != 2) {
         std::cout << "Insira um arquivo como entrada!" << std::endl;
         return 1;
     }
     instancia_problema test(argv[1]);
     test.exibe();
+    */
 
     //guloso guloso(test.size, test.sucos, test.trocaSuco);
     //solucao *solucao = guloso.algoritmo_guloso();
@@ -23,6 +24,10 @@ int main(int argc, char **argv) {
 
     //metaHeuristica(*solucao, test.trocaSuco, 15).exibe();
     
-    executeAll();
+    if (argc != 2) {
+        executeAll();
+    } else 
+        executeOneSeveralTimes(argv[1]);
+        
     return 0;
 }

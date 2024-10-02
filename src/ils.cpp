@@ -19,7 +19,7 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
             melhorSolucao = solucaoAtual;
             solucaoParaVnd = melhorSolucao;
 
-            rotate(solucaoParaVnd.linhaProducao);
+            multipleSwaps(solucaoParaVnd.linhaProducao);
         } else {
             /*
              * Caso a solução gerada tenha sido pior, em cima da solução calculada
@@ -29,6 +29,7 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
             changeOdsEven(solucaoParaVnd.linhaProducao);
             //rotate(solucaoParaVnd.linhaProducao);
             fourDividePerturbation(solucaoParaVnd.linhaProducao);
+            multipleSwaps(solucaoParaVnd.linhaProducao);
         }
 
         solucaoParaVnd.calcula_solucao(troca_suco);
@@ -132,5 +133,18 @@ void rotate(vector<suco_t>& linhaProducao){
     for (suco_t suco : lista){
         linhaProducao[i] = suco;
         ++i;
+    }
+}
+
+void multipleSwaps(vector<suco_t>& linhaProducao){
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distr(0, linhaProducao.size() - 1);
+
+    for (int k = 0; k < 10; ++k){
+        int i = distr(gen);
+        int j = distr(gen);
+
+        swap(linhaProducao[i], linhaProducao[j]);
     }
 }
