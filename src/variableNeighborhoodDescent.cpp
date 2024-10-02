@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/*
+/**
  * Implementacao do VND. Ele recebe uma solucao como entrada e a matriz que
  * contem o custo para iniciar a producao de um outro suco dado o suco atual.
  * O loop while eh mantido testando o twoSwap ate que ele nao encontre uma
