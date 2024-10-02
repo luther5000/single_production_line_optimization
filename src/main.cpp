@@ -8,28 +8,28 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-    //if(argc != 2) {
-        //std::cout << "Insira um arquivo como entrada!" << std::endl;
-        //return 1;
-    //}
-    //instancia_problema test(argv[1]);
-    //test.exibe();
+    if(argc != 2) {
+        std::cout << "Insira um arquivo como entrada!" << std::endl;
+        return 1;
+    }
+    instancia_problema test(argv[1]);
+    test.exibe();
 
-    //guloso guloso(test.size, test.sucos, test.trocaSuco);
-    //solucao *solucao = guloso.algoritmo_guloso();
+    guloso guloso(test.size, test.sucos, test.trocaSuco);
+    solucao *solucao = guloso.algoritmo_guloso_2();
 
-    //solucao->exibe();
+    solucao->exibe();
     //insertSwap(*solucao, test.trocaSuco);
     // guloso gul = guloso(test.size, test.sucos, test.trocaSuco);
 
     // solucao *sul = gul.algoritmo_guloso();
     // sul->exibe();
 
-    // variableNeighborhoodDescent(*sul, test.trocaSuco).exibe();
+    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
 
     //metaHeuristica(*solucao, test.trocaSuco, 15).exibe();
     
-    executeAll();
+    //executeAll();
     // metaHeuristica(*sul, test.trocaSuco, 15).exibe();
     return 0;
 }

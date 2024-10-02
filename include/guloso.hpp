@@ -23,5 +23,7 @@ public:
 
     class solucao *algoritmo_guloso();
 
+    class solucao *algoritmo_guloso_2();
+
 };
 #endif //GULOSO_HPP
