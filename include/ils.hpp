@@ -7,6 +7,7 @@
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -17,5 +18,7 @@ void twoDividePerturbation(vector<suco_t>& linhaProducao);
 void fourDividePerturbation(vector<suco_t>& linhaProducao);
 
 void changeOdsEven(vector<suco_t>& linhaProducao);
+
+void rotate(vector<suco_t>& linhaProducao);
 
 #endif //ILS_HPP

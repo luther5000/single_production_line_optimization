@@ -19,7 +19,7 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
             melhorSolucao = solucaoAtual;
             solucaoParaVnd = melhorSolucao;
 
-            twoDividePerturbation(solucaoParaVnd.linhaProducao);
+            rotate(solucaoParaVnd.linhaProducao);
         } else {
             /*
              * Caso a solução gerada tenha sido pior, em cima da solução calculada
@@ -27,6 +27,7 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
              * {@changeOdsEven} e {@fourDividePerturbation}.
              */
             changeOdsEven(solucaoParaVnd.linhaProducao);
+            //rotate(solucaoParaVnd.linhaProducao);
             fourDividePerturbation(solucaoParaVnd.linhaProducao);
         }
 
@@ -106,5 +107,30 @@ void changeOdsEven(vector<suco_t> &linhaProducao) {
 
         i += 2;
         j += 2;
+    }
+}
+
+/**
+ * Rotaciona os elementos do vetor n / 4 índices para 
+ * a direita. 
+ * 
+ * Algoritmo roda em O(n).
+ */
+void rotate(vector<suco_t>& linhaProducao){
+    int n = linhaProducao.size();
+
+    list<suco_t> lista;
+    for (int i = 0; i < n; ++i)
+        lista.push_back(linhaProducao[i]);
+
+    for (int i = 0; i < n / 4; ++i){
+        lista.push_front(lista.back());
+        lista.pop_back();
+    }
+
+    int i = 0;
+    for (suco_t suco : lista){
+        linhaProducao[i] = suco;
+        ++i;
     }
 }
