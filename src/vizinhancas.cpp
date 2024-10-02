@@ -8,12 +8,12 @@
  *  Para cada par de indices i e j, i < j, trocamos o valor na posicao i com
  *  o valor na posicao j.
  * 
- * Essa vizinhanca eh varrida em O(n^3).
+ * @note Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  * */
 solucao twoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
@@ -77,11 +77,11 @@ solucao twoSwap(const solucao& entrada,
  *
  * 0 5 4 3 2 1
  *
- * Essa vizinhanca eh varrida em O(n^3).
+ * @note Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada A solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
- * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  * */
 solucao pivoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
@@ -169,12 +169,12 @@ solucao pivoSwap(const solucao& entrada,
  * Para cada par de indices, inicio e fim, invertemos a ordem dos elementos
  * entre esses dois indices, com eles inclusos.
  *
- * Essa vizinhanca eh varrida em O(n^3).
+ * @note Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao
- * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  * */
 solucao reverseSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
@@ -243,7 +243,7 @@ solucao reverseSwap(const solucao& entrada,
  * de um vector.
  * @param linhaProducao Contém a ordem dos sucos a serem produzidos.
  * @param trocaSuco O tempo necessário para trocar os sucos de lugar.
- * @return {@code long long} contendo a multa paga para se executar essa linha de produção.
+ * @return A multa paga para se executar essa linha de produção.
  */
 long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<int>>& trocaSuco) {
     long long valor = 0;
@@ -279,12 +279,12 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const vector<vector<
  *
  * Com todos esses valores tomados modulo n.
  *
- * Essa vizinhanca eh varrida em O(n^2)
+ * @note Essa vizinhanca eh varrida em O(n^2)
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  * */
 solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
     unsigned long shiftMelhorSolucao = 0;
@@ -351,7 +351,7 @@ solucao rotateSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  */
 solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco){
     long long valorMelhorProducao = entrada.multaTotal;
@@ -425,12 +425,12 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
  *  Para cada indice index, pegamos os valores [index, index + 5)
  *  e testamos todas as permutacoes desses elementos
  * 
- * Essa vizinhanca eh varrida em O(n^2)
+ * @note Essa vizinhanca eh varrida em O(n^2)
  * 
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  */
 solucao fiveFactorialSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
     unsigned long indexMelhorSolucao = 0;
@@ -551,12 +551,12 @@ solucao fiveFactorialSwap(const solucao& entrada, const vector<vector<int>>& tro
  *  os valores i, j e k de posicao. As trocas que o twoSwap
  *  varre sao excluidas
  * 
- *  Essa vizinhanca eh varrida em O(n^4)
+ * @note Essa vizinhanca eh varrida em O(n^4)
  * 
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
+ * @return A melhor solucao encontrada na vizinhanca.
  */
 solucao threeSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
     solucao copiaEntrada = entrada; // O(n)
