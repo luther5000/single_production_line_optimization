@@ -13,5 +13,6 @@ add_executable(projeto_apa.exe src/main.cpp
         src/guloso.cpp
         src/solucao.cpp
         src/variableNeighborhoodDescent.cpp
-        src/ils.cpp)
+        src/ils.cpp
+        src/executeAll.cpp)
 

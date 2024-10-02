@@ -42,3 +42,8 @@ void solucao::exibe() {
     printf("\n");
     printf("Valor da solucao: %lld\n\n", this->multaTotal);
 }
+
+void solucao::exibe(const string& nomeArquivo){
+    
+    cout << nomeArquivo[14] << ": " << this->multaTotal << endl;
+}

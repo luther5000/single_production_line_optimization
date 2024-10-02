@@ -2,6 +2,7 @@
 #define __SOLUCAO_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -18,10 +19,16 @@ public:
     long long multaTotal;
 
     explicit solucao(const vector<suco_t>& solucao, const vector<vector<int>>& troca_suco);
+
     explicit solucao();
+    
     explicit solucao(const vector<suco_t>& solucao, const long long& valorMulta);
+    
     void calcula_solucao(const vector<vector<int>>& troca_suco);
+    
     void exibe();
+
+    void exibe(const string& nomeArquivo);
 };
 
 #endif //__SOLUCAO_H
