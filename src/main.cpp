@@ -15,16 +15,27 @@ int main(int argc, char **argv) {
     //instancia_problema test(argv[1]);
     //test.exibe();
 
+<<<<<<< HEAD
     //guloso guloso(test.size, test.sucos, test.trocaSuco);
     //solucao *solucao = guloso.algoritmo_guloso();
 
     //solucao->exibe();
     //insertSwap(*solucao, test.trocaSuco);
+=======
+    guloso gul = guloso(test.size, test.sucos, test.trocaSuco);
 
-    //variableNeighborhoodDescent(*solucao, test.trocaSuco).exibe();
+    solucao *sul = gul.algoritmo_guloso();
+    sul->exibe();
+>>>>>>> origin/branchAlquimas
 
+    variableNeighborhoodDescent(*sul, test.trocaSuco).exibe();
+
+<<<<<<< HEAD
     //metaHeuristica(*solucao, test.trocaSuco, 15).exibe();
     
     executeAll();
+=======
+    metaHeuristica(*sul, test.trocaSuco, 15).exibe();
+>>>>>>> origin/branchAlquimas
     return 0;
 }

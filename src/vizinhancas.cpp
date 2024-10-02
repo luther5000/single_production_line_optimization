@@ -1,18 +1,19 @@
 #include "vizinhancas.hpp"
 #include "solucao.hpp"
 #include <iostream>
-/*
+#include <algorithm>
+/**
  * Esta vizinhanca eh gerada da seguinte forma:
  *
  *  Para cada par de indices i e j, i < j, trocamos o valor na posicao i com
  *  o valor na posicao j.
  * 
- * Essa vizinhaca eh varrida em O(n^3).
+ * Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
- * @return {@code solucao} Contendo a melhor solucao encontrada na vizinhanca.
+ * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
  * */
 solucao twoSwap(const solucao& entrada,
         const vector<vector<int>>& troca_suco) {
@@ -59,7 +60,7 @@ solucao twoSwap(const solucao& entrada,
     return copiaEntrada;
 }
 
-/* 
+/** 
  * Essa vizinhanca eh gerada da seguinte forma:
  *
  * Para cada indice centro e cada inteiro r, fazemos swap dos r elementos na
@@ -162,7 +163,7 @@ solucao pivoSwap(const solucao& entrada,
     return copiaEntrada;
 }
 
-/*
+/**
  * Esta vizinhanca eh gerada da seguinte forma:
  *
  * Para cada par de indices, inicio e fim, invertemos a ordem dos elementos
@@ -416,4 +417,237 @@ solucao insertSwap(const solucao& entrada, const vector<vector<int>>& troca_suco
     }
 
     return solucao(melhorLinhaProducao, valorMelhorProducao);
+}
+
+/**
+ * Esta vizinhanca eh gerada da seguinte forma:
+ * 
+ *  Para cada indice index, pegamos os valores [index, index + 5)
+ *  e testamos todas as permutacoes desses elementos
+ * 
+ * Essa vizinhanca eh varrida em O(n^2)
+ * 
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao.
+ * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
+ */
+solucao fiveFactorialSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
+    unsigned long indexMelhorSolucao = 0;
+    vector<int> permutacaoMelhorSolucao = {0, 1, 2, 3, 4};
+    long long melhorSolucao = entrada.multaTotal;
+
+    for(unsigned long i = 0; i < entrada.linhaProducao.size() - 4; ++i) {
+        // a permutacao identidade
+        // iniciamos com ela e vamos ate a maior permutacao lexicografica
+        // que seria {4, 3, 2, 1, 0}
+        vector<int> permutacaoAtual = {0, 1, 2, 3, 4};
+        while(1) {
+            long long multa = 0;
+            long long tempo = 0;
+            long long ultimaLinha = 0;
+            unsigned long j = 0;
+
+            // Esse trecho seguinte encontra a proxima permutacao em ordem lexicografica
+            // Ou sai do laco se ja estivermos na maior permutacao
+
+            // encontramos o maior k tal que p[k] < p[k + 1]
+            int k = 3;
+            while(k >= 0 && permutacaoAtual[k] >= permutacaoAtual[k + 1]) {
+                k--;
+            }
+
+            // se nenhum k for encontrado, estamos na maior permutacao
+            // entao saia
+            if(k < 0) {
+                break;
+            }
+
+            // encontre o maior l tal que p[l] > p[k]
+            int l = 4;
+            while(permutacaoAtual[k] >= permutacaoAtual[l]) {
+                l--;
+            }
+
+            // troque p[l] e p[k] de posicao
+            std::swap(permutacaoAtual[k], permutacaoAtual[l]);
+
+            // inverta os elementos a frente de k
+            // isso mantem o crescimento lexicografico
+            std::reverse(permutacaoAtual.begin() + k + 1, permutacaoAtual.end());
+
+            // Calculamos a multa ate o suco i
+            for(j = 0; j < i; ++j) {
+                tempo +=
+                    troca_suco[ultimaLinha][entrada.linhaProducao[j].indice] +
+                    entrada.linhaProducao[j].tempo;
+
+                long long tempoPassado = tempo - entrada.linhaProducao[j].prazo;
+
+                if (tempoPassado > 0)
+                    multa += tempoPassado*entrada.linhaProducao[j].multa;
+
+                ultimaLinha = entrada.linhaProducao[i].indice + 1;
+            }
+
+            // calculamos a multa dos sucos i ate i + 4 com
+            // a permutacao atual aplicada
+            for(k = 0; k < 5; ++k) {
+                tempo +=
+                    troca_suco[ultimaLinha][entrada.linhaProducao[j + permutacaoAtual[k]].indice] +
+                    entrada.linhaProducao[j + permutacaoAtual[k]].tempo;
+
+                long long tempoPassado = tempo - entrada.linhaProducao[j + permutacaoAtual[k]].prazo;
+
+                if (tempoPassado > 0)
+                    multa += tempoPassado*entrada.linhaProducao[j + permutacaoAtual[k]].multa;
+
+                ultimaLinha = entrada.linhaProducao[j + permutacaoAtual[k]].indice + 1;
+            }
+
+            // depois prosseguimos o calculo normalmente
+            // ate o fim da linha de producao
+            for(j += 5; j < entrada.linhaProducao.size(); ++j) {
+                tempo +=
+                    troca_suco[ultimaLinha][entrada.linhaProducao[j].indice] +
+                    entrada.linhaProducao[j].tempo;
+
+                long long tempoPassado = tempo - entrada.linhaProducao[j].prazo;
+
+                if (tempoPassado > 0)
+                    multa += tempoPassado*entrada.linhaProducao[j].multa;
+
+                ultimaLinha = entrada.linhaProducao[i].indice + 1;
+            }
+
+            // se encontrarmos uma solucao melhor que a atual
+            // salvamos ela
+            if(multa < melhorSolucao) {
+                indexMelhorSolucao = i;
+                for(int m = 0; m < 5; ++m) {
+                    permutacaoMelhorSolucao[m] = permutacaoAtual[m];
+                }
+                melhorSolucao = multa;
+            }
+        }
+    }
+
+    // construimos a melhor solucao obtida e retornamos ela
+    solucao copiaEntrada = entrada;
+    for(unsigned long i = 0; i < 5; ++i) {
+        copiaEntrada.linhaProducao[indexMelhorSolucao + i] = 
+            entrada.linhaProducao[indexMelhorSolucao + permutacaoMelhorSolucao[i]];
+    }
+    copiaEntrada.multaTotal = melhorSolucao;
+
+    return copiaEntrada;
+
+}
+
+/**
+ * Esta vizinhanca eh gerada da seguinte forma:
+ * 
+ *  Para cada tripla de indices i, j e k, i < j < k, trocamos
+ *  os valores i, j e k de posicao. As trocas que o twoSwap
+ *  varre sao excluidas
+ * 
+ *  Essa vizinhanca eh varrida em O(n^4)
+ * 
+ * @param entrada Uma solucao inicial para ser explorada.
+ * @param troca_suco A matriz que contem o custo das trocas de contexto da
+ * linha de producao.
+ * @return @code solucao Contendo a melhor solucao encontrada na vizinhanca.
+ */
+solucao threeSwap(const solucao& entrada, const vector<vector<int>>& troca_suco) {
+    solucao copiaEntrada = entrada; // O(n)
+    unsigned long iMelhorSolucao = 0;
+    unsigned long jMelhorSolucao = 0;
+    unsigned long kMelhorSolucao = 0;
+    int qualPermutacao = 0;
+    long long melhorSolucao = entrada.multaTotal;
+
+    // existem 6 permutacoes de 3 elementos
+    // 0 1 2
+    // 0 2 1
+    // 1 0 2
+    // 1 2 0
+    // 2 0 1
+    // 2 1 0
+    // As 3 primeiras sao irrelevantes, pois ou geram a mesma solucao
+    // Os dois seguintes sao gerados pelo twoSwap
+    // Mesma coisa com a ultima
+    // Logo, resta testar 1 2 0 e 2 0 1.
+    for(unsigned long i = 0; i < entrada.linhaProducao.size(); ++i) {
+        for(unsigned long j = i + 1; j < entrada.linhaProducao.size(); ++j) {
+            for(unsigned long k = j + 1; k < entrada.linhaProducao.size(); ++k) {
+                suco_t a = copiaEntrada.linhaProducao[i];
+                suco_t b = copiaEntrada.linhaProducao[j];
+                suco_t c = copiaEntrada.linhaProducao[k];
+
+                // Testamos com 1 2 0
+                copiaEntrada.linhaProducao[i] = b;
+                copiaEntrada.linhaProducao[j] = c;
+                copiaEntrada.linhaProducao[k] = a;
+
+                copiaEntrada.calcula_solucao(troca_suco);
+
+                // O resto do corpo da funcao eh O(1)
+                if(copiaEntrada.multaTotal < melhorSolucao) {
+                    iMelhorSolucao = i;
+                    jMelhorSolucao = j;
+                    kMelhorSolucao = k;
+                    qualPermutacao = 1;
+                    melhorSolucao = copiaEntrada.multaTotal;
+                }
+
+                // Testamos com 2 0 1
+                copiaEntrada.linhaProducao[i] = c;
+                copiaEntrada.linhaProducao[j] = a;
+                copiaEntrada.linhaProducao[k] = b;
+
+                copiaEntrada.calcula_solucao(troca_suco);
+
+                // O resto do corpo da funcao eh O(1)
+                if(copiaEntrada.multaTotal < melhorSolucao) {
+                    iMelhorSolucao = i;
+                    jMelhorSolucao = j;
+                    kMelhorSolucao = k;
+                    qualPermutacao = 2;
+                    melhorSolucao = copiaEntrada.multaTotal;
+                }
+
+                copiaEntrada.linhaProducao[i] = a;
+                copiaEntrada.linhaProducao[j] = b;
+                copiaEntrada.linhaProducao[k] = c;
+            }
+        }
+    }
+
+    // reconstruimos a solucao e retornamos ela
+    suco_t a = copiaEntrada.linhaProducao[iMelhorSolucao];
+    suco_t b = copiaEntrada.linhaProducao[jMelhorSolucao];
+    suco_t c = copiaEntrada.linhaProducao[kMelhorSolucao];
+
+    if(qualPermutacao == 0) {
+        return copiaEntrada;
+    } else if(qualPermutacao == 1) {
+        // 1 2 0
+        copiaEntrada.linhaProducao[iMelhorSolucao] = b;
+        copiaEntrada.linhaProducao[jMelhorSolucao] = c;
+        copiaEntrada.linhaProducao[kMelhorSolucao] = a;
+
+        copiaEntrada.multaTotal = melhorSolucao;
+
+        return copiaEntrada;
+    } else {
+        // 2 0 1
+        copiaEntrada.linhaProducao[iMelhorSolucao] = c;
+        copiaEntrada.linhaProducao[jMelhorSolucao] = a;
+        copiaEntrada.linhaProducao[kMelhorSolucao] = b;
+
+        copiaEntrada.multaTotal = melhorSolucao;
+
+        return copiaEntrada;
+    }
+
 }
