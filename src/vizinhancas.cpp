@@ -1,6 +1,5 @@
 #include "vizinhancas.hpp"
 #include "solucao.hpp"
-#include <iostream>
 #include <algorithm>
 /**
  * Esta vizinhanca eh gerada da seguinte forma:

@@ -1,9 +1,14 @@
 #include "solucao.hpp"
 #include <iostream>
 
-solucao::solucao(const vector<suco_t>& solucao, const vector<vector<int>>& troca_suco) {
-    this->linhaProducao = solucao;
+solucao::solucao(const vector<suco_t>& sucos, const prepararLinha& troca_suco) {
+    this->linhaProducao = sucos;
     this->calcula_solucao(troca_suco);
+}
+
+solucao::solucao(const vector<suco_t>& sucos, const llong& valorMulta){
+    this->linhaProducao = sucos;
+    this->multaTotal = valorMulta;
 }
 
 solucao::solucao() {
@@ -11,16 +16,11 @@ solucao::solucao() {
     this->multaTotal = 0;
 }
 
-solucao::solucao(const vector<suco_t>& solucao, const long long& valorMulta){
-    this->linhaProducao = solucao;
-    this->multaTotal = valorMulta;
-}
-
-void solucao::calcula_solucao(const vector<vector<int>>& troca_suco) {
-    long long tempo = 0;
+void solucao::calcula_solucao(const prepararLinha& troca_suco) {
+    llong tempo = 0;
     this->multaTotal = 0;
-    long long ultimoLinha = 0;
-    long long tempoPassado;
+    llong ultimoLinha = 0;
+    llong tempoPassado;
 
     for (suco_t i: linhaProducao) {
         tempo += troca_suco[ultimoLinha][i.indice] + i.tempo;
@@ -37,13 +37,13 @@ void solucao::exibe() {
     printf("Valores da solucao:\n");
     printf(" Indice: Tempo   Prazo   Multa\n");
     for(suco_t cs: this->linhaProducao) {
-        printf("%7lld: %7lld %7lld %7lld\n", cs.indice, cs.tempo, cs.prazo, cs.multa);
+        printf("%7lld: %7lld %7lld %7lld\n",
+            cs.indice, cs.tempo, cs.prazo, cs.multa);
     }
     printf("\n");
     printf("Valor da solucao: %lld\n\n", this->multaTotal);
 }
 
-void solucao::exibe(const string& nomeArquivo){
-    
+void solucao::exibe(const string& nomeArquivo) {
     cout << nomeArquivo[14] << ": " << this->multaTotal << endl;
 }
