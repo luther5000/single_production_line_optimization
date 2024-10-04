@@ -6,6 +6,11 @@
 using namespace std;
 
 /**
+ * Um alias para o tipo unsigned int
+ * */
+typedef unsigned int uint;
+
+/**
  * Um alias para o tipo long long.
  * */
 typedef long long llong;
