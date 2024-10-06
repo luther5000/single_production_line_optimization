@@ -4,14 +4,6 @@
 
 using namespace std;
 
-/**
- * Implementacao do VND. Ele recebe uma solucao como entrada e a matriz que
- * contem o custo para iniciar a producao de um outro suco dado o suco atual.
- * O loop while eh mantido testando o twoSwap ate que ele nao encontre uma
- * solucao melhor, ai depois testa uma proxima vizinhanca. Sempre que um re-
- * sultado melhor eh encontrado, voltamos ao twoSwap. A busca termina quando
- * nenhuma vizinhanca obter um resultado melhor que o atual.
- * */
 solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco) {
     const int num_vizinhancas = 7;
     solucao melhorSolucao = entrada;
