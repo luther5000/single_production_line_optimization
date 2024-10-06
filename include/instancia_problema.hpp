@@ -1,35 +1,30 @@
 #ifndef INSTANCIA_PROBLEMA_H
 #define INSTANCIA_PROBLEMA_H
 
+#include "solucao.hpp"
+#include "customTypes.hpp"
 #include <vector>
 #include <string>
 
 using namespace std;
 
-typedef struct {
-    long long indice;
-    long long tempo;
-    long long prazo;
-    long long multa;
-} suco_t;
-
 class instancia_problema {
-private:
+public:
     int size;
     vector<suco_t> sucos;
-    vector<suco_t> solucao;
-    long long solucao_valor;
-    vector<vector<int>> troca_suco;
+    prepararLinha trocaSuco;
 
-public:
+    /**
+     * Builder da classe instancia_problema.
+     * Recebe um path como endereco, e extrai os dados necessarios dele.
+     *
+     * @param endereco O endereco do arquivo para ser lido como entrada.
+     * */
     instancia_problema(const string& endereco);
 
-    void algoritmo_guloso();
-
-    void calcula_solucao();
-
-    long long getsolucao_valor() const;
-
+    /**
+     * Exibe a solução armazenada na tela.
+     * */
     void exibe() const;
 };
 

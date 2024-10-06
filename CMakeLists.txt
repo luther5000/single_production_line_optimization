@@ -8,4 +8,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 include_directories(include)
 
 add_executable(projeto_apa.exe src/main.cpp
-        src/instancia_problema.cpp)
+        src/instancia_problema.cpp
+        src/vizinhancas.cpp
+        src/guloso.cpp
+        src/solucao.cpp
+        src/variableNeighborhoodDescent.cpp
+        src/ils.cpp
+        src/executeAll.cpp)
+
