@@ -4,11 +4,12 @@
 
 #include "guloso.hpp"
 #include "solucao.hpp"
+#include "customTypes.hpp"
 
 #include <list>
 
-guloso::guloso(const int &size, const vector<suco_t> &sucos,
-    const vector<vector<int> > &trocaSuco) {
+guloso::guloso(const int& size, const vector<suco_t>& sucos,
+    const prepararLinha& trocaSuco) {
     this->trocaSuco = trocaSuco;
     this->sucos = sucos;
     this->size = size;
@@ -34,13 +35,13 @@ solucao* guloso::algoritmo_guloso_2() {
         values.push_back(sucos[i]);
     }
 
-    long long tempoAtual = 0;
-    long long ultimaLinha = 0;
+    llong tempoAtual = 0;
+    llong ultimaLinha = 0;
 
     for(int i = 0; i < size; ++i) {
         list<suco_t>::iterator it1, it2;
         it2 = values.begin();
-        long long multaAtual = INT64_MAX;
+        llong multaAtual = INT64_MAX;
 
         for(it1 = values.begin(); it1 != values.end(); ++it1) {
 
@@ -71,5 +72,4 @@ solucao* guloso::algoritmo_guloso_2() {
     }
 
     return new class solucao(this->solucao, this->trocaSuco);
-
 }
