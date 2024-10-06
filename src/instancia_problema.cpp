@@ -4,10 +4,6 @@
 
 using namespace std;
 
-/*
- * Builder da classe instancia_problema.
- * Recebe um path como endereco, e extrai os dados necessarios dele.
- * */
 instancia_problema::instancia_problema(const string& endereco) {
     ifstream file;
     file.open(endereco, ios::in);
