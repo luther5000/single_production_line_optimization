@@ -322,7 +322,7 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
     vector<int> permutacaoMelhorSolucao = {0, 1, 2, 3, 4};
     llong melhorSolucao = entrada.multaTotal;
 
-    for(ulong i = 0; i < entrada.linhaProducao.size() - 4; ++i) {
+    for(ulong i = 0; i + 4 < entrada.linhaProducao.size(); ++i) {
         // a permutacao identidade
         // iniciamos com ela e vamos ate a maior permutacao lexicografica
         // que seria {4, 3, 2, 1, 0}

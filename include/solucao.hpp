@@ -72,6 +72,8 @@ public:
     void exibe();
 
     void exibe(const string& nomeArquivo);
+
+    void exibeReduzido();
 };
 
 #endif //__SOLUCAO_H

@@ -53,8 +53,8 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 5: { //pivoSwap
-                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
+            case 5: { //fiveFactorialSwap
+                solucao melhorVizinho = fiveFactorialSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;
@@ -64,8 +64,8 @@ solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<
                 }
                 break;
             }
-            case 6: { //fiveFactorialSwap
-                solucao melhorVizinho = fiveFactorialSwap(melhorSolucao, troca_suco);
+            case 6: { //pivoSwap
+                solucao melhorVizinho = pivoSwap(melhorSolucao, troca_suco);
                 if(melhorVizinho.multaTotal < melhorSolucao.multaTotal) {
                     melhorSolucao = std::move(melhorVizinho);
                     k = 1;

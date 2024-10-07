@@ -2,9 +2,11 @@
 // Created by lutero on 01/10/24.
 //
 #include "ils.hpp"
+#include "customTypes.hpp"
+#include <vector>
 
-solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_suco, const int& numIteracoes) {
-    unsigned int cont = 0;
+solucao metaHeuristica(const solucao& entrada, const prepararLinha& troca_suco, const int& numIteracoes) {
+    int cont = 0;
     solucao melhorSolucao = entrada;
     solucao solucaoParaVnd = entrada;
     do {
@@ -19,6 +21,7 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
             melhorSolucao = solucaoAtual;
             solucaoParaVnd = melhorSolucao;
 
+            //rotateEvens(solucaoParaVnd.linhaProducao);
             multipleSwaps(solucaoParaVnd.linhaProducao);
         } else {
             /*
@@ -53,7 +56,7 @@ void twoDividePerturbation(vector<suco_t>& linhaProducao) {
      * metade do vetor e o seu diametralmente oposto.
      */
     if (linhaProducao.size() % 2 == 0) {
-        for (int i = 0; i < linhaProducao.size() / 2; ++i) {
+        for (ulong i = 0; i < linhaProducao.size() / 2; ++i) {
             swap(linhaProducao[i], linhaProducao[(linhaProducao.size() / 2) + i]);
         }
     } else {
@@ -61,7 +64,7 @@ void twoDividePerturbation(vector<suco_t>& linhaProducao) {
          * Caso seja ímpar o número de elementos do vetor, a gente preserva o elemento do meio
          * em sua posição atual.
          */
-        for (int i = 0; i < (linhaProducao.size() - 1) / 2; ++i) {
+        for (ulong i = 0; i < (linhaProducao.size() - 1) / 2; ++i) {
             swap(linhaProducao[i], linhaProducao[(linhaProducao.size() + 1) / 2 + i]);
         }
     }
@@ -100,8 +103,8 @@ void fourDividePerturbation(vector<suco_t> &linhaProducao) {
  * @param linhaProducao O vetor a ser alterado.
  */
 void changeOdsEven(vector<suco_t> &linhaProducao) {
-    int i = 0;
-    int j = 1;
+    ulong i = 0;
+    ulong j = 1;
 
     while (i < linhaProducao.size() && j < linhaProducao.size()) {
         swap(linhaProducao[i], linhaProducao[j]);
@@ -146,5 +149,26 @@ void multipleSwaps(vector<suco_t>& linhaProducao){
         int j = distr(gen);
 
         swap(linhaProducao[i], linhaProducao[j]);
+    }
+}
+
+/** 
+ * Rotaciona os elementos de indice par do vetor para a direita.
+ *
+ * */
+void rotateEvens(vector<suco_t>& linhaProducao) {
+    ulong n = linhaProducao.size();
+    if(n % 2 == 0) {
+        suco_t value0 = linhaProducao[0];
+        for(ulong i = 0; i < n - 2; i += 2) {
+            linhaProducao[i] = linhaProducao[i + 2];
+        }
+        linhaProducao[n - 2] = value0;
+    } else {
+        suco_t value0 = linhaProducao[0];
+        for(ulong i = 0; i < n - 1; i += 2) {
+            linhaProducao[i] = linhaProducao[i + 2];
+        }
+        linhaProducao[n - 1] = value0;
     }
 }
