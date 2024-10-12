@@ -9,6 +9,8 @@
 #include "customTypes.hpp"
 #include "solucao.hpp"
 #include <vector>
+#include <list>
+#include <cstdint>
 
 using namespace std;
 

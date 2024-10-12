@@ -45,83 +45,6 @@ solucao twoSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     return solucao(cLinhaProducao, melhorSolucao);
 }
 
-solucao pivoSwap(const solucao& entrada, const prepararLinha& troca_suco) {
-    vector<suco_t> cLinhaProducao = entrada.linhaProducao; // O(n)
-    ulong centroMelhorSolucao = 0;
-    ulong rMelhorSolucao = 0;
-    llong melhorSolucao = entrada.multaTotal;
-    const ulong n = entrada.linhaProducao.size();
-
-    // testamos todos os centros validos
-    // lembrando que o size() eh um unsigned, entao eh melhor so subtrair dele
-    // quando houver certeza que o resultado nao dara overflow.
-    for(ulong centro = 1; centro + 1 < n; ++centro) {
-        ulong r = 0;
-
-        // Nesse caso, estamos mais proximos do comeco do vetor do que do final.
-        // No total, os loops dentro de ambas branchs serao executados um numero
-        // de vezes proporcional a O(n^2)
-        if(centro < n - centro) {
-            for(r = 0; r < centro; ++r) {
-                // fazemos swap dos elementos de fora para dentro para fora, em
-                // direcao ao centro
-                std::swap(cLinhaProducao[r], cLinhaProducao[2*centro - r]);
-
-                // O calculo do valor da solucao eh proporcional a O(n)
-                // O que no total adiciona O(n^3) de custo a solucao
-                solucao aux(cLinhaProducao, troca_suco);
-
-                // Essa parte eh O(1)
-                if(aux.multaTotal < melhorSolucao) {
-                    centroMelhorSolucao = centro;
-                    rMelhorSolucao = r;
-                    melhorSolucao = aux.multaTotal;
-                }
-            }
-            // Voltar a solucao pro estado inicial tem custo proporcional a O(n)
-            // E portanto essa linha tem custo proporcional a O(n^2)
-            for(r = 0; r < centro; ++r)
-                std::swap(cLinhaProducao[r], cLinhaProducao[2*centro - r]);
-
-        // Caso contrario, estamos mais proximos do fim do array
-        } else {
-            for(r = 0; r < n - centro - 1; ++r) {
-                std::swap(cLinhaProducao[2*centro - n + 1 + r],
-                        cLinhaProducao[n - r - 1]);
-
-                solucao aux(cLinhaProducao, troca_suco);
-
-                // Essa parte eh O(1)
-                if(aux.multaTotal < melhorSolucao) {
-                    centroMelhorSolucao = centro;
-                    rMelhorSolucao = r;
-                    melhorSolucao = aux.multaTotal;
-                }
-            }
-            for(r = 0; r < n - centro - 1; ++r)
-                std::swap(cLinhaProducao[2*centro - n + 1 + r],
-                        cLinhaProducao[n - r - 1]);
-        }
-    }
-
-
-    // geramos novamente a melhor solucao
-    // essa linha tem custo proporcional a O(n)
-    if(centroMelhorSolucao < n - centroMelhorSolucao) {
-        for(ulong r = 0; r <= rMelhorSolucao; ++r) {
-            std::swap(cLinhaProducao[r],
-                    cLinhaProducao[2*centroMelhorSolucao - r]);
-        }
-    } else {
-        for(ulong r = 0; r <= rMelhorSolucao; ++r) {
-            std::swap(cLinhaProducao[2*centroMelhorSolucao - n + 1 + r],
-                    cLinhaProducao[n - r - 1]);
-        }
-    }
-
-    return solucao(cLinhaProducao, melhorSolucao);
-}
-
 solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     vector<suco_t> cLinhaProducao = entrada.linhaProducao; // O(n);
     ulong inicioMelhorSolucao = 0;
@@ -199,55 +122,6 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha&
     }
 
     return valor;
-}
-
-solucao rotateSwap(const solucao& entrada, const prepararLinha& troca_suco) {
-    ulong shiftMelhorSolucao = 0;
-    llong melhorSolucao = entrada.multaTotal;
-    const ulong n = entrada.linhaProducao.size();
-
-    // Esse laco vai rodar n - 1 vezes
-    for(ulong shift = 1; shift < n; ++shift) {
-
-        llong multa = 0;
-        llong tempo = 0;
-        llong ultimaLinha = 0;
-
-        // calculamos o valor da solucao que comeca em shift ao inves de 0
-        // Isso custa O(n), gerando um custo total de O(n^2)
-        for (ulong i = 0; i < n; ++i) {
-            ulong nIndice = (i + shift) % n;
-            tempo +=
-                troca_suco[ultimaLinha][entrada.linhaProducao[nIndice].indice] +
-                entrada.linhaProducao[nIndice].tempo;
-
-            llong tempoPassado = tempo - entrada.linhaProducao[nIndice].prazo;
-
-            if (tempoPassado > 0)
-                multa += tempoPassado*entrada.linhaProducao[nIndice].multa;
-
-            ultimaLinha = entrada.linhaProducao[nIndice].indice + 1;
-        }
-
-        // Se essa solucao eh melhor que a obtida ate o momento, a atualizamos
-        if(multa < melhorSolucao) {
-            shiftMelhorSolucao = shift;
-            melhorSolucao = multa;
-        }
-    }
-
-    solucao copiaEntrada;
-
-    copiaEntrada.linhaProducao.resize(n);
-
-    // usamos o melhor valor de shift encontrado para gerar a solucao otima
-    for(ulong i = 0; i < n; ++i) {
-        ulong nIndice = (i + shiftMelhorSolucao) % n;
-        copiaEntrada.linhaProducao[i] = entrada.linhaProducao[nIndice];
-    }
-    copiaEntrada.multaTotal = melhorSolucao;
-
-    return copiaEntrada;
 }
 
 solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){

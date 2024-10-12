@@ -65,7 +65,7 @@ void executeOneSeveralTimes(const string& endereco){
         solucao *solucao = guloso.algoritmo_guloso_2();
 
         //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
-        *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 15);
+        *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 30);
         solucao->exibe(endereco);
 
         total += solucao->multaTotal;

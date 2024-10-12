@@ -23,7 +23,7 @@ void changeOdsEven(vector<suco_t>& linhaProducao);
 
 void rotate(vector<suco_t>& linhaProducao);
 
-void multipleSwaps(vector<suco_t>& linhaProducao);
+void multipleSwaps(vector<suco_t>& linhaProducao, int& peso);
 
 void rotateEvens(vector<suco_t>& linhaProducao);
 

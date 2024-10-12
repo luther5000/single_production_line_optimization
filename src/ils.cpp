@@ -7,32 +7,47 @@
 
 solucao metaHeuristica(const solucao& entrada, const prepararLinha& troca_suco, const int& numIteracoes) {
     int cont = 0;
+    int forcaPerturbacao = 1;
     solucao melhorSolucao = entrada;
     solucao solucaoParaVnd = entrada;
     do {
         solucao solucaoAtual = variableNeighborhoodDescent(solucaoParaVnd, troca_suco);
 
         if (solucaoAtual.multaTotal < melhorSolucao.multaTotal) {
-            /*
-             * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
-             * anteriormente, iremos pegar essa solução e aplicar a perturbação
-             * {@code twoCodePerturbation}.
-             */
             melhorSolucao = solucaoAtual;
             solucaoParaVnd = melhorSolucao;
 
-            //rotateEvens(solucaoParaVnd.linhaProducao);
-            multipleSwaps(solucaoParaVnd.linhaProducao);
+            /*
+             * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
+             * anteriormente, iremos reiniciar a força das perturbações aplicadas.
+             */
+            forcaPerturbacao = 1;
         } else {
             /*
-             * Caso a solução gerada tenha sido pior, em cima da solução calculada
-             * na iteração anterior do ILS iremos aplicar as perturbações
-             * {@changeOdsEven} e {@fourDividePerturbation}.
+             * Caso a solução gerada tenha sido pior, iremos aumentar gradualmente
+             * a força das perturbações a serem aplicadas.
              */
-            changeOdsEven(solucaoParaVnd.linhaProducao);
-            //rotate(solucaoParaVnd.linhaProducao);
-            fourDividePerturbation(solucaoParaVnd.linhaProducao);
-            multipleSwaps(solucaoParaVnd.linhaProducao);
+            ++forcaPerturbacao;
+        }
+
+        switch (forcaPerturbacao) {
+            case 1: {
+                twoDividePerturbation(solucaoParaVnd.linhaProducao);
+                rotate(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
+            case 2: {
+                fourDividePerturbation(solucaoParaVnd.linhaProducao);
+                changeOdsEven(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
+            default: {
+                rotateEvens(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
         }
 
         solucaoParaVnd.calcula_solucao(troca_suco);
@@ -139,12 +154,12 @@ void rotate(vector<suco_t>& linhaProducao){
     }
 }
 
-void multipleSwaps(vector<suco_t>& linhaProducao){
+void multipleSwaps(vector<suco_t>& linhaProducao, int& peso){
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> distr(0, linhaProducao.size() - 1);
 
-    for (int k = 0; k < 10; ++k){
+    for (int k = 0; k < linhaProducao.size()*peso / 2; ++k){
         int i = distr(gen);
         int j = distr(gen);
 

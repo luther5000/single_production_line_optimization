@@ -6,7 +6,6 @@
 #include "solucao.hpp"
 #include "customTypes.hpp"
 
-#include <list>
 
 guloso::guloso(const int& size, const vector<suco_t>& sucos,
     const prepararLinha& trocaSuco) {
