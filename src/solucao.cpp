@@ -43,10 +43,6 @@ void solucao::exibe() {
     printf("Valor da solucao: %lld\n\n", this->multaTotal);
 }
 
-void solucao::exibe(const string& nomeArquivo) {
-    cout << nomeArquivo[14] << ": " << this->multaTotal << endl;
-}
-
 void solucao::exibeReduzido() {
     printf("Valor da solucao: %lld\n", this->multaTotal);
 }

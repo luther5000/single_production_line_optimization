@@ -68,15 +68,22 @@ void executeAll(){
     }
 }
 
-llong executeOne(const string& endereco){
+pair<llong, long> executeOne(const string& endereco){
     instancia_problema instancia(endereco);
 
     guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
     solucao *solucao = guloso.algoritmo_guloso();
 
     //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
+    auto begin = high_resolution_clock::now();
     *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 20);
-    solucao->exibe(endereco);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - begin);
 
-    return solucao->multaTotal;
+    solucao->exibe();
+    printf("Tempo gasto: %ld milissegundos\n\n", duration.count());
+
+    pair<llong, long> saida(solucao->multaTotal, duration.count());
+
+    return saida;
 }

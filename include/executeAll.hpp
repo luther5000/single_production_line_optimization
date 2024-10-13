@@ -8,6 +8,7 @@
 #include "ils.hpp"
 #include "customTypes.hpp"
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <chrono>
 
@@ -16,6 +17,6 @@ using namespace std;
 
 void executeAll();
 
-llong executeOne(const string& endereco);
+pair<llong, long> executeOne(const string& endereco);
 
 #endif // PROJETOAPA_INCLUDE_EXECUTEALL_H_

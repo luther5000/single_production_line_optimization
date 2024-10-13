@@ -73,8 +73,9 @@ public:
      * */
     void exibe();
 
-    void exibe(const string& nomeArquivo);
-
+    /**
+     * Exibe apenas o valor da solução na tela.
+     * */
     void exibeReduzido();
 };
 
