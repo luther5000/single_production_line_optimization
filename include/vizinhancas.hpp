@@ -1,12 +1,9 @@
-//
-// Created by lutero on 27/09/24.
-//
-
-#ifndef __VIZINHANCAS_HPP
-#define __VIZINHANCAS_HPP
+#ifndef PROJETOAPA_INCLUDE_VIZINHANCAS_H_
+#define PROJETOAPA_INCLUDE_VIZINHANCAS_H_
 
 #include "solucao.hpp"
 #include "customTypes.hpp"
+#include <algorithm>
 #include <list>
 
 using namespace std;
@@ -25,31 +22,6 @@ using namespace std;
  * @return A melhor solucao encontrada na vizinhanca.
  * */
 solucao twoSwap(const solucao& solucao, const prepararLinha& troca_suco);
-
-/**
- * Essa vizinhanca eh gerada da seguinte forma:
- *
- * Para cada indice centro e cada inteiro r, fazemos swap dos r elementos na
- * borda do vetor mais proximos do centro com seus respectivos elementos
- * diametralmente opostos em relacao ao centro. Por exemplo
- *
- * 0 1 2 3 4 5
- *
- * Escolhendo o centro 3, para raio 1, teriamos
- *
- * 0 5 2 3 4 1
- *
- * E para raio 2
- *
- * 0 5 4 3 2 1
- *
- * @note Essa vizinhanca eh varrida em O(n^3).
- *
- * @param entrada A solucao inicial para ser explorada.
- * @param troca_suco A matriz que contem o custo das trocas de contexto da
- * @return A melhor solucao encontrada na vizinhanca.
- * */
-solucao pivoSwap(const solucao& entrada, const prepararLinha& troca_suco);
 
 /**
  * Esta vizinhanca eh gerada da seguinte forma:
@@ -76,29 +48,6 @@ solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco);
 llong calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha& trocaSuco);
 
 /**
- * Esta vizinhanca eh gerada da seguinte forma:
- *
- * Para cada inteiro shift, 0 < shift < n, onde n eh o tamanho da linha de
- * produco, faz a linha de producao ir de
- *
- * 0, 1, 2, ..., n
- *
- * para
- *
- * 0 + shift, 1 + shift, 2 + shift, ..., n + shift
- *
- * Com todos esses valores tomados modulo n.
- *
- * @note Essa vizinhanca eh varrida em O(n^2)
- *
- * @param entrada Uma solucao inicial para ser explorada.
- * @param troca_suco A matriz que contem o custo das trocas de contexto da
- * linha de producao.
- * @return A melhor solucao encontrada na vizinhanca.
- * */
-solucao rotateSwap(const solucao& entrada, const prepararLinha& troca_suco);
-
-/**
  * Função que verifica para cada suco todos os possíveis locais que o
  * suco pode ser inserido e guarda o melhor vizinho obtido para retornar ele.
  *
@@ -112,6 +61,8 @@ solucao rotateSwap(const solucao& entrada, const prepararLinha& troca_suco);
  * 1 3 2 4 5
  * 1 3 4 2 5
  * 1 3 4 5 2
+ *
+ * @note Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
@@ -137,13 +88,13 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
 
 /**
  * Esta vizinhanca eh gerada da seguinte forma:
- * 
+ *
  *  Para cada tripla de indices i, j e k, i < j < k, trocamos
  *  os valores i, j e k de posicao. As trocas que o twoSwap
  *  varre sao excluidas
- * 
+ *
  * @note Essa vizinhanca eh varrida em O(n^4)
- * 
+ *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
@@ -151,4 +102,4 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
  */
 solucao threeSwap(const solucao& entrada, const prepararLinha& troca_suco);
 
-#endif //__VIZINHANCAS_HPP
+#endif//PROJETOAPA_INCLUDE_VIZINHANCAS_H_

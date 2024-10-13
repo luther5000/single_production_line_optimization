@@ -1,33 +1,40 @@
-#include "instancia_problema.hpp"
-#include "guloso.hpp"
-#include "solucao.hpp"
-#include "variableNeighborhoodDescent.hpp"
-#include "vizinhancas.hpp"
-#include "ils.hpp"
+#include "customTypes.hpp"
 #include "executeAll.hpp"
-#include <iostream>
+#include <cstdlib>
 
 int main(int argc, char **argv) {
-    /*if(argc != 2) {
-        std::cout << "Insira um arquivo como entrada!" << std::endl;
+
+    if(argc > 3) {
+        printf("Uso: projeto_apa.exe\n"
+               "     projeto_apa.exe [<instância>]\n"
+               "     projeto_apa.exe [<instância>] [<num>]\n");
         return 1;
     }
-    instancia_problema test(argv[1]);
-    test.exibe();
-    */
+    switch(argc) {
+        case 3: {
+            llong total = 0;
+            llong tempo_total = 0;
+            int num = atoi(argv[2]);
+            for(int i = 0; i < num; ++i) {
+                pair<llong, long> saida = executeOne(argv[1]);
+                total += saida.first;
+                tempo_total += saida.second;
+                printf("===================================================\n");
+            }
+            printf("Média das solucoes: %lld\n\n", total / num);
+            printf("Média do tempo de execução: %lld milissegundos\n\n",
+                    tempo_total / num);
+            break;
+        }
+        case 2: {
+            executeOne(argv[1]);
+            break;
+        }
+        case 1: {
+            executeAll();
+            break;
+        }
+    }
 
-    //guloso guloso(test.size, test.sucos, test.trocaSuco);
-    //solucao *solucao = guloso.algoritmo_guloso();
-
-    //solucao->exibe();
-    //insertSwap(*solucao, test.trocaSuco);
-
-    //metaHeuristica(*solucao, test.trocaSuco, 15).exibe();
-    
-    if (argc != 2) {
-        executeAll();
-    } else 
-        executeOneSeveralTimes(argv[1]);
-        
     return 0;
 }

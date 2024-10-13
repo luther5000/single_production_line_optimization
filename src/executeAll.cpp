@@ -1,7 +1,8 @@
 #include "executeAll.hpp"
+#include "ils.hpp"
 
 void executeAll(){
-    vector<string> enderecos = {
+    const vector<string> enderecos = {
         "instancias/n60A.txt",
         "instancias/n60B.txt",
         "instancias/n60C.txt",
@@ -21,30 +22,68 @@ void executeAll(){
     };
 
     for (string endereco : enderecos) {
+        printf("%s\n", endereco.c_str());
         instancia_problema instancia(endereco);
 
-        guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
-        solucao *solucao = guloso.algoritmo_guloso_2();
+        printf("Guloso 1 \n");
+        guloso guloso1(instancia.size, instancia.sucos, instancia.trocaSuco);
 
-        //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
-        metaHeuristica(*solucao, instancia.trocaSuco, 15).exibe(endereco);
+        auto begin = high_resolution_clock::now();
+        solucao *solucao1 = guloso1.algoritmo_guloso();
+        auto end = high_resolution_clock::now();
+        solucao1->exibeReduzido();
+
+        auto duration = duration_cast<milliseconds>(end - begin);
+        printf("Duração: %ld milisegundos\n", duration.count());
+
+        printf("\nVND \n");
+
+        begin = high_resolution_clock::now();
+        solucao solucao2 = variableNeighborhoodDescent(*solucao1, instancia.trocaSuco);
+        end = high_resolution_clock::now();
+        solucao2.exibeReduzido();
+
+        duration = duration_cast<milliseconds>(end - begin);
+        printf("Duração: %ld milissegundos\n", duration.count());
+
+        printf("\nILS \n");
+        ullong tempoTotal = 0;
+        ullong multaTotal = 0;
+
+        for (uint i = 0; i < 20; ++i) {
+            solucao solucaoAtual;
+            begin = high_resolution_clock::now();
+            solucaoAtual = metaHeuristica(*solucao1, instancia.trocaSuco, 15);
+            end = high_resolution_clock::now();
+
+            duration = duration_cast<milliseconds>(end - begin);
+
+            tempoTotal += duration.count();
+            multaTotal += solucaoAtual.multaTotal;
+            solucaoAtual.exibeReduzido();
+        }
+        printf("Média da solução: %lld\n", multaTotal / 20);
+        printf("Tempo médio gasto: %lld milissegundos\n\n", tempoTotal / 20);
+        printf("=====================================\n\n");
     }
 }
 
-void executeOneSeveralTimes(const string& endereco){
-    long long total = 0;
-    for (int i = 0; i < 10; ++i){
-        instancia_problema instancia(endereco);
+pair<llong, long> executeOne(const string& endereco){
+    instancia_problema instancia(endereco);
 
-        guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
-        solucao *solucao = guloso.algoritmo_guloso_2();
+    guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
+    solucao *solucao = guloso.algoritmo_guloso();
 
-        //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
-        *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 15);
-        solucao->exibe(endereco);
+    //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
+    auto begin = high_resolution_clock::now();
+    *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 20);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - begin);
 
-        total += solucao->multaTotal;
-    }
+    solucao->exibe();
+    printf("Tempo gasto: %ld milissegundos\n\n", duration.count());
 
-    cout << "Média: " << total / 10 << endl;
+    pair<llong, long> saida(solucao->multaTotal, duration.count());
+
+    return saida;
 }

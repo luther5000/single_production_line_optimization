@@ -1,18 +1,22 @@
-#ifndef EXECUTEALL_HPP
-#define EXECUTEALL_HPP
+#ifndef PROJETOAPA_INCLUDE_EXECUTEALL_H_
+#define PROJETOAPA_INCLUDE_EXECUTEALL_H_
 
-#include <iostream>
-#include <vector>
 #include "instancia_problema.hpp"
 #include "guloso.hpp"
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include "ils.hpp"
+#include "customTypes.hpp"
+#include <iostream>
+#include <utility>
+#include <vector>
+#include <chrono>
 
+using namespace chrono;
 using namespace std;
 
 void executeAll();
 
-void executeOneSeveralTimes(const string& endereco);
+pair<llong, long> executeOne(const string& endereco);
 
-#endif // EXECUTEALL_HPP
+#endif // PROJETOAPA_INCLUDE_EXECUTEALL_H_

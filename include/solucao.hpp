@@ -1,9 +1,11 @@
-#ifndef __SOLUCAO_H
-#define __SOLUCAO_H
+#ifndef PROJETOAPA_INCLUDE_SOLUCAO_H_
+#define PROJETOAPA_INCLUDE_SOLUCAO_H_
 
-#include "customTypes.hpp"
+#include <iostream>
 #include <vector>
 #include <string>
+
+#include "customTypes.hpp"
 
 using namespace std;
 
@@ -71,7 +73,10 @@ public:
      * */
     void exibe();
 
-    void exibe(const string& nomeArquivo);
+    /**
+     * Exibe apenas o valor da solução na tela.
+     * */
+    void exibeReduzido();
 };
 
-#endif //__SOLUCAO_H
+#endif//PROJETOAPA_INCLUDE_SOLUCAO_H_

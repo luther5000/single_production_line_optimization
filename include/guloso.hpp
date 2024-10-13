@@ -1,14 +1,11 @@
-//
-// Created by lutero on 27/09/24.
-//
+#ifndef PROJETOAPA_INCLUDE_GULOSO_H_
+#define PROJETOAPA_INCLUDE_GULOSO_H_
 
-#ifndef GULOSO_HPP
-#define GULOSO_HPP
-
-#include <algorithm>
 #include "customTypes.hpp"
 #include "solucao.hpp"
 #include <vector>
+#include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -43,22 +40,5 @@ public:
      * */
     class solucao *algoritmo_guloso();
 
-    /**
-     * Função que aplica a seguinte lógica gulosa ao conteúdo do objeto:
-     *
-     * Para cada posição do vector, escolha o suco que gera menor multa no
-     * momento que ainda não tenha sido selecionado. Se houver mais de um,
-     * escolha aquele de menor prazo.
-     *
-     * Como esse algoritmo precisa sempre buscar o suco que gera menor multa,
-     * e a escolha de um suco afeta o valor da multa de todos os futuros
-     * sucos, esse algoritmo precisa varrer a lista de sucos por inteiro a
-     * cada busca.
-     *
-     * @note Esse algortimo é executado em n^2
-     * @return Um ponteiro para a solução gerada.
-     * */
-    class solucao *algoritmo_guloso_2();
-
 };
-#endif //GULOSO_HPP
+#endif//PROJETOAPA_INCLUDE_GULOSO_H_

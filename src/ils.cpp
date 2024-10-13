@@ -1,35 +1,49 @@
-//
-// Created by lutero on 01/10/24.
-//
 #include "ils.hpp"
+#include "customTypes.hpp"
 
-solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_suco, const int& numIteracoes) {
-    unsigned int cont = 0;
+solucao metaHeuristica(const solucao& entrada, const prepararLinha& troca_suco, const uint& numIteracoes) {
+    uint cont = 0;
+    uint forcaPerturbacao = 1;
     solucao melhorSolucao = entrada;
     solucao solucaoParaVnd = entrada;
     do {
         solucao solucaoAtual = variableNeighborhoodDescent(solucaoParaVnd, troca_suco);
 
         if (solucaoAtual.multaTotal < melhorSolucao.multaTotal) {
-            /*
-             * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
-             * anteriormente, iremos pegar essa solução e aplicar a perturbação
-             * {@code twoCodePerturbation}.
-             */
             melhorSolucao = solucaoAtual;
             solucaoParaVnd = melhorSolucao;
 
-            multipleSwaps(solucaoParaVnd.linhaProducao);
+            /*
+             * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
+             * anteriormente, iremos reiniciar a força das perturbações aplicadas.
+             */
+            forcaPerturbacao = 1;
         } else {
             /*
-             * Caso a solução gerada tenha sido pior, em cima da solução calculada
-             * na iteração anterior do ILS iremos aplicar as perturbações
-             * {@changeOdsEven} e {@fourDividePerturbation}.
+             * Caso a solução gerada tenha sido pior, iremos aumentar gradualmente
+             * a força das perturbações a serem aplicadas.
              */
-            changeOdsEven(solucaoParaVnd.linhaProducao);
-            //rotate(solucaoParaVnd.linhaProducao);
-            fourDividePerturbation(solucaoParaVnd.linhaProducao);
-            multipleSwaps(solucaoParaVnd.linhaProducao);
+            ++forcaPerturbacao;
+        }
+
+        switch (forcaPerturbacao) {
+            case 1: {
+                twoDividePerturbation(solucaoParaVnd.linhaProducao);
+                rotate(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
+            case 2: {
+                fourDividePerturbation(solucaoParaVnd.linhaProducao);
+                changeOdsEven(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
+            default: {
+                rotateEvens(solucaoParaVnd.linhaProducao);
+                multipleSwaps(solucaoParaVnd.linhaProducao, forcaPerturbacao);
+                break;
+            }
         }
 
         solucaoParaVnd.calcula_solucao(troca_suco);
@@ -39,21 +53,13 @@ solucao metaHeuristica(const solucao& entrada, const vector<vector<int>>& troca_
     return melhorSolucao;
 }
 
-/**
- * Perturbação para o ILS que quebra o vetor em dois e copia a primeira
- * metade para a segunda metade do vetor, e copia a segunda metade para a
- * primeira metade do vetor.
- *
- * Essa perturbação é o(n).
- * @param linhaProducao O vetor a ser alterado.
- */
 void twoDividePerturbation(vector<suco_t>& linhaProducao) {
     /*
      * Iremos efetuar o swap entre cada um dos elementos da primeira
      * metade do vetor e o seu diametralmente oposto.
      */
     if (linhaProducao.size() % 2 == 0) {
-        for (int i = 0; i < linhaProducao.size() / 2; ++i) {
+        for (uint i = 0; i < linhaProducao.size() / 2; ++i) {
             swap(linhaProducao[i], linhaProducao[(linhaProducao.size() / 2) + i]);
         }
     } else {
@@ -61,17 +67,12 @@ void twoDividePerturbation(vector<suco_t>& linhaProducao) {
          * Caso seja ímpar o número de elementos do vetor, a gente preserva o elemento do meio
          * em sua posição atual.
          */
-        for (int i = 0; i < (linhaProducao.size() - 1) / 2; ++i) {
+        for (uint i = 0; i < (linhaProducao.size() - 1) / 2; ++i) {
             swap(linhaProducao[i], linhaProducao[(linhaProducao.size() + 1) / 2 + i]);
         }
     }
 }
 
-/**
- * Perturbação que irá quebrar o vetor em duas partes e chama a
- * {@code twoDividePerturbation} para cada uma delas.
- * @param linhaProducao O vetor a ser alterado.
- */
 void fourDividePerturbation(vector<suco_t> &linhaProducao) {
     vector<suco_t> primeiraMetade;
     vector<suco_t> segundaMetade;
@@ -94,14 +95,9 @@ void fourDividePerturbation(vector<suco_t> &linhaProducao) {
     linhaProducao = primeiraMetade;
 }
 
-/**
- * Faz o swap entre todo par de elementos do vetor. Eventualmente todos
- * os elementos pares estarão em locais ímpares e vice-versa.
- * @param linhaProducao O vetor a ser alterado.
- */
 void changeOdsEven(vector<suco_t> &linhaProducao) {
-    int i = 0;
-    int j = 1;
+    ulong i = 0;
+    ulong j = 1;
 
     while (i < linhaProducao.size() && j < linhaProducao.size()) {
         swap(linhaProducao[i], linhaProducao[j]);
@@ -111,20 +107,14 @@ void changeOdsEven(vector<suco_t> &linhaProducao) {
     }
 }
 
-/**
- * Rotaciona os elementos do vetor n / 4 índices para 
- * a direita. 
- * 
- * Algoritmo roda em O(n).
- */
 void rotate(vector<suco_t>& linhaProducao){
-    int n = linhaProducao.size();
+    uint n = linhaProducao.size();
 
     list<suco_t> lista;
-    for (int i = 0; i < n; ++i)
+    for (uint i = 0; i < n; ++i)
         lista.push_back(linhaProducao[i]);
 
-    for (int i = 0; i < n / 4; ++i){
+    for (uint i = 0; i < n / 4; ++i){
         lista.push_front(lista.back());
         lista.pop_back();
     }
@@ -136,15 +126,32 @@ void rotate(vector<suco_t>& linhaProducao){
     }
 }
 
-void multipleSwaps(vector<suco_t>& linhaProducao){
+void multipleSwaps(vector<suco_t>& linhaProducao, const uint& peso){
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> distr(0, linhaProducao.size() - 1);
 
-    for (int k = 0; k < 10; ++k){
-        int i = distr(gen);
-        int j = distr(gen);
+    for (uint k = 0; k < linhaProducao.size()*peso / 2; ++k){
+        uint i = distr(gen);
+        uint j = distr(gen);
 
         swap(linhaProducao[i], linhaProducao[j]);
+    }
+}
+
+void rotateEvens(vector<suco_t>& linhaProducao) {
+    ulong n = linhaProducao.size();
+    if(n % 2 == 0) {
+        suco_t value0 = linhaProducao[0];
+        for(ulong i = 0; i < n - 2; i += 2) {
+            linhaProducao[i] = linhaProducao[i + 2];
+        }
+        linhaProducao[n - 2] = value0;
+    } else {
+        suco_t value0 = linhaProducao[0];
+        for(ulong i = 0; i < n - 1; i += 2) {
+            linhaProducao[i] = linhaProducao[i + 2];
+        }
+        linhaProducao[n - 1] = value0;
     }
 }

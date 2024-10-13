@@ -1,8 +1,4 @@
-#include <fstream>
-#include <iostream>
 #include "instancia_problema.hpp"
-
-using namespace std;
 
 instancia_problema::instancia_problema(const string& endereco) {
     ifstream file;
@@ -44,7 +40,11 @@ void instancia_problema::exibe() const {
     printf("Valores de entrada:\n");
     printf(" Indice: Tempo   Prazo   Multa\n");
     for(suco_t cs: sucos) {
-        printf("%7lld: %7lld %7lld %7lld\n", cs.indice, cs.tempo, cs.prazo, cs.multa);
+        printf("%7lld: %7lld %7lld %7lld\n",
+                cs.indice,
+                cs.tempo,
+                cs.prazo,
+                cs.multa);
     }
     printf("\n");
 }
