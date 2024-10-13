@@ -5,7 +5,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 1334
-Duração: 579 milissegundos
+Duração: 187 milissegundos
 
 ILS 
 Valor da solucao: 1046
@@ -29,7 +29,7 @@ Valor da solucao: 990
 Valor da solucao: 1014
 Valor da solucao: 879
 Média da solução: 991
-Tempo médio gasto: 10343 milissegundos
+Tempo médio gasto: 3748 milissegundos
 
 =====================================
 
@@ -40,7 +40,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 6803
-Duração: 632 milissegundos
+Duração: 225 milissegundos
 
 ILS 
 Valor da solucao: 5481
@@ -64,7 +64,7 @@ Valor da solucao: 5446
 Valor da solucao: 5255
 Valor da solucao: 6803
 Média da solução: 5462
-Tempo médio gasto: 11896 milissegundos
+Tempo médio gasto: 4120 milissegundos
 
 =====================================
 
@@ -75,7 +75,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 0
-Duração: 457 milissegundos
+Duração: 160 milissegundos
 
 ILS 
 Valor da solucao: 0
@@ -99,7 +99,7 @@ Valor da solucao: 0
 Valor da solucao: 0
 Valor da solucao: 0
 Média da solução: 0
-Tempo médio gasto: 9302 milissegundos
+Tempo médio gasto: 3256 milissegundos
 
 =====================================
 
@@ -110,7 +110,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 86546
-Duração: 673 milissegundos
+Duração: 237 milissegundos
 
 ILS 
 Valor da solucao: 77783
@@ -134,7 +134,7 @@ Valor da solucao: 78352
 Valor da solucao: 78406
 Valor da solucao: 75097
 Média da solução: 77310
-Tempo médio gasto: 11977 milissegundos
+Tempo médio gasto: 4032 milissegundos
 
 =====================================
 
@@ -145,7 +145,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 69685
-Duração: 676 milissegundos
+Duração: 239 milissegundos
 
 ILS 
 Valor da solucao: 63614
@@ -169,7 +169,7 @@ Valor da solucao: 63382
 Valor da solucao: 59357
 Valor da solucao: 64331
 Média da solução: 62461
-Tempo médio gasto: 11934 milissegundos
+Tempo médio gasto: 4196 milissegundos
 
 =====================================
 
@@ -180,7 +180,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 130044
-Duração: 781 milissegundos
+Duração: 280 milissegundos
 
 ILS 
 Valor da solucao: 112035
@@ -204,7 +204,7 @@ Valor da solucao: 129075
 Valor da solucao: 120090
 Valor da solucao: 122039
 Média da solução: 119646
-Tempo médio gasto: 12663 milissegundos
+Tempo médio gasto: 4552 milissegundos
 
 =====================================
 
@@ -215,7 +215,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 78186
-Duração: 689 milissegundos
+Duração: 240 milissegundos
 
 ILS 
 Valor da solucao: 70561
@@ -239,7 +239,7 @@ Valor da solucao: 72114
 Valor da solucao: 71062
 Valor da solucao: 72023
 Média da solução: 71341
-Tempo médio gasto: 13727 milissegundos
+Tempo médio gasto: 4519 milissegundos
 
 =====================================
 
@@ -250,7 +250,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 206681
-Duração: 657 milissegundos
+Duração: 230 milissegundos
 
 ILS 
 Valor da solucao: 183122
@@ -274,7 +274,7 @@ Valor da solucao: 183866
 Valor da solucao: 182754
 Valor da solucao: 175708
 Média da solução: 182730
-Tempo médio gasto: 15064 milissegundos
+Tempo médio gasto: 4508 milissegundos
 
 =====================================
 
@@ -285,7 +285,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 85632
-Duração: 577 milissegundos
+Duração: 213 milissegundos
 
 ILS 
 Valor da solucao: 61911
@@ -309,7 +309,7 @@ Valor da solucao: 53355
 Valor da solucao: 65184
 Valor da solucao: 63453
 Média da solução: 63675
-Tempo médio gasto: 14692 milissegundos
+Tempo médio gasto: 4772 milissegundos
 
 =====================================
 
@@ -320,7 +320,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 92899
-Duração: 716 milissegundos
+Duração: 249 milissegundos
 
 ILS 
 Valor da solucao: 76685
@@ -344,7 +344,7 @@ Valor da solucao: 85836
 Valor da solucao: 80203
 Valor da solucao: 72344
 Média da solução: 78437
-Tempo médio gasto: 15209 milissegundos
+Tempo médio gasto: 4588 milissegundos
 
 =====================================
 
@@ -355,7 +355,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 481725
-Duração: 891 milissegundos
+Duração: 317 milissegundos
 
 ILS 
 Valor da solucao: 474607
@@ -379,7 +379,7 @@ Valor da solucao: 464690
 Valor da solucao: 465160
 Valor da solucao: 465591
 Média da solução: 469997
-Tempo médio gasto: 12141 milissegundos
+Tempo médio gasto: 4324 milissegundos
 
 =====================================
 
@@ -390,7 +390,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 376398
-Duração: 846 milissegundos
+Duração: 301 milissegundos
 
 ILS 
 Valor da solucao: 368958
@@ -414,7 +414,7 @@ Valor da solucao: 357699
 Valor da solucao: 357035
 Valor da solucao: 352820
 Média da solução: 359465
-Tempo médio gasto: 12507 milissegundos
+Tempo médio gasto: 4105 milissegundos
 
 =====================================
 
@@ -425,7 +425,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 580000
-Duração: 752 milissegundos
+Duração: 265 milissegundos
 
 ILS 
 Valor da solucao: 553705
@@ -449,7 +449,7 @@ Valor da solucao: 571592
 Valor da solucao: 552875
 Valor da solucao: 562410
 Média da solução: 565103
-Tempo médio gasto: 13076 milissegundos
+Tempo médio gasto: 4481 milissegundos
 
 =====================================
 
@@ -460,7 +460,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 523532
-Duração: 729 milissegundos
+Duração: 257 milissegundos
 
 ILS 
 Valor da solucao: 508763
@@ -484,7 +484,7 @@ Valor da solucao: 506673
 Valor da solucao: 509702
 Valor da solucao: 508980
 Média da solução: 508410
-Tempo médio gasto: 12395 milissegundos
+Tempo médio gasto: 4074 milissegundos
 
 =====================================
 
@@ -495,7 +495,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 563514
-Duração: 2730 milissegundos
+Duração: 461 milissegundos
 
 ILS 
 Valor da solucao: 562900
@@ -519,7 +519,7 @@ Valor da solucao: 563514
 Valor da solucao: 563514
 Valor da solucao: 563514
 Média da solução: 562543
-Tempo médio gasto: 15132 milissegundos
+Tempo médio gasto: 4721 milissegundos
 
 =====================================
 
@@ -530,7 +530,7 @@ Duração: 0 milisegundos
 
 VND 
 Valor da solucao: 466937
-Duração: 778 milissegundos
+Duração: 275 milissegundos
 
 ILS 
 Valor da solucao: 429148
@@ -554,7 +554,7 @@ Valor da solucao: 438232
 Valor da solucao: 442187
 Valor da solucao: 433308
 Média da solução: 434796
-Tempo médio gasto: 13442 milissegundos
+Tempo médio gasto: 4590 milissegundos
 
 =====================================
 
