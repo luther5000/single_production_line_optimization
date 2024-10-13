@@ -1,0 +1,560 @@
+instancias/n60A.txt
+Guloso 1 
+Valor da solucao: 104827
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 1334
+Duração: 579 milissegundos
+
+ILS 
+Valor da solucao: 1046
+Valor da solucao: 1006
+Valor da solucao: 1086
+Valor da solucao: 1158
+Valor da solucao: 1074
+Valor da solucao: 1031
+Valor da solucao: 965
+Valor da solucao: 1054
+Valor da solucao: 789
+Valor da solucao: 910
+Valor da solucao: 949
+Valor da solucao: 921
+Valor da solucao: 1050
+Valor da solucao: 1050
+Valor da solucao: 942
+Valor da solucao: 889
+Valor da solucao: 1034
+Valor da solucao: 990
+Valor da solucao: 1014
+Valor da solucao: 879
+Média da solução: 991
+Tempo médio gasto: 10343 milissegundos
+
+=====================================
+
+instancias/n60B.txt
+Guloso 1 
+Valor da solucao: 493456
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 6803
+Duração: 632 milissegundos
+
+ILS 
+Valor da solucao: 5481
+Valor da solucao: 6532
+Valor da solucao: 5465
+Valor da solucao: 5456
+Valor da solucao: 5962
+Valor da solucao: 5944
+Valor da solucao: 4728
+Valor da solucao: 4509
+Valor da solucao: 5392
+Valor da solucao: 4669
+Valor da solucao: 5182
+Valor da solucao: 4466
+Valor da solucao: 5569
+Valor da solucao: 6803
+Valor da solucao: 5464
+Valor da solucao: 4958
+Valor da solucao: 5170
+Valor da solucao: 5446
+Valor da solucao: 5255
+Valor da solucao: 6803
+Média da solução: 5462
+Tempo médio gasto: 11896 milissegundos
+
+=====================================
+
+instancias/n60C.txt
+Guloso 1 
+Valor da solucao: 91885
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 0
+Duração: 457 milissegundos
+
+ILS 
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Valor da solucao: 0
+Média da solução: 0
+Tempo médio gasto: 9302 milissegundos
+
+=====================================
+
+instancias/n60D.txt
+Guloso 1 
+Valor da solucao: 498751
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 86546
+Duração: 673 milissegundos
+
+ILS 
+Valor da solucao: 77783
+Valor da solucao: 78037
+Valor da solucao: 77332
+Valor da solucao: 75517
+Valor da solucao: 75655
+Valor da solucao: 78168
+Valor da solucao: 80293
+Valor da solucao: 77545
+Valor da solucao: 76941
+Valor da solucao: 76206
+Valor da solucao: 77691
+Valor da solucao: 76149
+Valor da solucao: 77289
+Valor da solucao: 77726
+Valor da solucao: 76932
+Valor da solucao: 78529
+Valor da solucao: 76568
+Valor da solucao: 78352
+Valor da solucao: 78406
+Valor da solucao: 75097
+Média da solução: 77310
+Tempo médio gasto: 11977 milissegundos
+
+=====================================
+
+instancias/n60E.txt
+Guloso 1 
+Valor da solucao: 334845
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 69685
+Duração: 676 milissegundos
+
+ILS 
+Valor da solucao: 63614
+Valor da solucao: 63488
+Valor da solucao: 62809
+Valor da solucao: 60720
+Valor da solucao: 62985
+Valor da solucao: 62669
+Valor da solucao: 64313
+Valor da solucao: 63997
+Valor da solucao: 61010
+Valor da solucao: 60880
+Valor da solucao: 62561
+Valor da solucao: 60495
+Valor da solucao: 62396
+Valor da solucao: 62994
+Valor da solucao: 62230
+Valor da solucao: 62358
+Valor da solucao: 62650
+Valor da solucao: 63382
+Valor da solucao: 59357
+Valor da solucao: 64331
+Média da solução: 62461
+Tempo médio gasto: 11934 milissegundos
+
+=====================================
+
+instancias/n60F.txt
+Guloso 1 
+Valor da solucao: 1053287
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 130044
+Duração: 781 milissegundos
+
+ILS 
+Valor da solucao: 112035
+Valor da solucao: 118664
+Valor da solucao: 120704
+Valor da solucao: 114298
+Valor da solucao: 118259
+Valor da solucao: 129761
+Valor da solucao: 117860
+Valor da solucao: 114807
+Valor da solucao: 125225
+Valor da solucao: 128057
+Valor da solucao: 115185
+Valor da solucao: 114755
+Valor da solucao: 114819
+Valor da solucao: 116614
+Valor da solucao: 119102
+Valor da solucao: 120620
+Valor da solucao: 120960
+Valor da solucao: 129075
+Valor da solucao: 120090
+Valor da solucao: 122039
+Média da solução: 119646
+Tempo médio gasto: 12663 milissegundos
+
+=====================================
+
+instancias/n60G.txt
+Guloso 1 
+Valor da solucao: 447881
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 78186
+Duração: 689 milissegundos
+
+ILS 
+Valor da solucao: 70561
+Valor da solucao: 70915
+Valor da solucao: 71171
+Valor da solucao: 71524
+Valor da solucao: 69962
+Valor da solucao: 72290
+Valor da solucao: 70336
+Valor da solucao: 72559
+Valor da solucao: 71687
+Valor da solucao: 75371
+Valor da solucao: 71988
+Valor da solucao: 70852
+Valor da solucao: 71711
+Valor da solucao: 69897
+Valor da solucao: 69679
+Valor da solucao: 70948
+Valor da solucao: 70172
+Valor da solucao: 72114
+Valor da solucao: 71062
+Valor da solucao: 72023
+Média da solução: 71341
+Tempo médio gasto: 13727 milissegundos
+
+=====================================
+
+instancias/n60H.txt
+Guloso 1 
+Valor da solucao: 839902
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 206681
+Duração: 657 milissegundos
+
+ILS 
+Valor da solucao: 183122
+Valor da solucao: 182108
+Valor da solucao: 178828
+Valor da solucao: 182606
+Valor da solucao: 193541
+Valor da solucao: 177697
+Valor da solucao: 174932
+Valor da solucao: 188365
+Valor da solucao: 182021
+Valor da solucao: 178000
+Valor da solucao: 181316
+Valor da solucao: 188127
+Valor da solucao: 176964
+Valor da solucao: 193701
+Valor da solucao: 190005
+Valor da solucao: 187468
+Valor da solucao: 173479
+Valor da solucao: 183866
+Valor da solucao: 182754
+Valor da solucao: 175708
+Média da solução: 182730
+Tempo médio gasto: 15064 milissegundos
+
+=====================================
+
+instancias/n60I.txt
+Guloso 1 
+Valor da solucao: 854667
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 85632
+Duração: 577 milissegundos
+
+ILS 
+Valor da solucao: 61911
+Valor da solucao: 63737
+Valor da solucao: 72535
+Valor da solucao: 55134
+Valor da solucao: 54110
+Valor da solucao: 73802
+Valor da solucao: 68320
+Valor da solucao: 63189
+Valor da solucao: 70304
+Valor da solucao: 61061
+Valor da solucao: 71189
+Valor da solucao: 55048
+Valor da solucao: 55539
+Valor da solucao: 63114
+Valor da solucao: 72591
+Valor da solucao: 66565
+Valor da solucao: 63372
+Valor da solucao: 53355
+Valor da solucao: 65184
+Valor da solucao: 63453
+Média da solução: 63675
+Tempo médio gasto: 14692 milissegundos
+
+=====================================
+
+instancias/n60J.txt
+Guloso 1 
+Valor da solucao: 858764
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 92899
+Duração: 716 milissegundos
+
+ILS 
+Valor da solucao: 76685
+Valor da solucao: 82495
+Valor da solucao: 80111
+Valor da solucao: 78687
+Valor da solucao: 68376
+Valor da solucao: 77730
+Valor da solucao: 73673
+Valor da solucao: 87723
+Valor da solucao: 75905
+Valor da solucao: 69401
+Valor da solucao: 72310
+Valor da solucao: 77730
+Valor da solucao: 90794
+Valor da solucao: 79389
+Valor da solucao: 80318
+Valor da solucao: 71528
+Valor da solucao: 87507
+Valor da solucao: 85836
+Valor da solucao: 80203
+Valor da solucao: 72344
+Média da solução: 78437
+Tempo médio gasto: 15209 milissegundos
+
+=====================================
+
+instancias/n60K.txt
+Guloso 1 
+Valor da solucao: 968821
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 481725
+Duração: 891 milissegundos
+
+ILS 
+Valor da solucao: 474607
+Valor da solucao: 470415
+Valor da solucao: 470221
+Valor da solucao: 467254
+Valor da solucao: 463658
+Valor da solucao: 473354
+Valor da solucao: 469526
+Valor da solucao: 473449
+Valor da solucao: 473753
+Valor da solucao: 471177
+Valor da solucao: 472645
+Valor da solucao: 475073
+Valor da solucao: 467420
+Valor da solucao: 472680
+Valor da solucao: 473524
+Valor da solucao: 469536
+Valor da solucao: 466218
+Valor da solucao: 464690
+Valor da solucao: 465160
+Valor da solucao: 465591
+Média da solução: 469997
+Tempo médio gasto: 12141 milissegundos
+
+=====================================
+
+instancias/n60L.txt
+Guloso 1 
+Valor da solucao: 1222083
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 376398
+Duração: 846 milissegundos
+
+ILS 
+Valor da solucao: 368958
+Valor da solucao: 355051
+Valor da solucao: 370026
+Valor da solucao: 365566
+Valor da solucao: 354036
+Valor da solucao: 355929
+Valor da solucao: 362207
+Valor da solucao: 360592
+Valor da solucao: 355937
+Valor da solucao: 353501
+Valor da solucao: 362910
+Valor da solucao: 368543
+Valor da solucao: 359234
+Valor da solucao: 355868
+Valor da solucao: 357174
+Valor da solucao: 355689
+Valor da solucao: 360534
+Valor da solucao: 357699
+Valor da solucao: 357035
+Valor da solucao: 352820
+Média da solução: 359465
+Tempo médio gasto: 12507 milissegundos
+
+=====================================
+
+instancias/n60M.txt
+Guloso 1 
+Valor da solucao: 1728839
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 580000
+Duração: 752 milissegundos
+
+ILS 
+Valor da solucao: 553705
+Valor da solucao: 564353
+Valor da solucao: 564243
+Valor da solucao: 569464
+Valor da solucao: 565971
+Valor da solucao: 565155
+Valor da solucao: 571249
+Valor da solucao: 567168
+Valor da solucao: 567025
+Valor da solucao: 567453
+Valor da solucao: 580000
+Valor da solucao: 556479
+Valor da solucao: 567538
+Valor da solucao: 549863
+Valor da solucao: 569131
+Valor da solucao: 560632
+Valor da solucao: 575773
+Valor da solucao: 571592
+Valor da solucao: 552875
+Valor da solucao: 562410
+Média da solução: 565103
+Tempo médio gasto: 13076 milissegundos
+
+=====================================
+
+instancias/n60N.txt
+Guloso 1 
+Valor da solucao: 990790
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 523532
+Duração: 729 milissegundos
+
+ILS 
+Valor da solucao: 508763
+Valor da solucao: 508844
+Valor da solucao: 504329
+Valor da solucao: 507034
+Valor da solucao: 512521
+Valor da solucao: 511155
+Valor da solucao: 505926
+Valor da solucao: 511420
+Valor da solucao: 503069
+Valor da solucao: 512288
+Valor da solucao: 509866
+Valor da solucao: 507008
+Valor da solucao: 508050
+Valor da solucao: 506954
+Valor da solucao: 511802
+Valor da solucao: 508365
+Valor da solucao: 505468
+Valor da solucao: 506673
+Valor da solucao: 509702
+Valor da solucao: 508980
+Média da solução: 508410
+Tempo médio gasto: 12395 milissegundos
+
+=====================================
+
+instancias/n60O.txt
+Guloso 1 
+Valor da solucao: 1402344
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 563514
+Duração: 2730 milissegundos
+
+ILS 
+Valor da solucao: 562900
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 559260
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 558399
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 554086
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Valor da solucao: 563514
+Média da solução: 562543
+Tempo médio gasto: 15132 milissegundos
+
+=====================================
+
+instancias/n60P.txt
+Guloso 1 
+Valor da solucao: 1264616
+Duração: 0 milisegundos
+
+VND 
+Valor da solucao: 466937
+Duração: 778 milissegundos
+
+ILS 
+Valor da solucao: 429148
+Valor da solucao: 443215
+Valor da solucao: 425850
+Valor da solucao: 431267
+Valor da solucao: 438738
+Valor da solucao: 431588
+Valor da solucao: 436886
+Valor da solucao: 442978
+Valor da solucao: 430258
+Valor da solucao: 430689
+Valor da solucao: 422730
+Valor da solucao: 443842
+Valor da solucao: 442130
+Valor da solucao: 436593
+Valor da solucao: 434059
+Valor da solucao: 429089
+Valor da solucao: 433134
+Valor da solucao: 438232
+Valor da solucao: 442187
+Valor da solucao: 433308
+Média da solução: 434796
+Tempo médio gasto: 13442 milissegundos
+
+=====================================
+
