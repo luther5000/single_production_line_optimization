@@ -1,7 +1,6 @@
 #include "vizinhancas.hpp"
 #include "solucao.hpp"
 #include "customTypes.hpp"
-#include <algorithm>
 
 solucao twoSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     vector<suco_t> cLinhaProducao = entrada.linhaProducao; // O(n)
@@ -131,13 +130,13 @@ solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
     llong indiceLocalInsercao = -1;
     suco_t sucoInserido;
 
-    for (suco_t suco : entrada.linhaProducao){
+    for (suco_t suco : entrada.linhaProducao){ //Bloco roda em O(n^3)
         /**
          * Fazemos uma cópia da linha de produção inicial sem o suco que
          * estaremos inserindo em várias posições diferentes
          */
         list<suco_t> linhaProducaoAtual;
-        for (suco_t sucoCopia : entrada.linhaProducao){
+        for (suco_t sucoCopia : entrada.linhaProducao){//O(n)
             if (sucoCopia.indice != suco.indice)
                 linhaProducaoAtual.push_back(sucoCopia);
         }
@@ -147,11 +146,12 @@ solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
          * em que ele pode ser inserido na linha de produção.
          */
         list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
-        for (uint i = 0; i < linhaProducaoAtual.size() + 1; ++i){
+        for (uint i = 0; i < linhaProducaoAtual.size() + 1; ++i){//O(n^2)
             linhaProducaoAtual.insert(iterator, suco);
-            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);
+            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);//O(n)
 
-            //Caso o valor da solução seja melhor, salvamos ele para
+            // Caso o valor da solução seja melhor, salvamos ele, o
+            // índice do suco inserido e o índice do local inserido para
             // reconstruir a solução depois
             if (valorLinhaAtual < valorMelhorProducao){
                 valorMelhorProducao = valorLinhaAtual;
@@ -174,10 +174,12 @@ solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
     melhorLinhaProducao[indiceLocalInsercao] = sucoInserido;
 
     uint j = 0;
-    for (ulong i = 0; i < entrada.linhaProducao.size(); ++i){
+    for (ulong i = 0; i < entrada.linhaProducao.size(); ++i){//O(n)
+        // Não adicionamos o suco já inserido
         if (entrada.linhaProducao[i].indice == sucoInserido.indice) {
             continue;
         }
+        // Pulamos o índice onde o suco foi inserido
         if (j == indiceLocalInsercao) {
             ++j;
             --i;

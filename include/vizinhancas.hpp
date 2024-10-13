@@ -1,13 +1,11 @@
-//
-// Created by lutero on 27/09/24.
-//
-
 #ifndef __VIZINHANCAS_HPP
 #define __VIZINHANCAS_HPP
 
+#include <algorithm>
+#include <list>
+
 #include "solucao.hpp"
 #include "customTypes.hpp"
-#include <list>
 
 using namespace std;
 
@@ -64,6 +62,8 @@ llong calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha& tro
  * 1 3 2 4 5
  * 1 3 4 2 5
  * 1 3 4 5 2
+ *
+ * @note Essa vizinhanca eh varrida em O(n^3).
  *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da

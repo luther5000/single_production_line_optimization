@@ -1,7 +1,3 @@
-//
-// Created by lutero on 27/09/24.
-//
-
 #include "guloso.hpp"
 #include "solucao.hpp"
 #include "customTypes.hpp"

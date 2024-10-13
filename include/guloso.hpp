@@ -1,16 +1,13 @@
-//
-// Created by lutero on 27/09/24.
-//
-
 #ifndef GULOSO_HPP
 #define GULOSO_HPP
 
 #include <algorithm>
+#include <list>
+#include <cstdint>
+
 #include "customTypes.hpp"
 #include "solucao.hpp"
 #include <vector>
-#include <list>
-#include <cstdint>
 
 using namespace std;
 

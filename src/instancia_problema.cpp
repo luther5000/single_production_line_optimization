@@ -1,8 +1,4 @@
-#include <fstream>
-#include <iostream>
 #include "instancia_problema.hpp"
-
-using namespace std;
 
 instancia_problema::instancia_problema(const string& endereco) {
     ifstream file;

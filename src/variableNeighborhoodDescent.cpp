@@ -2,8 +2,6 @@
 #include "solucao.hpp"
 #include "vizinhancas.hpp"
 
-using namespace std;
-
 solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco) {
     const int num_vizinhancas = 5;
     solucao melhorSolucao = entrada;

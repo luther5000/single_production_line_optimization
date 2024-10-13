@@ -1,9 +1,11 @@
 #ifndef __SOLUCAO_H
 #define __SOLUCAO_H
 
-#include "customTypes.hpp"
+#include <iostream>
 #include <vector>
 #include <string>
+
+#include "customTypes.hpp"
 
 using namespace std;
 

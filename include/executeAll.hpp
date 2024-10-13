@@ -3,12 +3,15 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
+
 #include "instancia_problema.hpp"
 #include "guloso.hpp"
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include "ils.hpp"
 
+using namespace chrono;
 using namespace std;
 
 void executeAll();

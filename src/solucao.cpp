@@ -1,5 +1,4 @@
 #include "solucao.hpp"
-#include <iostream>
 
 solucao::solucao(const vector<suco_t>& sucos, const prepararLinha& troca_suco) {
     this->linhaProducao = sucos;

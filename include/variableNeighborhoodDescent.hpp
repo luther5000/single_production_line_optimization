@@ -1,9 +1,11 @@
 #ifndef __VARIABLE_NEIGHBORHOOD_SEARCH_HPP
 #define __VARIABLE_NEIGHBORHOOD_SEARCH_HPP
 
-#include "solucao.hpp"
 #include <vector>
 
+#include "solucao.hpp"
+
+using namespace std;
 /**
  * Implementacao do VND. Ele recebe uma solucao como entrada e a matriz que
  * contem o custo para iniciar a producao de um outro suco dado o suco atual.

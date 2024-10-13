@@ -1,10 +1,13 @@
 #ifndef INSTANCIA_PROBLEMA_H
 #define INSTANCIA_PROBLEMA_H
 
-#include "solucao.hpp"
-#include "customTypes.hpp"
+#include <fstream>
+#include <iostream>
 #include <vector>
 #include <string>
+
+#include "solucao.hpp"
+#include "customTypes.hpp"
 
 using namespace std;
 

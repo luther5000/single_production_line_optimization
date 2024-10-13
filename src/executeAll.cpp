@@ -29,16 +29,45 @@ void executeAll(){
 //#define GULOSO_2
 
 #ifdef GULOSO_1
-        printf("Guloso 1: ");
+        printf("Guloso 1 \n");
         guloso guloso1(instancia.size, instancia.sucos, instancia.trocaSuco);
+
+        auto begin = high_resolution_clock::now();
         solucao *solucao1 = guloso1.algoritmo_guloso();
+        auto end = high_resolution_clock::now();
+
         solucao1->exibeReduzido();
+        auto duration = duration_cast<milliseconds>(end - begin);
+        printf("Duração: %ld milisegundos\n", duration.count());
 
-        printf("VND 1: ");
+        printf("\nVND \n");
+
+        begin = high_resolution_clock::now();
         variableNeighborhoodDescent(*solucao1, instancia.trocaSuco).exibeReduzido();
+        end = high_resolution_clock::now();
+        duration = duration_cast<milliseconds>(end - begin);
+        printf("Duração: %ld milissegundos\n", duration.count());
 
-        printf("ILS 1: ");
-        metaHeuristica(*solucao1, instancia.trocaSuco, 15).exibeReduzido();
+
+        printf("\nILS \n");
+        ullong tempoTotal = 0;
+        ullong multaTotal = 0;
+
+        for (uint i = 0; i < 20; ++i) {
+            solucao solucaoAtual;
+            begin = high_resolution_clock::now();
+            solucaoAtual = metaHeuristica(*solucao1, instancia.trocaSuco, 15);
+            end = high_resolution_clock::now();
+
+            duration = duration_cast<milliseconds>(end - begin);
+
+            tempoTotal += duration.count();
+            multaTotal += solucaoAtual.multaTotal;
+            solucaoAtual.exibeReduzido();
+        }
+        printf("Média da solução: %lld\n", multaTotal / 20);
+        printf("Tempo médio gasto: %lld milissegundos\n\n", tempoTotal / 20);
+
 #endif
 #ifdef GULOSO_2
         printf("Guluso 2: ");
@@ -52,13 +81,13 @@ void executeAll(){
         printf("ILS 2: ");
         metaHeuristica(*solucao2, instancia.trocaSuco, 15).exibeReduzido();
 #endif
-        printf("=====================================\n");
+        printf("=====================================\n\n");
     }
 }
 
 void executeOneSeveralTimes(const string& endereco){
-    long long total = 0;
-    for (int i = 0; i < 10; ++i){
+    llong total = 0;
+    for (uint i = 0; i < 10; ++i){
         instancia_problema instancia(endereco);
 
         guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
