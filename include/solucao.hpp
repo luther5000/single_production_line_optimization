@@ -1,5 +1,5 @@
-#ifndef __SOLUCAO_H
-#define __SOLUCAO_H
+#ifndef PROJETOAPA_INCLUDE_SOLUCAO_H_
+#define PROJETOAPA_INCLUDE_SOLUCAO_H_
 
 #include <iostream>
 #include <vector>
@@ -78,4 +78,4 @@ public:
     void exibeReduzido();
 };
 
-#endif //__SOLUCAO_H
+#endif//PROJETOAPA_INCLUDE_SOLUCAO_H_

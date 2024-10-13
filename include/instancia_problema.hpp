@@ -1,13 +1,13 @@
-#ifndef INSTANCIA_PROBLEMA_H
-#define INSTANCIA_PROBLEMA_H
+#ifndef PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_
+#define PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_
 
+#include "solucao.hpp"
+#include "customTypes.hpp"
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <string>
 
-#include "solucao.hpp"
-#include "customTypes.hpp"
 
 using namespace std;
 
@@ -31,4 +31,4 @@ public:
     void exibe() const;
 };
 
-#endif //INSTANCIA_PROBLEMA_H
+#endif //PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_

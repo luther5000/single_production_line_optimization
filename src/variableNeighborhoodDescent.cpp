@@ -1,9 +1,12 @@
 #include "variableNeighborhoodDescent.hpp"
+#include "customTypes.hpp"
 #include "solucao.hpp"
 #include "vizinhancas.hpp"
 
-solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco) {
-    const int num_vizinhancas = 5;
+solucao variableNeighborhoodDescent(const solucao& entrada,
+                                    const prepararLinha& troca_suco) {
+
+    constexpr int num_vizinhancas = 5;
     solucao melhorSolucao = entrada;
     int k = 1;
     while(k <= num_vizinhancas) {

@@ -1,9 +1,8 @@
-#ifndef __VARIABLE_NEIGHBORHOOD_SEARCH_HPP
-#define __VARIABLE_NEIGHBORHOOD_SEARCH_HPP
-
-#include <vector>
+#ifndef PROJETOAPA_INCLUDE_VARIABLENEIGHBORHOODDESCENT_H_
+#define PROJETOAPA_INCLUDE_VARIABLENEIGHBORHOODDESCENT_H_
 
 #include "solucao.hpp"
+#include <vector>
 
 using namespace std;
 /**
@@ -16,4 +15,4 @@ using namespace std;
  * */
 solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco);
 
-#endif//__VARIABLE_NEIGHBORHOOD_SEARCH_HPP
+#endif//PROJETOAPA_INCLUDE_VARIABLENEIGHBORHOODDESCENT_H_

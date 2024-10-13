@@ -1,5 +1,5 @@
-#ifndef __CUSTOM_TYPES_H
-#define __CUSTOM_TYPES_H
+#ifndef PROJETOAPA_INCLUDE_CUSTOMTYPES_H_
+#define PROJETOAPA_INCLUDE_CUSTOMTYPES_H_
 
 #include <vector>
 
@@ -49,4 +49,4 @@ typedef struct {
     long long multa;
 } suco_t;
 
-#endif//__CUSTOM_TYPES_H
+#endif//PROJETOAPA_INCLUDE_CUSTOMTYPES_H_

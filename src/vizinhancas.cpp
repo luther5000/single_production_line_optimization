@@ -95,32 +95,12 @@ solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     // Regerar a melhor solucao encontrada tem custo proporcional a O(n)
     while(inicioMelhorSolucao < fimMelhorSolucao) {
         std::swap(cLinhaProducao[inicioMelhorSolucao],
-                cLinhaProducao[fimMelhorSolucao]);
+                  cLinhaProducao[fimMelhorSolucao]);
         ++inicioMelhorSolucao;
         --fimMelhorSolucao;
     }
 
     return solucao(cLinhaProducao, melhorSolucao);
-}
-
-long long calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha& trocaSuco) {
-    llong valor = 0;
-    llong tempo = 0;
-    llong tempoPassado;
-    llong ultimaLinha = 0;
-
-    for (suco_t suco : linhaProducao) { //O(n)
-        tempo += trocaSuco[ultimaLinha][suco.indice] +  suco.tempo;
-        tempoPassado = tempo - suco.prazo;
-
-        if (tempoPassado > 0) {
-            valor += tempoPassado*suco.multa;
-        }
-
-        ultimaLinha = suco.indice;
-    }
-
-    return valor;
 }
 
 solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
@@ -130,7 +110,7 @@ solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
     llong indiceLocalInsercao = -1;
     suco_t sucoInserido;
 
-    for (suco_t suco : entrada.linhaProducao){ //Bloco roda em O(n^3)
+    for (suco_t suco : entrada.linhaProducao) { //Bloco roda em O(n^3)
         /**
          * Fazemos uma cópia da linha de produção inicial sem o suco que
          * estaremos inserindo em várias posições diferentes
@@ -146,9 +126,13 @@ solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
          * em que ele pode ser inserido na linha de produção.
          */
         list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
-        for (uint i = 0; i < linhaProducaoAtual.size() + 1; ++i){//O(n^2)
+
+        //Este laço é executado em O(n^2)
+        for (uint i = 0; i < linhaProducaoAtual.size() + 1; ++i){
             linhaProducaoAtual.insert(iterator, suco);
-            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);//O(n)
+
+            // Esta linha é O(n)
+            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);
 
             // Caso o valor da solução seja melhor, salvamos ele, o
             // índice do suco inserido e o índice do local inserido para
@@ -209,8 +193,8 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
             llong ultimaLinha = 0;
             ulong j = 0;
 
-            // Esse trecho seguinte encontra a proxima permutacao em ordem lexicografica
-            // Ou sai do laco se ja estivermos na maior permutacao
+            // Esse trecho seguinte encontra a proxima permutacao em ordem
+            // lexicografica ou sai do laco se ja estivermos na maior permutacao
 
             // encontramos o maior k tal que p[k] < p[k + 1]
             int k = 3;
@@ -239,47 +223,50 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
 
             // Calculamos a multa ate o suco i
             for(j = 0; j < i; ++j) {
-                tempo +=
-                    troca_suco[ultimaLinha][entrada.linhaProducao[j].indice] +
-                    entrada.linhaProducao[j].tempo;
+                suco_t suco_atual = entrada.linhaProducao[j];
 
-                llong tempoPassado = tempo - entrada.linhaProducao[j].prazo;
+                tempo += troca_suco[ultimaLinha][suco_atual.indice] +
+                         suco_atual.tempo;
+
+                llong tempoPassado = tempo - suco_atual.prazo;
 
                 if (tempoPassado > 0)
-                    multa += tempoPassado*entrada.linhaProducao[j].multa;
+                    multa += tempoPassado*suco_atual.multa;
 
-                ultimaLinha = entrada.linhaProducao[i].indice + 1;
+                ultimaLinha = suco_atual.indice + 1;
             }
 
             // calculamos a multa dos sucos i ate i + 4 com
             // a permutacao atual aplicada
             for(k = 0; k < 5; ++k) {
                 ulong nIndice = j + permutacaoAtual[k];
-                tempo +=
-                    troca_suco[ultimaLinha][entrada.linhaProducao[nIndice].indice] +
-                    entrada.linhaProducao[nIndice].tempo;
+                suco_t suco_atual = entrada.linhaProducao[nIndice];
 
-                llong tempoPassado = tempo - entrada.linhaProducao[nIndice].prazo;
+                tempo += troca_suco[ultimaLinha][suco_atual.indice] +
+                         suco_atual.tempo;
+
+                llong tempoPassado = tempo - suco_atual.prazo;
 
                 if (tempoPassado > 0)
-                    multa += tempoPassado*entrada.linhaProducao[nIndice].multa;
+                    multa += tempoPassado*suco_atual.multa;
 
-                ultimaLinha = entrada.linhaProducao[nIndice].indice + 1;
+                ultimaLinha = suco_atual.indice + 1;
             }
 
             // depois prosseguimos o calculo normalmente
             // ate o fim da linha de producao
             for(j += 5; j < entrada.linhaProducao.size(); ++j) {
-                tempo +=
-                    troca_suco[ultimaLinha][entrada.linhaProducao[j].indice] +
-                    entrada.linhaProducao[j].tempo;
+                suco_t suco_atual = entrada.linhaProducao[j];
 
-                llong tempoPassado = tempo - entrada.linhaProducao[j].prazo;
+                tempo += troca_suco[ultimaLinha][suco_atual.indice] +
+                         suco_atual.tempo;
+
+                llong tempoPassado = tempo - suco_atual.prazo;
 
                 if (tempoPassado > 0)
-                    multa += tempoPassado*entrada.linhaProducao[j].multa;
+                    multa += tempoPassado*suco_atual.multa;
 
-                ultimaLinha = entrada.linhaProducao[i].indice + 1;
+                ultimaLinha = suco_atual.indice + 1;
             }
 
             // se encontrarmos uma solucao melhor que a atual
@@ -397,4 +384,24 @@ solucao threeSwap(const solucao& entrada, const prepararLinha& troca_suco) {
 
         return copiaEntrada;
     }
+}
+
+long long calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha& trocaSuco) {
+    llong valor = 0;
+    llong tempo = 0;
+    llong tempoPassado;
+    llong ultimaLinha = 0;
+
+    for (suco_t suco : linhaProducao) { //O(n)
+        tempo += trocaSuco[ultimaLinha][suco.indice] +  suco.tempo;
+        tempoPassado = tempo - suco.prazo;
+
+        if (tempoPassado > 0) {
+            valor += tempoPassado*suco.multa;
+        }
+
+        ultimaLinha = suco.indice;
+    }
+
+    return valor;
 }

@@ -1,13 +1,12 @@
-#ifndef ILS_HPP
-#define ILS_HPP
-
-#include <vector>
-#include <list>
-#include <random>
+#ifndef PROJETOAPA_INCLUDE_ILS_H_
+#define PROJETOAPA_INCLUDE_ILS_H_
 
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include "customTypes.hpp"
+#include <vector>
+#include <list>
+#include <random>
 
 using namespace std;
 
@@ -70,4 +69,4 @@ void multipleSwaps(vector<suco_t>& linhaProducao, const uint& peso);
  * */
 void rotateEvens(vector<suco_t>& linhaProducao);
 
-#endif //ILS_HPP
+#endif//PROJETOAPA_INCLUDE_ILS_H_

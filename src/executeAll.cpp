@@ -25,29 +25,26 @@ void executeAll(){
         printf("%s\n", endereco.c_str());
         instancia_problema instancia(endereco);
 
-#define GULOSO_1
-//#define GULOSO_2
-
-#ifdef GULOSO_1
         printf("Guloso 1 \n");
         guloso guloso1(instancia.size, instancia.sucos, instancia.trocaSuco);
 
         auto begin = high_resolution_clock::now();
         solucao *solucao1 = guloso1.algoritmo_guloso();
         auto end = high_resolution_clock::now();
-
         solucao1->exibeReduzido();
+
         auto duration = duration_cast<milliseconds>(end - begin);
         printf("Duração: %ld milisegundos\n", duration.count());
 
         printf("\nVND \n");
 
         begin = high_resolution_clock::now();
-        variableNeighborhoodDescent(*solucao1, instancia.trocaSuco).exibeReduzido();
+        solucao solucao2 = variableNeighborhoodDescent(*solucao1, instancia.trocaSuco);
         end = high_resolution_clock::now();
+        solucao2.exibeReduzido();
+
         duration = duration_cast<milliseconds>(end - begin);
         printf("Duração: %ld milissegundos\n", duration.count());
-
 
         printf("\nILS \n");
         ullong tempoTotal = 0;
@@ -67,38 +64,19 @@ void executeAll(){
         }
         printf("Média da solução: %lld\n", multaTotal / 20);
         printf("Tempo médio gasto: %lld milissegundos\n\n", tempoTotal / 20);
-
-#endif
-#ifdef GULOSO_2
-        printf("Guluso 2: ");
-        guloso guloso2(instancia.size, instancia.sucos, instancia.trocaSuco);
-        solucao *solucao2 = guloso2.algoritmo_guloso_2();
-        solucao2->exibeReduzido();
-
-        printf("VND 2: ");
-        variableNeighborhoodDescent(*solucao2, instancia.trocaSuco).exibeReduzido();
-
-        printf("ILS 2: ");
-        metaHeuristica(*solucao2, instancia.trocaSuco, 15).exibeReduzido();
-#endif
         printf("=====================================\n\n");
     }
 }
 
-void executeOneSeveralTimes(const string& endereco){
-    llong total = 0;
-    for (uint i = 0; i < 10; ++i){
-        instancia_problema instancia(endereco);
+llong executeOne(const string& endereco){
+    instancia_problema instancia(endereco);
 
-        guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
-        solucao *solucao = guloso.algoritmo_guloso_2();
+    guloso guloso(instancia.size, instancia.sucos, instancia.trocaSuco);
+    solucao *solucao = guloso.algoritmo_guloso();
 
-        //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
-        *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 30);
-        solucao->exibe(endereco);
+    //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
+    *solucao = metaHeuristica(*solucao, instancia.trocaSuco, 20);
+    solucao->exibe(endereco);
 
-        total += solucao->multaTotal;
-    }
-
-    cout << "Média: " << total / 10 << endl;
+    return solucao->multaTotal;
 }

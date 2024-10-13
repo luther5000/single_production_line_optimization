@@ -1,11 +1,10 @@
-#ifndef __VIZINHANCAS_HPP
-#define __VIZINHANCAS_HPP
-
-#include <algorithm>
-#include <list>
+#ifndef PROJETOAPA_INCLUDE_VIZINHANCAS_H_
+#define PROJETOAPA_INCLUDE_VIZINHANCAS_H_
 
 #include "solucao.hpp"
 #include "customTypes.hpp"
+#include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -89,13 +88,13 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
 
 /**
  * Esta vizinhanca eh gerada da seguinte forma:
- * 
+ *
  *  Para cada tripla de indices i, j e k, i < j < k, trocamos
  *  os valores i, j e k de posicao. As trocas que o twoSwap
  *  varre sao excluidas
- * 
+ *
  * @note Essa vizinhanca eh varrida em O(n^4)
- * 
+ *
  * @param entrada Uma solucao inicial para ser explorada.
  * @param troca_suco A matriz que contem o custo das trocas de contexto da
  * linha de producao.
@@ -103,4 +102,4 @@ solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suc
  */
 solucao threeSwap(const solucao& entrada, const prepararLinha& troca_suco);
 
-#endif //__VIZINHANCAS_HPP
+#endif//PROJETOAPA_INCLUDE_VIZINHANCAS_H_
