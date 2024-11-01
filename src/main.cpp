@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
 
-    if(argc > 3) {
+    /*if(argc > 3) {
         printf("Uso: projeto_apa.exe\n"
                "     projeto_apa.exe [<instância>]\n"
                "     projeto_apa.exe [<instância>] [<num>]\n");
@@ -34,7 +34,11 @@ int main(int argc, char **argv) {
             executeAll();
             break;
         }
-    }
+    }*/
+
+    instancia_problema instancia(argv[1]);
+    solucao *solucao = algoritmo_guloso(instancia);
+    solucao->exibe(instancia);
 
     return 0;
 }

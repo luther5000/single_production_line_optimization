@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+#include "instancia_problema.hpp"
 #include "customTypes.hpp"
 
 using namespace std;
@@ -21,8 +22,9 @@ using namespace std;
  * */
 class solucao {
 public:
-    vector<suco_t> linhaProducao;
+    vector<solucaoInfo_t> linhaProducao;
     llong multaTotal;
+
 
     /**
      * Um construtor da classe solucao.
@@ -36,19 +38,9 @@ public:
      * fato correspondente ao vector de sucos linhaProducao após sua
      * inicializacao.
      * */
-    solucao(const vector<suco_t>& sucos, const prepararLinha& troca_suco);
+    solucao(const vector<solucaoInfo_t>& linhaProducao,
+            const instancia_problema &i_problema);
 
-    /**
-     * Um construtor da classe solucao.
-     *
-     * O argumento sucos é copiada diretamente para o campo linhaProducao da
-     * classe. De forma semelhante, o argumento valorMulta é copiada direta-
-     * mente para o campo multaTotal.
-     *
-     * @note Esse construtor não garante que o valor armazendo em multaTotal é
-     * de fato correspondente ao vector de sucos linhaProducao.
-     * */
-    solucao(const vector<suco_t>& sucos, const llong& valorMulta);
 
     /**
      * Um construtor da classe solucao.
@@ -66,12 +58,12 @@ public:
      * @param troca_suco A matriz que guarda o custo para parar a produção de
      * um tipo de suco e iniciar a produção de outro.
      * */
-    void calcula_solucao(const prepararLinha& troca_suco);
+    void calcula_solucao_inicial(const instancia_problema &i_problema);
 
     /**
      * Exibe a solução armazenada na tela.
      * */
-    void exibe();
+    void exibe(const instancia_problema &i_problema);
 
     /**
      * Exibe apenas o valor da solução na tela.

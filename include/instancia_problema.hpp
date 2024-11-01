@@ -1,7 +1,6 @@
-#ifndef PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_
-#define PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_
+#ifndef PROJETOAPA_INCLUDE_INSTANCIA_PROBLEMA_H_
+#define PROJETOAPA_INCLUDE_INSTANCIA_PROBLEMA_H_
 
-#include "solucao.hpp"
 #include "customTypes.hpp"
 #include <fstream>
 #include <iostream>
@@ -31,4 +30,4 @@ public:
     void exibe() const;
 };
 
-#endif //PROJETOAPA_INCLUDE_INSTANCIAPROBLEMA_H_
+#endif //PROJETOAPA_INCLUDE_INSTANCIA_PROBLEMA_H_

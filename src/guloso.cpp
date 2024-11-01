@@ -2,22 +2,19 @@
 #include "solucao.hpp"
 #include "customTypes.hpp"
 
-guloso::guloso(const int& size, const vector<suco_t>& sucos,
-    const prepararLinha& trocaSuco) {
-    this->trocaSuco = trocaSuco;
-    this->sucos = sucos;
-    this->size = size;
-}
 
-solucao* guloso::algoritmo_guloso() {
-    solucao.resize(size);
-    for (int i = 0; i < size; ++i) {
-        solucao[i] = sucos[i];
+solucao* algoritmo_guloso(instancia_problema &i_problema) {
+    solucao *solucao = new ::solucao;
+    solucao->linhaProducao.resize(i_problema.size);
+
+    for (int i = 0; i < i_problema.size; ++i) {
+        solucao->linhaProducao[i].indice = i;
     }
 
-    sort(solucao.begin(), solucao.end(), [](suco_t const& a, suco_t const& b) {
-        return a.prazo < b.prazo;
+    sort(solucao->linhaProducao.begin(), solucao->linhaProducao.end(), [i_problema]
+        (const solucaoInfo_t &a, const solucaoInfo_t &b) {
+        return i_problema.sucos[a.indice].prazo < i_problema.sucos[b.indice].prazo;
     });
 
-    return new class solucao(this->solucao, this->trocaSuco);
+    return solucao;
 }

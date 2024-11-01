@@ -43,10 +43,16 @@ typedef vector<vector<int>> prepararLinha;
  * producao do suco.
  * */
 typedef struct {
-    long long indice;
-    long long tempo;
-    long long prazo;
-    long long multa;
+    llong indice;
+    llong tempo;
+    llong prazo;
+    llong multa;
 } suco_t;
+
+typedef struct {
+    uint indice;
+    llong tempoDecorrido;
+    llong multaAtual;
+} solucaoInfo_t;
 
 #endif//PROJETOAPA_INCLUDE_CUSTOMTYPES_H_
