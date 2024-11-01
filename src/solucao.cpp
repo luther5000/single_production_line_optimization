@@ -27,7 +27,7 @@ void solucao::calcula_solucao_inicial(const instancia_problema &i_problema) {
             multaTotal += tempoPassado * i_problema.sucos[linhaProducao[i].indice].multa;
 
         linhaProducao[i].multaAtual = multaTotal;
-        linhaProducao[i].tempoDecorrido = (tempoPassado > 0) ? tempoPassado : 0;
+        linhaProducao[i].tempoDecorrido = tempo;
 
         ultimoLinha = linhaProducao[i].indice + 1;
     }
