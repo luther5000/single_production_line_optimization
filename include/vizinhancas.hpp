@@ -1,10 +1,12 @@
 #ifndef PROJETOAPA_INCLUDE_VIZINHANCAS_H_
 #define PROJETOAPA_INCLUDE_VIZINHANCAS_H_
 
-#include "solucao.hpp"
-#include "customTypes.hpp"
 #include <algorithm>
 #include <list>
+
+#include "solucao.hpp"
+#include "customTypes.hpp"
+#include "instancia_problema.hpp"
 
 using namespace std;
 
@@ -21,7 +23,7 @@ using namespace std;
  * linha de producao.
  * @return A melhor solucao encontrada na vizinhanca.
  * */
-solucao twoSwap(const solucao& solucao, const prepararLinha& troca_suco);
+void twoSwap(solucao &solucao, const instancia_problema &i_problema);
 
 /**
  * Esta vizinhanca eh gerada da seguinte forma:
@@ -36,7 +38,9 @@ solucao twoSwap(const solucao& solucao, const prepararLinha& troca_suco);
  * linha de producao
  * @return A melhor solucao encontrada na vizinhanca.
  * */
-solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco);
+void reinsertion(solucao &entrada, const instancia_problema &i_problema);
+
+void opt(solucao &entrada, const instancia_problema &i_problema);
 
 /**
  * Função que calcula o valor de uma solução a partir de uma list ao invés

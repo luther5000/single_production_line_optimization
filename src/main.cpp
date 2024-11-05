@@ -1,6 +1,7 @@
 #include "customTypes.hpp"
 #include "executeAll.hpp"
 #include <cstdlib>
+#include <vizinhancas.hpp>
 
 int main(int argc, char **argv) {
 
@@ -38,6 +39,9 @@ int main(int argc, char **argv) {
 
     instancia_problema instancia(argv[1]);
     solucao *solucao = algoritmo_guloso(instancia);
+    solucao->exibe(instancia);
+
+    opt(*solucao, instancia);
     solucao->exibe(instancia);
 
     return 0;

@@ -13,20 +13,20 @@ instancia_problema::instancia_problema(const string& endereco) {
 
     sucos.resize(size);
 
-    for (int i = 0; i < size; ++i) {
+    for (ulong i = 0; i < size; ++i) {
         sucos[i].indice = i;
         file >> sucos[i].tempo;
     }
 
-    for (int i = 0; i < size; ++i)
+    for (ulong i = 0; i < size; ++i)
         file >> sucos[i].prazo;
 
-    for (int i = 0; i <size; ++i)
+    for (ulong i = 0; i <size; ++i)
         file >> sucos[i].multa;
 
     trocaSuco.resize(size + 1);
 
-    for (int i = 0; i < size + 1; ++i) {
+    for (ulong i = 0; i < size + 1; ++i) {
         trocaSuco[i].resize(size);
         for (int j = 0; j < size; ++j) {
             file >> trocaSuco[i][j];

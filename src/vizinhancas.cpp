@@ -2,49 +2,66 @@
 #include "solucao.hpp"
 #include "customTypes.hpp"
 
-solucao twoSwap(const solucao& entrada, const prepararLinha& troca_suco) {
-    vector<suco_t> cLinhaProducao = entrada.linhaProducao; // O(n)
+void twoSwap(solucao &entrada, const instancia_problema &i_problema) {
     ulong iMelhorSolucao = 0;
     ulong jMelhorSolucao = 0;
     llong melhorSolucao = entrada.multaTotal;
-    const ulong n = entrada.linhaProducao.size();
 
-    // O(n^2)
-    for(ulong i = 0; i + 1 < n; ++i) {
-        for(ulong j = i + 1; j < n; ++j) {
-            std::swap(cLinhaProducao[i], cLinhaProducao[j]);
 
-            // Calcula solucao custa O(n)
-            // Como eh realizado O(n^2) vezes, o custo total é O(n^3)
-            // Uma otimizacao possivel eh calcular os valores e salvar em um
-            // vetor. Depois, eh necessario apenas calcular a partir da ultima
-            // alteracao do vetor. Isso nao melhora a complexidade, mas torna
-            // o codigo mais eficiente.
-            // Como uma solucao só usa vector e long long,
-            // o C++ cuida da sua destruição manualmente.
-            solucao aux(cLinhaProducao, troca_suco);
+    for(ulong i = 0; i + 1 < i_problema.size; ++i) {
+        for(ulong j = i + 1; j < i_problema.size; ++j) {
 
-            // O resto do corpo da funcao eh O(1)
-            if(aux.multaTotal < melhorSolucao) {
+            // Realiza a simulação do swap entre i e j e calcula o valor
+            // da solução caso ele fosse realizado.
+            llong solucaoAtual = entrada.simula_solucao_two_swap(i, j);
+
+            if(solucaoAtual < melhorSolucao) {
                 iMelhorSolucao = i;
                 jMelhorSolucao = j;
-                melhorSolucao = aux.multaTotal;
+                melhorSolucao = solucaoAtual;
             }
-
-            // Desfaz o swap
-            std::swap(cLinhaProducao[i], cLinhaProducao[j]);
         }
     }
 
-    // Tambem eh O(1)
-    std::swap(cLinhaProducao[iMelhorSolucao], cLinhaProducao[jMelhorSolucao]);
-
-    // O compilador otimiza essa saida para um move desde a versao C++17, e
-    // nao uma copia, portanto ela eh realizada em O(1)
-    return solucao(cLinhaProducao, melhorSolucao);
+    entrada.calcula_solucao_two_swap(iMelhorSolucao, jMelhorSolucao);
 }
 
-solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco) {
+void opt(solucao &entrada, const instancia_problema &i_problema) {
+    llong valorMelhorProducao = entrada.multaTotal;
+    ulong iMelhorSolucao = 0;
+    ulong jMelhorSolucao = 0;
+
+    for (ulong i = 0; i < i_problema.size; ++i) {
+        for (ulong j = i + 3; j < i_problema.size; ++j) {
+            llong solucaoAtual = entrada.simula_solucao_opt(i, j);
+
+            if (solucaoAtual < valorMelhorProducao) {
+                iMelhorSolucao = i;
+                jMelhorSolucao = j;
+                valorMelhorProducao = solucaoAtual;
+            }
+        }
+    }
+
+    entrada.calcula_solucao_opt(iMelhorSolucao, jMelhorSolucao);
+}
+
+void reinsertion(solucao &entrada, const instancia_problema &i_problema){
+    llong valorMelhorProducao = entrada.multaTotal;
+    ulong iMelhorSolucao = 0;
+    ulong jMelhorSolucao = 0;
+
+    for (ulong i = 0; i < i_problema.size; ++i) {
+        for (ulong j = i + 2; j < i_problema.size; ++j) {
+
+        }
+    }
+}
+
+
+
+
+/*solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     vector<suco_t> cLinhaProducao = entrada.linhaProducao; // O(n);
     ulong inicioMelhorSolucao = 0;
     ulong fimMelhorSolucao = 0;
@@ -103,79 +120,6 @@ solucao reverseSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     return solucao(cLinhaProducao, melhorSolucao);
 }
 
-solucao insertSwap(const solucao& entrada, const prepararLinha& troca_suco){
-    llong valorMelhorProducao = entrada.multaTotal;
-    llong valorLinhaAtual;
-
-    llong indiceLocalInsercao = -1;
-    suco_t sucoInserido;
-
-    for (suco_t suco : entrada.linhaProducao) { //Bloco roda em O(n^3)
-        /**
-         * Fazemos uma cópia da linha de produção inicial sem o suco que
-         * estaremos inserindo em várias posições diferentes
-         */
-        list<suco_t> linhaProducaoAtual;
-        for (suco_t sucoCopia : entrada.linhaProducao){//O(n)
-            if (sucoCopia.indice != suco.indice)
-                linhaProducaoAtual.push_back(sucoCopia);
-        }
-
-        /*
-         * Agora iremos analisar para cada um dos sucos todas as posições
-         * em que ele pode ser inserido na linha de produção.
-         */
-        list<suco_t>::iterator iterator = linhaProducaoAtual.begin();
-
-        //Este laço é executado em O(n^2)
-        for (uint i = 0; i < linhaProducaoAtual.size() + 1; ++i){
-            linhaProducaoAtual.insert(iterator, suco);
-
-            // Esta linha é O(n)
-            valorLinhaAtual = calculaSolucao(linhaProducaoAtual, troca_suco);
-
-            // Caso o valor da solução seja melhor, salvamos ele, o
-            // índice do suco inserido e o índice do local inserido para
-            // reconstruir a solução depois
-            if (valorLinhaAtual < valorMelhorProducao){
-                valorMelhorProducao = valorLinhaAtual;
-                indiceLocalInsercao = i;
-                sucoInserido = suco;
-            }
-
-            --iterator;
-            iterator = linhaProducaoAtual.erase(iterator);
-            ++iterator;
-        }
-    }
-
-    //Caso a entrada seja a melhor solução, retornamos ela
-    if (indiceLocalInsercao == -1)
-        return entrada;
-
-    //Reconstruímos a solução ótima obtida pelo algoritmo
-    vector<suco_t> melhorLinhaProducao(entrada.linhaProducao.size());
-    melhorLinhaProducao[indiceLocalInsercao] = sucoInserido;
-
-    uint j = 0;
-    for (ulong i = 0; i < entrada.linhaProducao.size(); ++i){//O(n)
-        // Não adicionamos o suco já inserido
-        if (entrada.linhaProducao[i].indice == sucoInserido.indice) {
-            continue;
-        }
-        // Pulamos o índice onde o suco foi inserido
-        if (j == indiceLocalInsercao) {
-            ++j;
-            --i;
-            continue;
-        }
-
-        melhorLinhaProducao[j] = entrada.linhaProducao[i];
-        ++j;
-    }
-
-    return solucao(melhorLinhaProducao, valorMelhorProducao);
-}
 
 solucao fiveFactorialSwap(const solucao& entrada, const prepararLinha& troca_suco) {
     ulong indexMelhorSolucao = 0;
@@ -404,4 +348,4 @@ long long calculaSolucao(const list<suco_t>& linhaProducao, const prepararLinha&
     }
 
     return valor;
-}
+}*/

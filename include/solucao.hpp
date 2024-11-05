@@ -24,31 +24,10 @@ class solucao {
 public:
     vector<solucaoInfo_t> linhaProducao;
     llong multaTotal;
+    const instancia_problema &i_problema;
 
 
-    /**
-     * Um construtor da classe solucao.
-     *
-     * O argumento sucos é copiado diretamente para o campo linhaProducao
-     * da classe. Já a multa total é calculada na inicialização usando
-     * troca_suco, a qual contem o custo para mudar de uma linha para outra,
-     * e esse valor é armazenado no campo multaTotal.
-     *
-     * @note Esse construtor garante que o valor armazenado em multaTotal é de
-     * fato correspondente ao vector de sucos linhaProducao após sua
-     * inicializacao.
-     * */
-    solucao(const vector<solucaoInfo_t>& linhaProducao,
-            const instancia_problema &i_problema);
-
-
-    /**
-     * Um construtor da classe solucao.
-     *
-     * A solucao é iniciada de forma vazia, com o campo linhaProducao contendo
-     * um vector vazio, e a multaTotal contendo 0.
-     * */
-    solucao();
+    explicit solucao(const instancia_problema &i_problema);
 
     /**
      * Calcula quanto vale a solucao atual armazenada no campo linhaProducao
@@ -58,12 +37,24 @@ public:
      * @param troca_suco A matriz que guarda o custo para parar a produção de
      * um tipo de suco e iniciar a produção de outro.
      * */
-    void calcula_solucao_inicial(const instancia_problema &i_problema);
+    void calcula_solucao_inicial();
+
+    llong simula_solucao_two_swap(ulong i, ulong j) const;
+
+    void calcula_solucao_two_swap(ulong i, ulong j);
+
+    llong simula_solucao_opt(ulong i, ulong j) const;
+
+    void calcula_solucao_opt(ulong i, ulong j);
+
+    llong simula_solucao_reinsertion(ulong i, ulong j) const;
+
+    void calcula_solucao_reinsertion(ulong i, ulong j);
 
     /**
      * Exibe a solução armazenada na tela.
      * */
-    void exibe(const instancia_problema &i_problema);
+    void exibe(const instancia_problema &i_problema) const;
 
     /**
      * Exibe apenas o valor da solução na tela.

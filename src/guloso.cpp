@@ -4,7 +4,7 @@
 
 
 solucao* algoritmo_guloso(instancia_problema &i_problema) {
-    solucao *solucao = new ::solucao;
+    solucao *solucao = new ::solucao(i_problema);
     solucao->linhaProducao.resize(i_problema.size);
 
     for (int i = 0; i < i_problema.size; ++i) {
@@ -15,6 +15,8 @@ solucao* algoritmo_guloso(instancia_problema &i_problema) {
         (const solucaoInfo_t &a, const solucaoInfo_t &b) {
         return i_problema.sucos[a.indice].prazo < i_problema.sucos[b.indice].prazo;
     });
+
+    solucao->calcula_solucao_inicial();
 
     return solucao;
 }

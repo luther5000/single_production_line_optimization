@@ -12,7 +12,7 @@ using namespace std;
 
 class instancia_problema {
 public:
-    int size;
+    ulong size;
     vector<suco_t> sucos;
     prepararLinha trocaSuco;
 
