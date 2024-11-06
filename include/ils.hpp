@@ -10,7 +10,7 @@
 
 using namespace std;
 
-solucao metaHeuristica(const solucao& entrada, const prepararLinha& troca_suco, const uint& numIteracoes);
+solucao *metaHeuristica(solucao *entrada, const instancia_problema& i_problema, uint numIteracoes);
 
 /**
  * Perturbação para o ILS que quebra o vetor em dois e copia a primeira
@@ -21,17 +21,7 @@ solucao metaHeuristica(const solucao& entrada, const prepararLinha& troca_suco, 
  *
  * @param linhaProducao O vetor a ser alterado.
  */
-void twoDividePerturbation(vector<suco_t>& linhaProducao);
-
-/**
- * Perturbação que irá quebrar o vetor em duas partes e chama a
- * {@code twoDividePerturbation} para cada uma delas.
- *
- * Essa perturbação é O(n)
- *
- * @param linhaProducao O vetor a ser alterado.
- */
-void fourDividePerturbation(vector<suco_t>& linhaProducao);
+void twoDividePerturbation(vector<solucaoInfo_t>& linhaProducao);
 
 /**
  * Faz o swap entre todo par de elementos do vetor. Eventualmente todos
@@ -41,7 +31,7 @@ void fourDividePerturbation(vector<suco_t>& linhaProducao);
  *
  * @param linhaProducao O vetor a ser alterado.
  */
-void changeOdsEven(vector<suco_t>& linhaProducao);
+void changeOdsEven(vector<solucaoInfo_t>& linhaProducao);
 
 /**
  * Rotaciona os elementos do vetor n / 4 índices para
@@ -49,7 +39,7 @@ void changeOdsEven(vector<suco_t>& linhaProducao);
  *
  * Algoritmo roda em O(n).
  */
-void rotate(vector<suco_t>& linhaProducao);
+void rotate(vector<solucaoInfo_t>& linhaProducao);
 
 /**
  * Realiza n * peso / 2 swaps aleatórios no vetor.
@@ -59,7 +49,7 @@ void rotate(vector<suco_t>& linhaProducao);
  * @param linhaProducao O vetor a ser alterado.
  * @param peso Quantidade de interações sem melhora da solução.
  */
-void multipleSwaps(vector<suco_t>& linhaProducao, const uint& peso);
+void multipleSwaps(vector<solucaoInfo_t>& linhaProducao, const uint& peso);
 
 /**
  * Rotaciona os elementos de indice par do vetor para a direita.
@@ -67,6 +57,6 @@ void multipleSwaps(vector<suco_t>& linhaProducao, const uint& peso);
  * Essa perturbação é O(n)
  *
  * */
-void rotateEvens(vector<suco_t>& linhaProducao);
+void rotateEvens(vector<solucaoInfo_t>& linhaProducao);
 
 #endif//PROJETOAPA_INCLUDE_ILS_H_

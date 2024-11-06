@@ -13,6 +13,6 @@ using namespace std;
  * sultado melhor eh encontrado, voltamos ao insertSwap. A busca termina quando
  * nenhuma vizinhanca obter um resultado melhor que o atual.
  * */
-solucao variableNeighborhoodDescent(const solucao& entrada, const vector<vector<int>>& troca_suco);
+void variableNeighborhoodDescent(solucao& entrada, const instancia_problema &i_problema);
 
 #endif//PROJETOAPA_INCLUDE_VARIABLENEIGHBORHOODDESCENT_H_

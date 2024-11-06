@@ -7,7 +7,7 @@ solucao* algoritmo_guloso(instancia_problema &i_problema) {
     solucao *solucao = new ::solucao(i_problema);
     solucao->linhaProducao.resize(i_problema.size);
 
-    for (int i = 0; i < i_problema.size; ++i) {
+    for (ulong i = 0; i < i_problema.size; ++i) {
         solucao->linhaProducao[i].indice = i;
     }
 

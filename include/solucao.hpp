@@ -26,17 +26,10 @@ public:
     llong multaTotal;
     const instancia_problema &i_problema;
 
+    explicit solucao(const solucao *solucao);
 
     explicit solucao(const instancia_problema &i_problema);
 
-    /**
-     * Calcula quanto vale a solucao atual armazenada no campo linhaProducao
-     * E guarda no campo multaTotal.
-     *
-     * @note Essa função é executada em O(n)
-     * @param troca_suco A matriz que guarda o custo para parar a produção de
-     * um tipo de suco e iniciar a produção de outro.
-     * */
     void calcula_solucao_inicial();
 
     llong simula_solucao_two_swap(ulong i, ulong j) const;

@@ -15,8 +15,8 @@
 using namespace chrono;
 using namespace std;
 
-void executeAll();
+void executeAll(uint numExecucoes);
 
-pair<llong, long> executeOne(const string& endereco);
+pair<llong, long> executeOne(const string& endereco, uint numExecucoes);
 
 #endif // PROJETOAPA_INCLUDE_EXECUTEALL_H_
