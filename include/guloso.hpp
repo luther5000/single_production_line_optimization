@@ -22,6 +22,6 @@ using namespace std;
 * @note Esse algoritmo é executado em n*lg(n).
 * @return Um ponteiro para a solução gerada.
 * */
-solucao *algoritmo_guloso(instancia_problema &i_problema);
+solucao *algoritmo_guloso(const instancia_problema &i_problema);
 
 #endif//PROJETOAPA_INCLUDE_GULOSO_H_

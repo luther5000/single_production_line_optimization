@@ -1,24 +1,29 @@
 #include "ils.hpp"
 #include "customTypes.hpp"
 
-solucao *metaHeuristica(solucao *entrada, const instancia_problema& i_problema, const uint numIteracoes) {
+solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIteracoes) {
     uint cont = 0;
     uint forcaPerturbacao = 1;
-    solucao *melhorSolucao = entrada;
-    solucao *solucaoParaVnd = new solucao(entrada);
 
-    variableNeighborhoodDescent(*solucaoParaVnd, i_problema);
+    solucao *solucaoAtual = algoritmo_guloso(i_problema);
+    variableNeighborhoodDescent(*solucaoAtual, i_problema);
+
+    solucao *melhorSolucao = solucaoAtual->criaCopia();
+    printf("VND: %lld\n", melhorSolucao->multaTotal);
+
     do {
-        if (solucaoParaVnd->multaTotal < melhorSolucao->multaTotal) {
-            melhorSolucao = solucaoParaVnd;
-
+        printf("\n%d\n", cont);
+        if (solucaoAtual->multaTotal < melhorSolucao->multaTotal) {
+            printf ("Atual é melhor \nAtual: %lld \nMelhor: %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
+            melhorSolucao = solucaoAtual->criaCopia();
             /*
              * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
              * anteriormente, iremos reiniciar a força das perturbações aplicadas.
              */
             forcaPerturbacao = 1;
-        } else {
-            solucaoParaVnd = melhorSolucao;
+        } else if (cont != 0) {
+            printf ("Atual é pior \nAtual: %lld \nMelhor: %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
+            solucaoAtual = melhorSolucao->criaCopia();
             /*
              * Caso a solução gerada tenha sido pior, iremos aumentar gradualmente
              * a força das perturbações a serem aplicadas.
@@ -28,25 +33,28 @@ solucao *metaHeuristica(solucao *entrada, const instancia_problema& i_problema, 
 
         switch (forcaPerturbacao) {
             case 1: {
-                twoDividePerturbation(solucaoParaVnd->linhaProducao);
-                rotate(solucaoParaVnd->linhaProducao);
-                multipleSwaps(solucaoParaVnd->linhaProducao, forcaPerturbacao);
+                //twoDividePerturbation(solucaoParaVnd->linhaProducao);
+                rotate(solucaoAtual->linhaProducao);
+                multipleSwaps(solucaoAtual->linhaProducao, forcaPerturbacao);
                 break;
             }
             case 2: {
-                changeOdsEven(solucaoParaVnd->linhaProducao);
-                multipleSwaps(solucaoParaVnd->linhaProducao, forcaPerturbacao);
+                changeOdsEven(solucaoAtual->linhaProducao);
+                multipleSwaps(solucaoAtual->linhaProducao, forcaPerturbacao);
                 break;
             }
             default: {
-                rotateEvens(solucaoParaVnd->linhaProducao);
-                multipleSwaps(solucaoParaVnd->linhaProducao, forcaPerturbacao);
+                rotateEvens(solucaoAtual->linhaProducao);
+                multipleSwaps(solucaoAtual->linhaProducao, forcaPerturbacao);
                 break;
             }
         }
 
-        solucaoParaVnd->calcula_solucao_inicial();
-        variableNeighborhoodDescent(*solucaoParaVnd, i_problema);
+        printf("53 Melhor %lld\n",  melhorSolucao->multaTotal);
+        solucaoAtual->calcula_solucao_inicial();
+        printf("55 Atual: %lld Melhor %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
+        variableNeighborhoodDescent(*solucaoAtual, i_problema);
+        printf("57 Atual: %lld Melhor %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
 
         ++cont;
     } while (cont < numIteracoes);

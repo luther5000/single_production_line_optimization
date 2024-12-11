@@ -3,7 +3,7 @@
 #include "customTypes.hpp"
 
 
-solucao* algoritmo_guloso(instancia_problema &i_problema) {
+solucao* algoritmo_guloso(const instancia_problema &i_problema) {
     solucao *solucao = new ::solucao(i_problema);
     solucao->linhaProducao.resize(i_problema.size);
 

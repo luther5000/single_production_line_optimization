@@ -36,6 +36,7 @@ void opt(solucao &entrada, const instancia_problema &i_problema) {
                 iMelhorSolucao = i;
                 jMelhorSolucao = j;
                 valorMelhorProducao = solucaoAtual;
+                printf("opt i = %ld j = %ld, v = %lld\n", i, j, valorMelhorProducao);
             }
         }
     }

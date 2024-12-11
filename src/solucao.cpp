@@ -105,18 +105,14 @@ void solucao::calcula_solucao_two_swap(ulong i,const ulong j) {
 }
 
 llong solucao::simula_solucao_opt(ulong i, ulong j) const {
-    llong tempo;
-    llong multaAtual;
-    llong ultimaLinha;
+    llong tempo = 0;
+    llong multaAtual = 0;
+    llong ultimaLinha = 0;
 
     if (i > 0) {
         tempo = linhaProducao[i-1].tempoDecorrido;
         multaAtual = linhaProducao[i-1].multaAtual;
         ultimaLinha = linhaProducao[i-1].indice + 1;
-    } else {
-        tempo = 0;
-        multaAtual = 0;
-        ultimaLinha = 0;
     }
 
     ulong l = j;
@@ -262,6 +258,10 @@ void solucao::calcula_solucao_reinsertion(ulong i, ulong j) {
     }
 }
 
+solucao* solucao::criaCopia() {
+    return new solucao(*this);
+}
+
 void solucao::exibe(const instancia_problema &i_problema) const{
     printf("Valores da solucao:\n");
     printf(" Indice: Tempo   Prazo   Multa\n");
@@ -279,3 +279,4 @@ void solucao::exibe(const instancia_problema &i_problema) const{
 void solucao::exibeReduzido() {
     printf("Valor da solucao: %lld\n", this->multaTotal);
 }
+

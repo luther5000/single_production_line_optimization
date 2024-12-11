@@ -4,13 +4,14 @@
 #include "solucao.hpp"
 #include "variableNeighborhoodDescent.hpp"
 #include "customTypes.hpp"
+#include "guloso.hpp"
 #include <vector>
 #include <list>
 #include <random>
 
 using namespace std;
 
-solucao *metaHeuristica(solucao *entrada, const instancia_problema& i_problema, uint numIteracoes);
+solucao *metaHeuristica(const instancia_problema& i_problema, uint numIteracoes);
 
 /**
  * Perturbação para o ILS que quebra o vetor em dois e copia a primeira

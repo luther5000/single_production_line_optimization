@@ -26,6 +26,7 @@ void variableNeighborhoodDescent(solucao &entrada, const instancia_problema &i_p
                 break;
         }
         if (entrada.multaTotal < melhorSolucao) {
+            //printf("k = %d valor = %lld\n", k, entrada.multaTotal);
             melhorSolucao = entrada.multaTotal;
             k = 1;
         } else {

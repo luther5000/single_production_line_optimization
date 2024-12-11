@@ -44,6 +44,8 @@ public:
 
     void calcula_solucao_reinsertion(ulong i, ulong j);
 
+    solucao* criaCopia();
+
     /**
      * Exibe a solução armazenada na tela.
      * */

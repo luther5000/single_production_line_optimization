@@ -51,9 +51,8 @@ void executeAll(const uint numExecucoes){
         ullong multaTotal = 0;
 
         for (uint i = 0; i < 20; ++i) {
-            solucao *solucaoAtual = new solucao(solucao1);
             begin = high_resolution_clock::now();
-            solucaoAtual = metaHeuristica(solucaoAtual, instancia, numExecucoes);
+            solucao *solucaoAtual = metaHeuristica(instancia, numExecucoes);
             end = high_resolution_clock::now();
 
             duration = duration_cast<milliseconds>(end - begin);
@@ -71,11 +70,9 @@ void executeAll(const uint numExecucoes){
 pair<llong, long> executeOne(const string& endereco, const uint numExecucoes){
     instancia_problema instancia(endereco);
 
-    solucao *solucao = algoritmo_guloso(instancia);
-
     //variableNeighborhoodDescent(*solucao, instancia.trocaSuco).exibe(endereco);
     auto begin = high_resolution_clock::now();
-    metaHeuristica(solucao, instancia, numExecucoes);
+    solucao *solucao = metaHeuristica(instancia, numExecucoes);
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(end - begin);
 
