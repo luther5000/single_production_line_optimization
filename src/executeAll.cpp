@@ -25,7 +25,7 @@ void executeAll(const uint numExecucoes){
         printf("%s\n", endereco.c_str());
         instancia_problema instancia(endereco);
 
-        printf("Guloso 1 \n");
+        /*printf("Guloso 1 \n");
 
         auto begin = high_resolution_clock::now();
         solucao *solucao1 = algoritmo_guloso(instancia);
@@ -46,23 +46,23 @@ void executeAll(const uint numExecucoes){
         duration = duration_cast<milliseconds>(end - begin);
         printf("Duração: %ld milissegundos\n", duration.count());
 
-        printf("\nILS \n");
+        printf("\nILS \n");*/
         ullong tempoTotal = 0;
         ullong multaTotal = 0;
 
-        for (uint i = 0; i < 20; ++i) {
-            begin = high_resolution_clock::now();
+        for (uint i = 0; i < 10; ++i) {
+            auto begin = high_resolution_clock::now();
             solucao *solucaoAtual = metaHeuristica(instancia, numExecucoes);
-            end = high_resolution_clock::now();
+            auto end = high_resolution_clock::now();
 
-            duration = duration_cast<milliseconds>(end - begin);
+            auto duration = duration_cast<milliseconds>(end - begin);
 
             tempoTotal += duration.count();
             multaTotal += solucaoAtual->multaTotal;
             solucaoAtual->exibeReduzido();
         }
-        printf("Média da solução: %lld\n", multaTotal / 20);
-        printf("Tempo médio gasto: %lld milissegundos\n\n", tempoTotal / 20);
+        printf("Média da solução: %lld\n", multaTotal / 10);
+        printf("Tempo médio gasto: %lld milissegundos\n\n", tempoTotal / 10);
         printf("=====================================\n\n");
     }
 }

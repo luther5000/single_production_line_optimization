@@ -11,7 +11,6 @@ solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIter
     solucao *melhorSolucao = solucaoAtual->criaCopia();
 
     do {
-        printf("\n%d\n", cont);
         if (solucaoAtual->multaTotal < melhorSolucao->multaTotal) {
             melhorSolucao = solucaoAtual->criaCopia();
             /*
