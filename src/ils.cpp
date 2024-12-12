@@ -9,12 +9,10 @@ solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIter
     variableNeighborhoodDescent(*solucaoAtual, i_problema);
 
     solucao *melhorSolucao = solucaoAtual->criaCopia();
-    printf("VND: %lld\n", melhorSolucao->multaTotal);
 
     do {
         printf("\n%d\n", cont);
         if (solucaoAtual->multaTotal < melhorSolucao->multaTotal) {
-            printf ("Atual é melhor \nAtual: %lld \nMelhor: %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
             melhorSolucao = solucaoAtual->criaCopia();
             /*
              * Caso a solução gerada pelo VND for melhor que a solução que tinhamos
@@ -22,7 +20,6 @@ solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIter
              */
             forcaPerturbacao = 1;
         } else if (cont != 0) {
-            printf ("Atual é pior \nAtual: %lld \nMelhor: %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
             solucaoAtual = melhorSolucao->criaCopia();
             /*
              * Caso a solução gerada tenha sido pior, iremos aumentar gradualmente
@@ -50,11 +47,8 @@ solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIter
             }
         }
 
-        printf("53 Melhor %lld\n",  melhorSolucao->multaTotal);
         solucaoAtual->calcula_solucao_inicial();
-        printf("55 Atual: %lld Melhor %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
         variableNeighborhoodDescent(*solucaoAtual, i_problema);
-        printf("57 Atual: %lld Melhor %lld\n", solucaoAtual->multaTotal,  melhorSolucao->multaTotal);
 
         ++cont;
     } while (cont < numIteracoes);
