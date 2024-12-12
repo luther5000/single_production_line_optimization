@@ -28,7 +28,7 @@ instancia_problema::instancia_problema(const string& endereco) {
 
     for (ulong i = 0; i < size + 1; ++i) {
         trocaSuco[i].resize(size);
-        for (int j = 0; j < size; ++j) {
+        for (ulong j = 0; j < size; ++j) {
             file >> trocaSuco[i][j];
         }
     }

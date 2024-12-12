@@ -61,7 +61,7 @@ solucao *metaHeuristica(const instancia_problema& i_problema, const uint numIter
     return melhorSolucao;
 }
 
-void twoDividePerturbation(vector<solucaoInfo_t>& linhaProducao) {
+void twoDividePerturbation(vector<uint>& linhaProducao) {
     /*
      * Iremos efetuar o swap entre cada um dos elementos da primeira
      * metade do vetor e o seu diametralmente oposto.
@@ -81,7 +81,7 @@ void twoDividePerturbation(vector<solucaoInfo_t>& linhaProducao) {
     }
 }
 
-void changeOdsEven(vector<solucaoInfo_t> &linhaProducao) {
+void changeOdsEven(vector<uint>& linhaProducao) {
     ulong i = 0;
     ulong j = 1;
 
@@ -93,26 +93,23 @@ void changeOdsEven(vector<solucaoInfo_t> &linhaProducao) {
     }
 }
 
-void rotate(vector<solucaoInfo_t>& linhaProducao){
+void rotate(vector<uint>& linhaProducao){
     uint n = linhaProducao.size();
+    vector<uint> novo;
+    novo.resize(linhaProducao.size());
 
-    list<solucaoInfo_t*> lista;
+    uint j = n - n/4;
+    for (uint i = 0; i < n; ++i) {
+        novo[i] = linhaProducao[j % n];
+        ++j;
+    }
+
     for (uint i = 0; i < n; ++i)
-        lista.push_back(&linhaProducao[i]);
+        linhaProducao[i] = novo[i];
 
-    for (uint i = 0; i < n / 4; ++i){
-        lista.push_front(lista.back());
-        lista.pop_back();
-    }
-
-    int i = 0;
-    for (solucaoInfo_t *suco : lista){
-        linhaProducao[i] = *suco;
-        ++i;
-    }
 }
 
-void multipleSwaps(vector<solucaoInfo_t>& linhaProducao, const uint& peso){
+void multipleSwaps(vector<uint>& linhaProducao, const uint peso){
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> distr(0, linhaProducao.size() - 1);
@@ -125,19 +122,19 @@ void multipleSwaps(vector<solucaoInfo_t>& linhaProducao, const uint& peso){
     }
 }
 
-void rotateEvens(vector<solucaoInfo_t>& linhaProducao) {
+void rotateEvens(vector<uint>& linhaProducao) {
     ulong n = linhaProducao.size();
     if(n % 2 == 0) {
-        solucaoInfo_t *value0 = &linhaProducao[0];
+        uint value0 = linhaProducao[0];
         for(ulong i = 0; i < n - 2; i += 2) {
             linhaProducao[i] = linhaProducao[i + 2];
         }
-        linhaProducao[n - 2] = *value0;
+        linhaProducao[n - 2] = value0;
     } else {
-        solucaoInfo_t *value0 = &linhaProducao[0];
+        uint value0 = linhaProducao[0];
         for(ulong i = 0; i < n - 1; i += 2) {
             linhaProducao[i] = linhaProducao[i + 2];
         }
-        linhaProducao[n - 1] = *value0;
+        linhaProducao[n - 1] = value0;
     }
 }

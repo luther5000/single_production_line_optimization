@@ -22,7 +22,8 @@ using namespace std;
  * */
 class solucao {
 public:
-    vector<solucaoInfo_t> linhaProducao;
+    vector<uint> linhaProducao;
+    vector<solucaoInfo_t> solucaoInfo;
     llong multaTotal;
     const instancia_problema &i_problema;
 

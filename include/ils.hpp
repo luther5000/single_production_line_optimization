@@ -22,7 +22,7 @@ solucao *metaHeuristica(const instancia_problema& i_problema, uint numIteracoes)
  *
  * @param linhaProducao O vetor a ser alterado.
  */
-void twoDividePerturbation(vector<solucaoInfo_t>& linhaProducao);
+void twoDividePerturbation(vector<uint>& linhaProducao);
 
 /**
  * Faz o swap entre todo par de elementos do vetor. Eventualmente todos
@@ -32,7 +32,7 @@ void twoDividePerturbation(vector<solucaoInfo_t>& linhaProducao);
  *
  * @param linhaProducao O vetor a ser alterado.
  */
-void changeOdsEven(vector<solucaoInfo_t>& linhaProducao);
+void changeOdsEven(vector<uint>& linhaProducao);
 
 /**
  * Rotaciona os elementos do vetor n / 4 índices para
@@ -40,7 +40,7 @@ void changeOdsEven(vector<solucaoInfo_t>& linhaProducao);
  *
  * Algoritmo roda em O(n).
  */
-void rotate(vector<solucaoInfo_t>& linhaProducao);
+void rotate(vector<uint>& linhaProducao);
 
 /**
  * Realiza n * peso / 2 swaps aleatórios no vetor.
@@ -50,7 +50,7 @@ void rotate(vector<solucaoInfo_t>& linhaProducao);
  * @param linhaProducao O vetor a ser alterado.
  * @param peso Quantidade de interações sem melhora da solução.
  */
-void multipleSwaps(vector<solucaoInfo_t>& linhaProducao, const uint& peso);
+void multipleSwaps(vector<uint>& linhaProducao, const uint peso);
 
 /**
  * Rotaciona os elementos de indice par do vetor para a direita.
@@ -58,6 +58,6 @@ void multipleSwaps(vector<solucaoInfo_t>& linhaProducao, const uint& peso);
  * Essa perturbação é O(n)
  *
  * */
-void rotateEvens(vector<solucaoInfo_t>& linhaProducao);
+void rotateEvens(vector<uint>& linhaProducao);
 
 #endif//PROJETOAPA_INCLUDE_ILS_H_

@@ -50,7 +50,6 @@ typedef struct {
 } suco_t;
 
 typedef struct {
-    uint indice;
     llong tempoDecorrido;
     llong multaAtual;
 } solucaoInfo_t;
