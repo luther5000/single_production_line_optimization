@@ -38,7 +38,7 @@ void twoSwap(solucao &solucao, const instancia_problema &i_problema);
  * linha de producao
  * @return A melhor solucao encontrada na vizinhanca.
  * */
-void reinsertion(solucao &entrada, const instancia_problema &i_problema);
+void reinsertion(solucao &entrada, const instancia_problema &i_problema, const ulong l);
 
 void opt(solucao &entrada, const instancia_problema &i_problema);
 

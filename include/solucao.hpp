@@ -41,9 +41,9 @@ public:
 
     void calcula_solucao_opt(ulong i, ulong j);
 
-    llong simula_solucao_reinsertion(ulong i, ulong j) const;
+    llong simula_solucao_reinsertion(ulong i, ulong j, ulong l) const;
 
-    void calcula_solucao_reinsertion(ulong i, ulong j);
+    void calcula_solucao_reinsertion(ulong i, ulong j, ulong l);
 
     solucao* criaCopia();
 

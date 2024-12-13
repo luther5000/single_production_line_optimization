@@ -11,7 +11,7 @@ void variableNeighborhoodDescent(solucao &entrada, const instancia_problema &i_p
     while(k <= num_vizinhancas) {
         switch(k) {
             case 1: { //twoSwap
-                reinsertion(entrada, i_problema);
+                reinsertion(entrada, i_problema, 1);
                 break;
             }
             case 2: { //opt

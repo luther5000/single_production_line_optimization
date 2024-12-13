@@ -42,14 +42,14 @@ void opt(solucao &entrada, const instancia_problema &i_problema) {
     entrada.calcula_solucao_opt(iMelhorSolucao, jMelhorSolucao);
 }
 
-void reinsertion(solucao &entrada, const instancia_problema &i_problema){
+void reinsertion(solucao &entrada, const instancia_problema &i_problema, const ulong l){
     llong valorMelhorProducao = entrada.multaTotal;
     ulong iMelhorSolucao = 0;
     ulong jMelhorSolucao = 0;
 
     for (ulong i = 0; i < i_problema.size; ++i) {
-        for (ulong j = i + 2; j < i_problema.size; ++j) {
-            llong solucaoAtual = entrada.simula_solucao_reinsertion(i, j);
+        for (ulong j = i + l + 1; j < i_problema.size; ++j) {
+            llong solucaoAtual = entrada.simula_solucao_reinsertion(i, j, l);
 
             if (solucaoAtual < valorMelhorProducao) {
                 iMelhorSolucao = i;
@@ -58,5 +58,5 @@ void reinsertion(solucao &entrada, const instancia_problema &i_problema){
             }
         }
     }
-    entrada.calcula_solucao_reinsertion(iMelhorSolucao, jMelhorSolucao);
+    entrada.calcula_solucao_reinsertion(iMelhorSolucao, jMelhorSolucao, l);
 }
