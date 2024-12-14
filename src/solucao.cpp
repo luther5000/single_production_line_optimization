@@ -163,53 +163,6 @@ void solucao::calcula_solucao_opt(ulong i, ulong j) {
     }
 }
 
-/*llong solucao::simula_solucao_reinsertion(ulong i, ulong j) const {
-    llong tempo = 0;
-    llong multaAtual = 0;
-    llong ultimaLinha = 0;
-
-    if (i > 0) {
-        tempo = solucaoInfo[i-1].tempoDecorrido;
-        multaAtual = solucaoInfo[i-1].multaAtual;
-        ultimaLinha = linhaProducao[i-1] + 1;
-    }
-
-    for (ulong k = i; k < i_problema.size; ++k) {
-        if (k == i)
-            continue;
-
-        if (k == j + 1) {
-            tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[i]]
-                 + i_problema.sucos[linhaProducao[i]].tempo;
-            llong tempoPassado = tempo - i_problema.sucos[linhaProducao[i]].prazo;
-
-            if (tempoPassado > 0)
-                multaAtual += tempoPassado * i_problema.sucos[linhaProducao[i]].multa;
-
-            ultimaLinha = linhaProducao[i] + 1;
-        }
-
-        tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[k]]
-                 + i_problema.sucos[linhaProducao[k]].tempo;
-        llong tempoPassado = tempo - i_problema.sucos[linhaProducao[k]].tempo;
-
-        if (tempoPassado > 0)
-            multaAtual += tempoPassado * i_problema.sucos[linhaProducao[k]].multa;
-
-        ultimaLinha = linhaProducao[k] + 1;
-    }
-
-    if (j == i_problema.size - 1) {
-        tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[i]]
-                 + i_problema.sucos[linhaProducao[i]].tempo;
-        llong tempoPassado = tempo - i_problema.sucos[linhaProducao[i]].tempo;
-
-        if (tempoPassado > 0)
-            multaAtual += tempoPassado * i_problema.sucos[linhaProducao[i]].multa;
-    }
-    return multaAtual;
-}*/
-
 llong solucao::simula_solucao_reinsertion(ulong i, ulong j, ulong l) const {
     llong tempo = 0;
     llong multaAtual = 0;
@@ -221,14 +174,9 @@ llong solucao::simula_solucao_reinsertion(ulong i, ulong j, ulong l) const {
         ultimaLinha = linhaProducao[i-1] + 1;
     }
 
-    for (ulong k = i; k < i_problema.size; ++k) {
-        if (k == i) {
-            k += l-1;
-            continue;
-        }
-
+    for (ulong k = i + l; k < i_problema.size; ++k) {
         if (k == j + 1) {
-            for (uint m = 0; m < l; ++m) {
+            for (ulong m = 0; m < l; ++m) {
                 tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[i + m]]
                      + i_problema.sucos[linhaProducao[i + m]].tempo;
                 llong tempoPassado = tempo - i_problema.sucos[linhaProducao[i + m]].prazo;
@@ -242,7 +190,7 @@ llong solucao::simula_solucao_reinsertion(ulong i, ulong j, ulong l) const {
 
         tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[k]]
                  + i_problema.sucos[linhaProducao[k]].tempo;
-        llong tempoPassado = tempo - i_problema.sucos[linhaProducao[k]].tempo;
+        llong tempoPassado = tempo - i_problema.sucos[linhaProducao[k]].prazo;
 
         if (tempoPassado > 0)
             multaAtual += tempoPassado * i_problema.sucos[linhaProducao[k]].multa;
@@ -279,11 +227,14 @@ void solucao::calcula_solucao_reinsertion(ulong i, ulong j, ulong l) {
         ultimaLinha = linhaProducao[i-1] + 1;
     }
 
+
+    vector<uint> s(l);
     for (uint m = 0; m < l; ++m) {
-        uint s = linhaProducao[i + m];
-        linhaProducao.erase(linhaProducao.begin() + i + m);
-        linhaProducao.insert(linhaProducao.begin() + j + m, s);
+        s[m] = linhaProducao[i + m];
     }
+
+    linhaProducao.erase(linhaProducao.begin() + i, linhaProducao.begin() + i + l);
+    linhaProducao.insert(linhaProducao.begin() + j - l + 1, s.begin(), s.end());
 
     for (; i < i_problema.size; ++i) {
         tempo += i_problema.trocaSuco[ultimaLinha][linhaProducao[i]]
